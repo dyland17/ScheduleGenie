@@ -4,17 +4,17 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import dewalddylan.data.Day;
+import dewalddylan.data.WorkDay;
 
 public class DayTest {
 	@Test
 	public void daysAreTheSameTest(){
-		Day monday = Day.MONDAY;
-		assertEquals(Day.MONDAY, monday);
+		WorkDay monday = WorkDay.MONDAY;
+		assertEquals(WorkDay.MONDAY, monday);
 	}
 	@Test
 	public void daysAreNotTheSameTest(){
-		Day monday = Day.MONDAY;
-		assertNotEquals(Day.TUESDAY, monday);
+		WorkDay monday = WorkDay.MONDAY;
+		assertNotEquals(WorkDay.TUESDAY, monday);
 	}
 }

@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import dewalddylan.data.WorkDay;
+import dewalddylan.data.enumerations.WorkDay;
 
 public class DayTest {
 	@Test

@@ -1,5 +1,7 @@
 package dewalddylan.data;
 
+import dewalddylan.data.enumerations.WorkDay;
+
 public class TimeSheet {
 	Time startTime;
 	Time endTime;

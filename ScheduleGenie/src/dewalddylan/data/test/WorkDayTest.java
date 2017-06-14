@@ -6,7 +6,7 @@ import org.junit.Test;
 
 import dewalddylan.data.enumerations.WorkDay;
 
-public class DayTest {
+public class WorkDayTest {
 	@Test
 	public void daysAreTheSameTest(){
 		WorkDay monday = WorkDay.MONDAY;

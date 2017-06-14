@@ -1,15 +1,18 @@
 package dewalddylan.data;
 
 import dewalddylan.data.enumerations.TimeOfDay;
+import dewalddylan.data.exceptions.TimeException;
 
-public class Time {
+public class Time{
 	private int hour;
 	private int minute;
 	private TimeOfDay timeOfDay;
-	public Time(int hour, int min, TimeOfDay timeOfDay){
+	public Time(int hour, int min, TimeOfDay timeOfDay) throws TimeException{
 		this.hour = hour;
 		minute = min;
 		this.timeOfDay = timeOfDay;
+		if(hour  > 12 || hour <= 0 || minute < 0 || minute > 59)
+			throw new TimeException(hour, minute);
 	}
 	public int getHour() {
 		return hour;

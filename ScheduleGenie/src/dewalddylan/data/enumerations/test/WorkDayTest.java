@@ -1,4 +1,4 @@
-package dewalddylan.data.test;
+package dewalddylan.data.enumerations.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

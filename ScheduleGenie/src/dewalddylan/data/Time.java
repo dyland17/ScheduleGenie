@@ -7,12 +7,21 @@ public class Time{
 	private int hour;
 	private int minute;
 	private TimeOfDay timeOfDay;
-	public Time(int hour, int min, TimeOfDay timeOfDay) throws TimeException{
+	public Time(int hour, int min, TimeOfDay timeOfDay){
 		this.hour = hour;
 		minute = min;
 		this.timeOfDay = timeOfDay;
-		if(hour  > 12 || hour <= 0 || minute < 0 || minute > 59)
-			throw new TimeException(hour, minute);
+		try{
+			if(hour  > 12 || hour <= 0 || minute < 0 || minute > 59){
+				throw new TimeException(hour, minute);
+			}
+			//else if(){
+				
+			//}
+		}
+		catch(TimeException te){
+			
+		}
 	}
 	public int getHour() {
 		return hour;

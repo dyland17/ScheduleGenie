@@ -12,15 +12,15 @@ public class Time{
 		minute = min;
 		this.timeOfDay = timeOfDay;
 		try{
-			if(hour  > 12 || hour <= 0 || minute < 0 || minute > 59){
-				throw new TimeException(hour, minute);
+			if(hour  > 12 || hour <= 0 ){
+				throw new TimeException(hour, minute,TimeException.EHOUR);
 			}
-			//else if(){
-				
-			//}
+			else if(minute < 0 || minute > 59){
+				throw new TimeException(hour, minute,TimeException.EMINUTE);
+			}
 		}
 		catch(TimeException te){
-			
+			te.showMessage();
 		}
 	}
 	public int getHour() {

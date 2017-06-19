@@ -45,7 +45,6 @@ public abstract class Window {
 		butCreate = new JButton("Create");
 		if(type == ScreenType.NEWEMPLOYEE)
 			createNewEmployeeScreen();
-			
 	}
 	private void createNewEmployeeScreen() {
 		window.setPreferredSize(EMPLOYEESCREEN);
@@ -67,7 +66,6 @@ public abstract class Window {
 		window.pack();
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
-		
 	}
 	
 	private JPanel setupRequiredGUIForNewEmployeeScreen(){
@@ -121,7 +119,6 @@ public abstract class Window {
 		jpOptFieldsPanel.add(tfTotalHours);
 		jpOptPanelOuter.add(jpOptFieldsPanel, BorderLayout.SOUTH);
 		return jpOptPanelOuter;
-		
 	}
 	private JPanel setupButtonGUIForNewEmployeeScreen() {
 		JPanel jpButPanel = new JPanel();
@@ -133,7 +130,6 @@ public abstract class Window {
 		butCreate.setPreferredSize(BUTTONSIZE);
 		jpButPanel.add(butCreate, BorderLayout.EAST);
 		return jpButPanel;
-		
 	}
 	public static void main(String[] args){
 		new NewEmployeeScreen("Add new Employee",ScreenType.NEWEMPLOYEE);

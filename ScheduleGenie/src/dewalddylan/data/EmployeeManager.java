@@ -21,10 +21,11 @@ public class EmployeeManager {
 	}
 
 	private void sortAlphabetically() {
-		Employee previousEmployee = employeeList.get(0);
+		Employee previousEmployee;
 		Employee nextEmployee;
 		int sortSize = employeeList.size();
 		for(int i = 0; i <  sortSize; i++){
+			previousEmployee = employeeList.get(i);
 			for(int n = (i+1); n < sortSize; n++){
 				nextEmployee = employeeList.get(n);
 				if(nextEmployee.getLastName().charAt(0) < previousEmployee.getLastName().charAt(0)){
@@ -34,9 +35,12 @@ public class EmployeeManager {
 			}
 			sortSize--;
 		}
+		
 	}
-
-	private void printList(){
+	public Employee getEmployee(int index){
+		return employeeList.get(index);
+	}
+	public void printList(){
 		for(Employee employee: employeeList){
 			System.out.println("LastName: " + employee.getLastName());
 		}

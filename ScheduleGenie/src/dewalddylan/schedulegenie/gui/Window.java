@@ -15,7 +15,8 @@ import dewalddylan.data.enumerations.ScreenType;
 public abstract class Window {
 	//All GUI components
 	protected JFrame window;
-	protected JTextField tfEmployeeName;
+	protected JTextField tfEmployeeFirstName;
+	protected JTextField tfEmployeeLastName;
 	protected JTextField tfAge;
 	protected JTextField tfTitle;
 	protected JTextField tfTotalHours;
@@ -26,8 +27,8 @@ public abstract class Window {
 	private final Font BOLDFONT = new Font(Font.SANS_SERIF,Font.BOLD,18);
 	private final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	private final Dimension EMPLOYEESCREEN = new Dimension(420,400);
-	private final Dimension JPANELOVERALLSIZE = new Dimension(320,110);
-	private final Dimension JPANELINNERSIZE = new Dimension(320,140);
+	private final Dimension JPANELOVERALLSIZE = new Dimension(320,130);
+	private final Dimension JPANELINNERSIZE = new Dimension(320,130);
 	private final Dimension BUTTONSIZE = new Dimension(140, 60);
 	
 	public  Window(String name,ScreenType type){
@@ -35,7 +36,8 @@ public abstract class Window {
 	}
 	private void setupJFrame(String name, ScreenType type) {
 		window = new JFrame(name);
-		tfEmployeeName = new JTextField(TFSIZE);
+		tfEmployeeFirstName = new JTextField(TFSIZE);
+		tfEmployeeLastName = new JTextField(TFSIZE);
 		tfAge = new JTextField(TFSIZE);
 		tfTitle = new JTextField(TFSIZE);
 		tfTotalHours = new JTextField(TFSIZE);
@@ -78,10 +80,15 @@ public abstract class Window {
 		JPanel jpReqInnerPanel = new JPanel();
 		jpReqInnerPanel.setLayout(new FlowLayout());
 		jpReqInnerPanel.setPreferredSize(JPANELINNERSIZE);
-		JLabel jlEmployeeName = new JLabel("Employee's name:");
-		jlEmployeeName.setFont(TEXTFONT);
-		jpReqInnerPanel.add(jlEmployeeName);
-		jpReqInnerPanel.add(tfEmployeeName);
+		JLabel jlEmployeeFirstName = new JLabel("Employee's first name:");
+		jlEmployeeFirstName.setFont(TEXTFONT);
+		jpReqInnerPanel.add(jlEmployeeFirstName);
+		jpReqInnerPanel.add(tfEmployeeFirstName);
+		
+		JLabel jlEmployeeLastName = new JLabel("Employee's last name:");
+		jlEmployeeLastName.setFont(TEXTFONT);
+		jpReqInnerPanel.add(jlEmployeeLastName);
+		jpReqInnerPanel.add(tfEmployeeLastName);
 		
 		JLabel jlAge = new JLabel("Employee's age:");
 		jlAge.setFont(TEXTFONT);

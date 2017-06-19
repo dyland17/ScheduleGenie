@@ -24,14 +24,15 @@ public class EmployeeManager {
 		Employee previousEmployee;
 		Employee nextEmployee;
 		int sortSize = employeeList.size();
-		for(int i = 0; i <  sortSize; i++){
+		int listSize = employeeList.size();
+		for(int i = 0; i <  listSize; i++){
 			for(int n = 0; n < sortSize; n++){
 				if((n+1) >= sortSize)
 					break;
 				previousEmployee = employeeList.get(n);
 				nextEmployee = employeeList.get(n+1);
 				if(  nextEmployee.getLastName().charAt(0)<previousEmployee.getLastName().charAt(0)){
-					Collections.swap(employeeList, (n-1), n);
+					Collections.swap(employeeList, (n+1), n);
 				}
 			}
 			sortSize--;

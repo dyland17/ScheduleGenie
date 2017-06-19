@@ -2,38 +2,46 @@ package dewalddylan.data;
 
 public class Employee {
 	//Most important information
-	private String name;
+	private String firstName;
+	private String lastName;
 	private int age;
 	//Extra info
 	private String title;
 	private int totalHours;
 	private boolean minor;
-	//private DayTracker dayTracker;
+	private DayTracker dayTracker;
 	
-	public Employee(String name, int age){
-		this.name = name;
+	public Employee(String firstName,String lastName, int age){
+		this.firstName = firstName;
+		this.lastName = lastName;
 		this.age = age;
 		this.minor = false;
 		if(age < 18)
 			this.minor = true;
 		totalHours = 0;
 		title = "No title given.";
-		//dayTracker = new DayTracker();
+		dayTracker = new DayTracker();
 	}
-	public Employee(String name, int age, int totalHours, String title){
-		this(name,age);
+	public Employee(String firstName,String lastName, int age, int totalHours, String title){
+		this(firstName,lastName,age);
 		this.totalHours = totalHours;
 		this.title = title;
 		
 	}
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public String getLastName() {
+		return lastName;
 	}
-
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
 	public int getAge() {
 		return age;
 	}

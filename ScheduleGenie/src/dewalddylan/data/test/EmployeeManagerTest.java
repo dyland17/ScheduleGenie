@@ -9,13 +9,15 @@ public class EmployeeManagerTest {
 	@Test
 	public void sortAlphabeticallyTest(){
 		EmployeeManager manager = new EmployeeManager();
+		//First switch with two elements
 		manager.addEmployee(new Employee("Tom", "Thomas", 18));
 		manager.addEmployee(new Employee("Dylan", "Dewald",23));
+		//Moving an element to the middle
 		assertEquals("Dewald", manager.getEmployee(0).getLastName());
 		manager.addEmployee(new Employee("Andy", "Everett", 20));
 		assertEquals("Everett", manager.getEmployee(1).getLastName());
+		//Moving name to front
 		manager.addEmployee(new Employee("Anthony","Anderson",16));
-		assertEquals("Anderson",manager.getEmployee(0));
-		manager.printList();
+		assertEquals("Anderson",manager.getEmployee(0).getLastName());
 	}
 }

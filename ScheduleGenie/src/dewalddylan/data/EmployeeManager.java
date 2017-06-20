@@ -12,7 +12,6 @@ public class EmployeeManager {
 	public void addEmployee(Employee newEmployee){
 		if(employeeList.isEmpty()){
 			employeeList.add(newEmployee);
-			//return;
 		}
 		else{
 			employeeList.add(newEmployee);
@@ -34,6 +33,14 @@ public class EmployeeManager {
 				if(  nextEmployee.getLastName().charAt(0)<previousEmployee.getLastName().charAt(0)){
 					Collections.swap(employeeList, (n+1), n);
 				}
+				else if(nextEmployee.getLastName().charAt(0) == previousEmployee.getLastName().charAt(0)){
+					for(int c = 1; c < 6; c++ ){
+						if(nextEmployee.getLastName().charAt(c)<previousEmployee.getLastName().charAt(c)){
+							Collections.swap(employeeList, (n+1), n);
+							break;
+						}
+					}
+				}
 			}
 			sortSize--;
 		}
@@ -44,6 +51,7 @@ public class EmployeeManager {
 	}
 	public void printList(){
 		for(Employee employee: employeeList){
+			System.out.print("FirstName: " + employee.getFirstName() + " ");
 			System.out.println("LastName: " + employee.getLastName());
 		}
 	}

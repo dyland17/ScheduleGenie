@@ -26,5 +26,13 @@ public class EmployeeManagerTest {
 		manager.addEmployee(new Employee("Don", "Phantom",16));
 		manager.addEmployee(new Employee("Danny", "Peterson",20));
 		assertEquals("Peterson", manager.getEmployee(0).getLastName());
+		manager.printList();
+	}
+	@Test
+	public void sortAlphabeticallySameNameTest(){
+		EmployeeManager manager = new EmployeeManager();
+		manager.addEmployee(new Employee("Don", "Phantom",16));
+		manager.addEmployee(new Employee("Danny", "Phantom",20));
+		assertEquals("Don", manager.getEmployee(0).getFirstName());
 	}
 }

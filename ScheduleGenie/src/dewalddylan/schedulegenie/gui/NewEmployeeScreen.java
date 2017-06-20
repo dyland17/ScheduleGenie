@@ -9,10 +9,10 @@ import dewalddylan.data.enumerations.ScreenType;
 public class NewEmployeeScreen extends Window implements ActionListener{
 
 	
-	public NewEmployeeScreen(String name, ScreenType type) {
-		super(name, type);
+	public NewEmployeeScreen(String name) {
+		super(name, ScreenType.NEWEMPLOYEE);
 		butCancel.addActionListener(this);
-		butCreate.addActionListener(this);
+		butUpdate.addActionListener(this);
 	}
 	//Creation button functionality.
 	@Override
@@ -20,7 +20,7 @@ public class NewEmployeeScreen extends Window implements ActionListener{
 		if(e.getSource() == butCancel){
 			window.dispose();
 		}
-		else if(e.getSource() == butCreate){
+		else if(e.getSource() == butUpdate){
 			Employee newEmployee = new Employee(tfEmployeeFirstName.getText(),tfEmployeeLastName.getText(),Integer.parseInt(tfAge.getText()),Integer.parseInt(tfTotalHours.getText()),tfTitle.getText());
 			printEmployeeInfo(newEmployee);
 		}

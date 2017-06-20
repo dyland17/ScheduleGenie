@@ -7,7 +7,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 public class EmployeeManagerTest {
 	@Test
-	public void sortAlphabeticallyTest(){
+	public void sortAlphabeticallyByFirstLetterTest(){
 		EmployeeManager manager = new EmployeeManager();
 		//First switch with two elements
 		manager.addEmployee(new Employee("Tom", "Thomas", 18));
@@ -19,5 +19,12 @@ public class EmployeeManagerTest {
 		//Moving name to front
 		manager.addEmployee(new Employee("Anthony","Anderson",16));
 		assertEquals("Anderson",manager.getEmployee(0).getLastName());
+	}
+	@Test
+	public void sortAlphabeticallySameFirstLetterTest(){
+		EmployeeManager manager = new EmployeeManager();
+		manager.addEmployee(new Employee("Don", "Phantom",16));
+		manager.addEmployee(new Employee("Danny", "Peterson",20));
+		assertEquals("Peterson", manager.getEmployee(0).getLastName());
 	}
 }

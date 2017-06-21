@@ -73,6 +73,9 @@ public class Employee {
 	public void setMinor(boolean minor) {
 		this.minor = minor;
 	}
+	public Employee copy(){
+		return new Employee(firstName,lastName,age,totalHours,title) ;
+	}
 	/*public DayTracker getDayTracker(){
 		return this.getDayTracker;
 	}*/

@@ -11,16 +11,13 @@ public class NewEmployeeScreen extends Window implements ActionListener{
 	
 	public NewEmployeeScreen(String name) {
 		super(name, ScreenType.NEWEMPLOYEE);
-		butCancel.addActionListener(this);
 		butUpdate.addActionListener(this);
 	}
 	//Creation button functionality.
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == butCancel){
-			window.dispose();
-		}
-		else if(e.getSource() == butUpdate){
+		super.actionPerformed(e);
+		if(e.getSource() == butUpdate){
 			Employee newEmployee = new Employee(tfEmployeeFirstName.getText(),tfEmployeeLastName.getText(),Integer.parseInt(tfAge.getText()),Integer.parseInt(tfTotalHours.getText()),tfTitle.getText());
 			printEmployeeInfo(newEmployee);
 		}

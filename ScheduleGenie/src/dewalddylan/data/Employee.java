@@ -48,6 +48,10 @@ public class Employee {
 
 	public void setAge(int age) {
 		this.age = age;
+		if(age < 18)
+			minor = true;
+		else
+			minor = false;
 	}
 
 	public String getTitle() {
@@ -70,9 +74,6 @@ public class Employee {
 		return minor;
 	}
 
-	public void setMinor(boolean minor) {
-		this.minor = minor;
-	}
 	public Employee copy(){
 		return new Employee(firstName,lastName,age,totalHours,title) ;
 	}

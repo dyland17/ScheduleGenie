@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
 import dewalddylan.data.DayTracker;
+import dewalddylan.data.Employee;
 import dewalddylan.data.Time;
 import dewalddylan.data.TimeSheet;
 import dewalddylan.data.enumerations.TimeOfDay;
@@ -24,6 +25,13 @@ public class DayTrackerTest {
 		eTime = new Time(12,0,TimeOfDay.AM);
 		testTracker.addNewTimeSheet(new TimeSheet(sTime,eTime,WorkDay.FRIDAY));
 		assertEquals(WorkDay.FRIDAY,  testTracker.getTimeSheetByDay(WorkDay.FRIDAY).getWorkDay());
+	}
+	
+	@Test
+	public void getTimeSheetByDayNullTest(){
+		Employee newEmployee = new Employee("Dan", "SexBang",21);
+		DayTracker eDayTracker = newEmployee.getDayTracker();
+		assertEquals(null, eDayTracker.getTimeSheetByDay(WorkDay.MONDAY));
 		
 	}
 }

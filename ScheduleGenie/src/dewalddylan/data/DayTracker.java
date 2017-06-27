@@ -17,9 +17,14 @@ public class DayTracker {
 		}
 		return null;
 	}
-	//public setTimeSheetByDay(Day day, Time time){
-		
-	//}
+	public void setTimeSheetByDay(WorkDay day, TimeSheet timeSheet){
+		for(int i = 0; i < daySheet.size(); i++){
+			if(day == daySheet.get(i).getWorkDay()){
+				daySheet.get(i).setTimeSheet(timeSheet);
+				return;
+			}
+		}
+	}
 	
 	public void addNewTimeSheet(TimeSheet sheet){
 		daySheet.add(sheet);

@@ -77,7 +77,7 @@ public class Employee {
 	public Employee copy(){
 		return new Employee(firstName,lastName,age,totalHours,title) ;
 	}
-	/*public DayTracker getDayTracker(){
-		return this.getDayTracker;
-	}*/
+	public DayTracker getDayTracker(){
+		return dayTracker;
+	}
 }

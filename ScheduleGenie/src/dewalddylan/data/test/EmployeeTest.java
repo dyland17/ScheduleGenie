@@ -27,7 +27,7 @@ public class EmployeeTest {
 	}
 	
 	@Test
-	public void changeEmployeeFieldsTest(){
+	public void changeEmployeeFieldsCloneTest(){
 		Employee newEmployee = new Employee("Ted","Bearington",18);
 		newEmployee.setFirstName("Teddy");
 		assertEquals("Teddy",newEmployee.getFirstName());

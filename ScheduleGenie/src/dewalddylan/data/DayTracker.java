@@ -17,13 +17,15 @@ public class DayTracker {
 		}
 		return null;
 	}
-	public void setTimeSheetByDay(WorkDay day, TimeSheet timeSheet){
-		for(int i = 0; i < daySheet.size(); i++){
-			if(day == daySheet.get(i).getWorkDay()){
-				daySheet.get(i).setTimeSheet(timeSheet);
-				return;
-			}
+	public void setTimeSheetByTimeSheet(TimeSheet timeSheet){
+		WorkDay timeSheetDay = timeSheet.getWorkDay();
+			for(int i = 0; i < daySheet.size(); i++){
+				if(timeSheetDay == daySheet.get(i).getWorkDay()){
+					daySheet.get(i).setTimeSheet(timeSheet);
+					return;
+				}
 		}
+		addNewTimeSheet(timeSheet);
 	}
 	
 	public void addNewTimeSheet(TimeSheet sheet){

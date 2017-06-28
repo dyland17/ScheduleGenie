@@ -14,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import dewalddylan.data.Employee;
-import dewalddylan.data.enumerations.ScreenType;
+import dewalddylan.schedulegenie.data.Employee;
+import dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
 public abstract class Window implements ActionListener{
 	//All GUI components

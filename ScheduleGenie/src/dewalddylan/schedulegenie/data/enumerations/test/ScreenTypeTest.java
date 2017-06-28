@@ -1,11 +1,11 @@
-package dewalddylan.data.enumerations.test;
+package dewalddylan.schedulegenie.data.enumerations.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Assert;
 import org.junit.Test;
 
-import dewalddylan.data.enumerations.ScreenType;
+import dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
 public class ScreenTypeTest {
 	

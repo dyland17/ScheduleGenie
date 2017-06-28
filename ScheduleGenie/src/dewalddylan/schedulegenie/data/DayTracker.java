@@ -1,8 +1,8 @@
-package dewalddylan.data;
+package dewalddylan.schedulegenie.data;
 
 import java.util.ArrayList;
 
-import dewalddylan.data.enumerations.WorkDay;
+import dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class DayTracker {
 	private ArrayList<TimeSheet> daySheet;

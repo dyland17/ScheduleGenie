@@ -1,15 +1,15 @@
-package dewalddylan.data.test;
+package dewalddylan.schedulegenie.data.test;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import dewalddylan.data.DayTracker;
-import dewalddylan.data.Employee;
-import dewalddylan.data.Time;
-import dewalddylan.data.TimeSheet;
-import dewalddylan.data.enumerations.TimeOfDay;
-import dewalddylan.data.enumerations.WorkDay;
+import dewalddylan.schedulegenie.data.DayTracker;
+import dewalddylan.schedulegenie.data.Employee;
+import dewalddylan.schedulegenie.data.Time;
+import dewalddylan.schedulegenie.data.TimeSheet;
+import dewalddylan.schedulegenie.data.enumerations.TimeOfDay;
+import dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class DayTrackerTest {
 	@Test

@@ -1,4 +1,4 @@
-package dewalddylan.data;
+package dewalddylan.schedulegenie.data;
 
 import java.util.Collections;
 import java.util.LinkedList;

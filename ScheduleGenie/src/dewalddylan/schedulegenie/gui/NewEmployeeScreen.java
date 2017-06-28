@@ -3,8 +3,8 @@ package dewalddylan.schedulegenie.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import dewalddylan.data.Employee;
-import dewalddylan.data.enumerations.ScreenType;
+import dewalddylan.schedulegenie.data.Employee;
+import dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
 public class NewEmployeeScreen extends Window implements ActionListener{
 

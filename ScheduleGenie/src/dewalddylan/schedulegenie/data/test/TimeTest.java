@@ -1,4 +1,4 @@
-package dewalddylan.data.test;
+package dewalddylan.schedulegenie.data.test;
 
 import static org.junit.Assert.assertEquals;
 
@@ -6,9 +6,9 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
-import dewalddylan.data.Time;
-import dewalddylan.data.enumerations.TimeOfDay;
-import dewalddylan.data.exceptions.TimeException;
+import dewalddylan.schedulegenie.data.Time;
+import dewalddylan.schedulegenie.data.enumerations.TimeOfDay;
+import dewalddylan.schedulegenie.data.exceptions.TimeException;
 
 public class TimeTest {
 	@Rule

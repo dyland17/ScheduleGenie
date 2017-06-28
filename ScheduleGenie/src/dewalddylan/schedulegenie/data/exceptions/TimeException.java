@@ -1,4 +1,4 @@
-package dewalddylan.data.exceptions;
+package dewalddylan.schedulegenie.data.exceptions;
 
 import javax.swing.JOptionPane;
 

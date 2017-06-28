@@ -1,10 +1,11 @@
-package dewalddylan.data.test;
+package dewalddylan.schedulegenie.data.test;
 
-import dewalddylan.data.Employee;
-import dewalddylan.data.EmployeeManager;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
+
+import dewalddylan.schedulegenie.data.Employee;
+import dewalddylan.schedulegenie.data.EmployeeManager;
 public class EmployeeManagerTest {
 	@Test
 	public void sortAlphabeticallyByFirstLetterTest(){

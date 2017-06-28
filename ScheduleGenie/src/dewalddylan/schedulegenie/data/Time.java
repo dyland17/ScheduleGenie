@@ -1,7 +1,7 @@
-package dewalddylan.data;
+package dewalddylan.schedulegenie.data;
 
-import dewalddylan.data.enumerations.TimeOfDay;
-import dewalddylan.data.exceptions.TimeException;
+import dewalddylan.schedulegenie.data.enumerations.TimeOfDay;
+import dewalddylan.schedulegenie.data.exceptions.TimeException;
 
 public class Time{
 	private int hour;

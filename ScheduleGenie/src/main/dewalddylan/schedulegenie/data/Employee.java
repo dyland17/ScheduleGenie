@@ -19,7 +19,7 @@ public class Employee {
 		if(age < 18)
 			this.minor = true;
 		totalHours = 0;
-		title = "No title given.";
+		title = "No title given";
 		dayTracker = new DayTracker();
 	}
 	public Employee(String firstName,String lastName, int age, int totalHours, String title){

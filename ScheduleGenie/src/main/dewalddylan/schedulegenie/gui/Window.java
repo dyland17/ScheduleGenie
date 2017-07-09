@@ -146,7 +146,7 @@ public abstract class Window implements ActionListener{
 	}
 	public static void main(String[] args){
 		//new NewEmployeeScreen("New Employee");
-		new EditEmployeeScreen("New Employee", new Employee("Danny" , "Phantom",21));
+		new EditEmployeeScreen(new Employee("Danny" , "Phantom",21));
 	}
 
 }

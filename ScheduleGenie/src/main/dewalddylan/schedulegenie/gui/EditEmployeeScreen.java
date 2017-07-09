@@ -8,8 +8,9 @@ import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
 public class EditEmployeeScreen extends Window{
 	private Employee employeeToBeEdited;
-	public EditEmployeeScreen(String name, Employee employee) {
-		super(name, ScreenType.EDITEMPLOYEE);
+	private static final String screenName = "Edit employee screen." ;
+	public EditEmployeeScreen(Employee employee) {
+		super(screenName, ScreenType.EDITEMPLOYEE);
 		employeeToBeEdited = employee;
 		butUpdate.addActionListener(this);
 		setupTfInfo();
@@ -29,16 +30,15 @@ public class EditEmployeeScreen extends Window{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		super.actionPerformed(e);
-		Employee originalEmployee = employeeToBeEdited.copy();
 		if(e.getSource() == butUpdate){
 			employeeToBeEdited.setFirstName(tfEmployeeFirstName.getText());
 			employeeToBeEdited.setLastName(tfEmployeeLastName.getText());
 			employeeToBeEdited.setAge(Integer.parseInt(tfAge.getText()));
 			employeeToBeEdited.setTitle(tfTitle.getText());
 			employeeToBeEdited.setTotalHours(Integer.parseInt(tfTotalHours.getText()));
-			
 		}
-		
 	}
-
+	public Employee getCurrentEmployeeToBeEdited(){
+		return employeeToBeEdited;
+	}
 }

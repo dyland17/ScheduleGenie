@@ -1,8 +1,8 @@
-package dewalddylan.schedulegenie.data.test;
+package test.dewalddylan.schedulegenie.data;
 
 import org.junit.Test;
 
-import dewalddylan.schedulegenie.data.Employee;
+import main.dewalddylan.schedulegenie.data.Employee;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;

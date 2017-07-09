@@ -1,10 +1,10 @@
-package dewalddylan.schedulegenie.data.enumerations.test;
+package test.dewalddylan.schedulegenie.data.enumerations;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotEquals;
 import org.junit.Test;
 
-import dewalddylan.schedulegenie.data.enumerations.WorkDay;
+import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class WorkDayTest {
 	@Test

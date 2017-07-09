@@ -1,4 +1,4 @@
-package dewalddylan.schedulegenie.data;
+package main.dewalddylan.schedulegenie.data;
 
 public class Employee {
 	//Most important information

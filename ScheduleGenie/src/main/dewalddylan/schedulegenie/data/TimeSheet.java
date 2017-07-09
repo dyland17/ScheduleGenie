@@ -1,6 +1,6 @@
-package dewalddylan.schedulegenie.data;
+package main.dewalddylan.schedulegenie.data;
 
-import dewalddylan.schedulegenie.data.enumerations.WorkDay;
+import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class TimeSheet {
 	private Time startTime;

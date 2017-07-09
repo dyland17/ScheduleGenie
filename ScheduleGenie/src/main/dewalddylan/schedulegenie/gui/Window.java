@@ -1,4 +1,4 @@
-package dewalddylan.schedulegenie.gui;
+package main.dewalddylan.schedulegenie.gui;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
@@ -14,8 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import dewalddylan.schedulegenie.data.Employee;
-import dewalddylan.schedulegenie.data.enumerations.ScreenType;
+import main.dewalddylan.schedulegenie.data.Employee;
+import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
 public abstract class Window implements ActionListener{
 	//All GUI components

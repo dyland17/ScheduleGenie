@@ -1,10 +1,10 @@
-package dewalddylan.schedulegenie.gui;
+package main.dewalddylan.schedulegenie.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import dewalddylan.schedulegenie.data.Employee;
-import dewalddylan.schedulegenie.data.enumerations.ScreenType;
+import main.dewalddylan.schedulegenie.data.Employee;
+import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
 public class EditEmployeeScreen extends Window{
 	private Employee employeeToBeEdited;

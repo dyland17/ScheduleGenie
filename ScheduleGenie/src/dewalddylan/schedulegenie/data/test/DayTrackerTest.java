@@ -13,7 +13,7 @@ import dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class DayTrackerTest {
 	@Test
-	public void getTimeSheetByDayTest(){
+	public void getTimeSheetByDayTest()throws Exception{
 		//Test to see if timesheet's workday comes back the same.
 		DayTracker testTracker = new DayTracker();
 		Time sTime = new Time(2,30,TimeOfDay.PM);
@@ -46,7 +46,7 @@ public class DayTrackerTest {
 		
 	}
 	@Test
-	public void setTimeSheetByTimeSheetTest(){
+	public void setTimeSheetByTimeSheetTest() throws Exception{
 		DayTracker testTracker = new DayTracker();
 		Time sTime = new Time(2,30,TimeOfDay.PM);
 		Time eTime = new Time(4,0, TimeOfDay.PM);
@@ -71,7 +71,7 @@ public class DayTrackerTest {
 	}
 	
 	@Test
-	public void setTimeSheetByTimeSheetWhenWorkDayIsNotPresentTest(){
+	public void setTimeSheetByTimeSheetWhenWorkDayIsNotPresentTest()throws Exception{
 		DayTracker testTracker = new DayTracker();
 		Time sTime = new Time(2,30,TimeOfDay.PM);
 		Time eTime = new Time(4,0, TimeOfDay.PM);

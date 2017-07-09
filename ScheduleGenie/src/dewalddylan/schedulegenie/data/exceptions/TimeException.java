@@ -4,23 +4,23 @@ import javax.swing.JOptionPane;
 
 public class TimeException extends Exception{
 	private int hour, minute;
-	private String note = "";
+	private String errorNote = "";
 	public static final String EHOUR = "The hour you have entered is wrong";
 	public static final String EMINUTE = "The minute you have entered is wrong";
-	public TimeException(int hour, int minute){
-		this.hour = hour;
-		this.minute = minute;
-	}
+	private final String STRINGATTACHMENT;
 	public TimeException(int hour, int minute, String note){
-		this(hour,minute);
-		this.note = note;
+		super(note);
+		STRINGATTACHMENT = ":\n" + "The hour is: " + hour + "\n The minute is: " + minute;
+		errorNote = note;
 	}
 	public void showMessage(){
-		if(note.equals("")){
-			JOptionPane.showMessageDialog(null, "The hour: " + hour + " or the minute: " + minute + " you entered is not possible.");
-		}
-		else{
-			JOptionPane.showMessageDialog(null, note + ":\n" + "The hour is: " + hour + "\n The minute is: " + minute);
-		}
+			JOptionPane.showMessageDialog(null, getFinalNote());
 	}
+	public String getErrorNote(){
+		return errorNote;
+	}
+	public String getFinalNote(){
+		return errorNote + STRINGATTACHMENT;
+	}
+	
 }

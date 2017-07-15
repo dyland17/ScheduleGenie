@@ -1,4 +1,4 @@
 package main.dewalddylan.schedulegenie.data.enumerations;
-public enum TypeOfCheck {
+public enum TypeOfTextField {
 	ALPHABET(),NUMBER();
 }

@@ -9,8 +9,8 @@ import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 public class NewEmployeeScreen extends Window implements ActionListener{
 
 	
-	public NewEmployeeScreen(String name) {
-		super(name, ScreenType.NEWEMPLOYEE);
+	public NewEmployeeScreen() {
+		super(Window.NEWSCREEN, ScreenType.NEWEMPLOYEE);
 		butUpdate.addActionListener(this);
 	}
 	//Creation button functionality.

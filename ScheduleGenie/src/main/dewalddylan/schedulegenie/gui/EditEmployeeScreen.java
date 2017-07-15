@@ -12,9 +12,8 @@ import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
 public class EditEmployeeScreen extends Window{
 	private Employee employeeToBeEdited;
-	private static final String screenName = "Edit employee screen." ;
 	public EditEmployeeScreen(Employee employee) {
-		super(screenName, ScreenType.EDITEMPLOYEE);
+		super(Window.EDITSCREEN, ScreenType.EDITEMPLOYEE);
 		employeeToBeEdited = employee;
 		butUpdate.addActionListener(this);
 		setupTfInfo();
@@ -59,7 +58,7 @@ public class EditEmployeeScreen extends Window{
 		if(guiEx.checker.getFirstNameError())
 			tfEmployeeFirstName.setBorder(BorderFactory.createLineBorder(Color.red));
 		else
-			tfEmployeeFirstName.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+			tfEmployeeFirstName.setBorder(BorderFactory.createLineBorder(Color.gray));
 		if(guiEx.checker.getLastNameError())
 			tfEmployeeLastName.setBorder(BorderFactory.createLineBorder(Color.red));
 		else

@@ -18,6 +18,8 @@ import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
 public abstract class Window implements ActionListener{
+	public static final String EDITSCREEN = "Edit employee screen." ;
+	public static final String NEWSCREEN = "New employee screen.";
 	//All GUI components
 	protected JFrame window;
 	protected JTextField tfEmployeeFirstName;
@@ -145,7 +147,7 @@ public abstract class Window implements ActionListener{
 			window.dispose();
 	}
 	public static void main(String[] args){
-		//new NewEmployeeScreen("New Employee");
+		//new NewEmployeeScreen();
 		new EditEmployeeScreen(new Employee("Danny" , "Phantom",21));
 	}
 

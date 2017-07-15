@@ -4,6 +4,7 @@ import javax.swing.JTextField;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
+import main.dewalddylan.schedulegenie.gui.Window;
 
 public class TextFieldChecker {
 	private int errors = 0;
@@ -12,7 +13,7 @@ public class TextFieldChecker {
 	private boolean ageError;
 	private boolean titleError;
 	private boolean totalHourError;
-	
+	//Probably not going to need booleans, not sure.
 	public TextFieldChecker(){
 		firstNameError = false;
 		lastNameError = false;
@@ -20,6 +21,7 @@ public class TextFieldChecker {
 		titleError = false;
 		totalHourError = false;
 	}
+	//vvvvv Change this vvvvv
 	public void check(Employee checkEmployee, JTextField tfAge, JTextField tfTotalHours)throws GUITextFieldException{
 		checkEmployeeForNonAlphabetChars(checkEmployee);
 		checkFieldsForDigits(tfAge,tfTotalHours);
@@ -32,7 +34,7 @@ public class TextFieldChecker {
 		totalHourError = utilCheckStringForNonDigits(tfTotalHours.getText());
 		
 	}
-	public void  checkEmployeeForNonAlphabetChars(Employee checkEmployee){
+	private void  checkEmployeeForNonAlphabetChars(Employee checkEmployee){
 		firstNameError = utilCheckStringForNonAlphabet(checkEmployee.getFirstName());
 		lastNameError = utilCheckStringForNonAlphabet(checkEmployee.getLastName());
 		titleError = utilCheckStringForNonAlphabet(checkEmployee.getTitle());
@@ -91,5 +93,9 @@ public class TextFieldChecker {
 
 	public void setErrors(int errors) {
 		this.errors = errors;
+	}
+	//vvvvv Implements this vvvvv
+	public void updateCheck(Window screen){
+		//screen.getArrayOfSGTextFields();
 	}
 }

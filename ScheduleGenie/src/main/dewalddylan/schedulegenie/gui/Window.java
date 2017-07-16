@@ -143,6 +143,16 @@ public abstract class Window implements ActionListener{
 		jpButPanel.add(butUpdate, BorderLayout.EAST);
 		return jpButPanel;
 	}
+	public SGTextField[] getAllSGTextFields(){
+		SGTextField[] allFields = new SGTextField[5];
+		allFields[0] = tfEmployeeFirstName;
+		allFields[1] = tfEmployeeLastName;
+		allFields[2] = tfAge;
+		allFields[3] = tfTitle;
+		allFields[4] = tfTotalHours;
+		return allFields;
+		
+	}
 		@Override
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == butCancel)

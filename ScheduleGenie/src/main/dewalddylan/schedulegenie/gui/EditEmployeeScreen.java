@@ -53,7 +53,6 @@ public class EditEmployeeScreen extends Window{
 		tfTitle.setBorder(BorderFactory.createLineBorder(Color.gray));
 		tfTotalHours.setText(String.valueOf(employeeToBeEdited.getTotalHours()));
 		tfTotalHours.setBorder(BorderFactory.createLineBorder(Color.gray));
-		
 	}
 
 	private void setEmployeeFieldsWithSGTextFields() {

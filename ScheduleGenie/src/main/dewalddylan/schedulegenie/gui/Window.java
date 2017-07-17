@@ -22,6 +22,7 @@ import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 public abstract class Window implements ActionListener{
 	public static final String EDITSCREEN = "Edit employee screen." ;
 	public static final String NEWSCREEN = "New employee screen.";
+	public static final int  TFSIZE = 10;
 	//All GUI components
 	protected JFrame window;
 	protected SGTextField tfEmployeeFirstName;
@@ -32,7 +33,6 @@ public abstract class Window implements ActionListener{
 	protected JButton butCancel;
 	protected JButton butUpdate;
 	//Size fields
-	private final int  TFSIZE = 10;
 	private final Font BOLDFONT = new Font(Font.SANS_SERIF,Font.BOLD,18);
 	private final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	private final Dimension EMPLOYEESCREEN = new Dimension(420,400);
@@ -45,11 +45,11 @@ public abstract class Window implements ActionListener{
 	}
 	private void setupJFrame(String name, ScreenType type) {
 		window = new JFrame(name);
-		tfEmployeeFirstName = new SGTextField(TFSIZE,TypeOfTextField.ALPHABET);
-		tfEmployeeLastName = new SGTextField(TFSIZE,TypeOfTextField.ALPHABET);
-		tfAge = new SGTextField(TFSIZE,TypeOfTextField.NUMBER);
-		tfTitle = new SGTextField(TFSIZE,TypeOfTextField.ALPHABET);
-		tfTotalHours = new SGTextField(TFSIZE,TypeOfTextField.NUMBER);
+		tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABET,"First Name");
+		tfEmployeeLastName = new SGTextField(TypeOfTextField.ALPHABET,"Last Name");
+		tfAge = new SGTextField(TypeOfTextField.NUMBER, "Age");
+		tfTitle = new SGTextField(TypeOfTextField.ALPHABET,"Title");
+		tfTotalHours = new SGTextField(TypeOfTextField.NUMBER,"Total Hours");
 		butCancel = new JButton("Cancel");
 		butCancel.addActionListener(this);
 		if(type == ScreenType.NEWEMPLOYEE)

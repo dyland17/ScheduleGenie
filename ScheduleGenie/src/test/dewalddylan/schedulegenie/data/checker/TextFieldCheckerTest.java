@@ -7,20 +7,22 @@ import static org.junit.Assert.assertTrue;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
 
 import main.dewalddylan.schedulegenie.data.Employee;
+import main.dewalddylan.schedulegenie.data.SGTextField;
 import main.dewalddylan.schedulegenie.data.checker.TextFieldChecker;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 import main.dewalddylan.schedulegenie.gui.EditEmployeeScreen;
 
 public class TextFieldCheckerTest {
 	private static TextFieldChecker checker;
-	@BeforeClass
-	public static void setup(){
+	@Before
+	public void setup(){
 		 checker = new TextFieldChecker();
 	}
 	@Test
@@ -83,14 +85,35 @@ public class TextFieldCheckerTest {
 		checker.check(screen);
 		assertEquals(0,checker.getRecentErrors());
 	}
-	//vvvv Need to fix this vvvv
-	@Rule
-		public ExpectedException guiTFException = ExpectedException.none();
+
 	@Test(expected = GUITextFieldException.class)
-	public void getRecentErrorsWithErrorsTest() throws GUITextFieldException{
-		guiTFException.expect(GUITextFieldException.class);
-		EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("#$","25",40));
+	public void checkErrorAlphabetTest() throws GUITextFieldException{
+		EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("47","West",25));
 		checker.check(screen);
+	}
+	
+	@Test(expected = GUITextFieldException.class)
+	public void checkErrorDigitTest() throws GUITextFieldException{
+		EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("Adam","West",25));
+		SGTextField[] allFields = screen.getAllSGTextFields();
+		for(SGTextField field: allFields){
+			if(field.getTitle().equals("Age")){
+				field.setText("Dan");
+				break;
+			}
+		}
+		checker.check(screen);
+	}
+	
+	@Test
+	public void getRecentErrorsWithErrorsTest() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		Method utilDigitMethod = TextFieldChecker.class.getDeclaredMethod("utilCheckStringForNonDigits", String.class);
+		Method utilAlphabetMethod = TextFieldChecker.class.getDeclaredMethod("utilCheckStringForNonAlphabet", String.class);
+		utilAlphabetMethod.setAccessible(true);
+		utilDigitMethod.setAccessible(true);
+		utilDigitMethod.invoke(checker, "Bat");
+		utilAlphabetMethod.invoke(checker, "89");
 		assertEquals(2,checker.getRecentErrors());
 	}
+	
 }

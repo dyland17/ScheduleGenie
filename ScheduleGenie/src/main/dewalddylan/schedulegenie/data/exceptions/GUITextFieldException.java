@@ -9,7 +9,7 @@ public class GUITextFieldException extends Exception{
 	public TextFieldChecker checker;
 	public GUITextFieldException(TextFieldChecker checker){
 		super("One of the textFields have a char that can't be used.");
-		amountOfErrors = checker.getErrors();
+		amountOfErrors = checker.getRecentErrors();
 		this.checker = checker;
 	}
 	

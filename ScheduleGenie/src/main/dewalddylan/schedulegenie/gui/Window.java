@@ -15,22 +15,24 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import main.dewalddylan.schedulegenie.data.Employee;
+import main.dewalddylan.schedulegenie.data.SGTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
+import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 
 public abstract class Window implements ActionListener{
 	public static final String EDITSCREEN = "Edit employee screen." ;
 	public static final String NEWSCREEN = "New employee screen.";
+	public static final int  TFSIZE = 10;
 	//All GUI components
 	protected JFrame window;
-	protected JTextField tfEmployeeFirstName;
-	protected JTextField tfEmployeeLastName;
-	protected JTextField tfAge;
-	protected JTextField tfTitle;
-	protected JTextField tfTotalHours;
+	protected SGTextField tfEmployeeFirstName;
+	protected SGTextField tfEmployeeLastName;
+	protected SGTextField tfAge;
+	protected SGTextField tfTitle;
+	protected SGTextField tfTotalHours;
 	protected JButton butCancel;
 	protected JButton butUpdate;
 	//Size fields
-	private final int  TFSIZE = 10;
 	private final Font BOLDFONT = new Font(Font.SANS_SERIF,Font.BOLD,18);
 	private final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	private final Dimension EMPLOYEESCREEN = new Dimension(420,400);
@@ -43,11 +45,11 @@ public abstract class Window implements ActionListener{
 	}
 	private void setupJFrame(String name, ScreenType type) {
 		window = new JFrame(name);
-		tfEmployeeFirstName = new JTextField(TFSIZE);
-		tfEmployeeLastName = new JTextField(TFSIZE);
-		tfAge = new JTextField(TFSIZE);
-		tfTitle = new JTextField(TFSIZE);
-		tfTotalHours = new JTextField(TFSIZE);
+		tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABET,"First Name");
+		tfEmployeeLastName = new SGTextField(TypeOfTextField.ALPHABET,"Last Name");
+		tfAge = new SGTextField(TypeOfTextField.NUMBER, "Age");
+		tfTitle = new SGTextField(TypeOfTextField.ALPHABET,"Title");
+		tfTotalHours = new SGTextField(TypeOfTextField.NUMBER,"Total Hours");
 		butCancel = new JButton("Cancel");
 		butCancel.addActionListener(this);
 		if(type == ScreenType.NEWEMPLOYEE)
@@ -140,6 +142,16 @@ public abstract class Window implements ActionListener{
 		butUpdate.setPreferredSize(BUTTONSIZE);
 		jpButPanel.add(butUpdate, BorderLayout.EAST);
 		return jpButPanel;
+	}
+	public SGTextField[] getAllSGTextFields(){
+		SGTextField[] allFields = new SGTextField[5];
+		allFields[0] = tfEmployeeFirstName;
+		allFields[1] = tfEmployeeLastName;
+		allFields[2] = tfAge;
+		allFields[3] = tfTitle;
+		allFields[4] = tfTotalHours;
+		return allFields;
+		
 	}
 		@Override
 	public void actionPerformed(ActionEvent e) {

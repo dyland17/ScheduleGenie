@@ -11,8 +11,9 @@ import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 import main.dewalddylan.schedulegenie.gui.Window;
 
 public class TextFieldChecker {
-	private int errors = 0;
+	private int recentErrors;
 	public void check(Window screen)throws GUITextFieldException{
+		recentErrors = 0;
 		SGTextField[] allTextFields = screen.getAllSGTextFields();
 		for(SGTextField field: allTextFields){
 			if(field.getTextFieldType() == TypeOfTextField.ALPHABET)
@@ -20,8 +21,7 @@ public class TextFieldChecker {
 			else
 				field.changeBorderColor((utilCheckStringForNonDigits((field.getText()))? Color.red : Color.gray));
 		}
-		if(errors > 0){
-			errors = 0;
+		if(recentErrors > 0){
 			throw new GUITextFieldException(this);
 		}
 	}
@@ -32,7 +32,7 @@ public class TextFieldChecker {
 			if(Character.isWhitespace(c))
 				continue;
 			if(!Character.isAlphabetic(c)){
-				errors++;
+				recentErrors++;
 				alphabetError = true;
 				break;
 			}
@@ -44,7 +44,7 @@ public class TextFieldChecker {
 		boolean digitError = false;
 		for(char c: toBeChecked.toCharArray()){
 			if(!Character.isDigit(c)){
-				errors++;
+				recentErrors++;
 				digitError = true;
 				break;
 			}
@@ -52,7 +52,7 @@ public class TextFieldChecker {
 		return digitError;
 	}
 	
-	public int getErrors() {
-		return errors;
+	public int getRecentErrors() {
+		return recentErrors;
 	}
 }

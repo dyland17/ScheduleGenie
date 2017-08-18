@@ -1,15 +1,12 @@
 package main.dewalddylan.schedulegenie.data.checker;
 
 import java.awt.Color;
+import java.util.concurrent.atomic.AtomicBoolean;
 
-import javax.swing.JTextField;
-
-import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.SGTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 import main.dewalddylan.schedulegenie.gui.EmployeeScreen;
-import main.dewalddylan.schedulegenie.gui.Window;
 
 public class TextFieldChecker {
 	private int recentErrors;
@@ -35,10 +32,10 @@ public class TextFieldChecker {
 	}
 	
 	private boolean utilCheckStringForNonAlphabet(String toBeChecked, TypeOfTextField typeTF){
-		Boolean alphabetError =  new Boolean(false);
+		AtomicBoolean alphabetError =  new AtomicBoolean(false);
 		if(toBeChecked.equals("") && typeTF == TypeOfTextField.ALPHABETREQ){
 			incrementErrorAndSetBooleanToTrue(alphabetError);
-			return alphabetError;
+			return alphabetError.get();
 		}
 		for(char c: toBeChecked.toCharArray()){
 			if(Character.isWhitespace(c))
@@ -48,19 +45,19 @@ public class TextFieldChecker {
 				break;
 			}
 		}
-		return alphabetError;
+		return alphabetError.get();
 	}
 	
 	private boolean utilCheckStringForNonDigits(String toBeChecked,TypeOfTextField typeTF){
-		Boolean digitError = new Boolean(false);
+		AtomicBoolean digitError = new AtomicBoolean(false);
 		if(toBeChecked.equals("")){
 			switch(typeTF){
 					case NUMBERREQ:
 							incrementErrorAndSetBooleanToTrue(digitError);
-							return digitError;
+							return  digitError.get();
 					case NUMBEROP:
-						digitError = true;
-						return digitError;
+						digitError.set(true);
+						return digitError.get();
 			}
 		} 
 		for(char c: toBeChecked.toCharArray()){
@@ -69,12 +66,12 @@ public class TextFieldChecker {
 				break;
 			}
 		}
-		return digitError;
+		return digitError.get();
 	}
 	
-	private void incrementErrorAndSetBooleanToTrue(Boolean bool){
+	private void incrementErrorAndSetBooleanToTrue(AtomicBoolean bool){
 		recentErrors++;
-		bool = new Boolean(true);
+		bool.set(true);
 	}
 	
 	public int getRecentErrors() {

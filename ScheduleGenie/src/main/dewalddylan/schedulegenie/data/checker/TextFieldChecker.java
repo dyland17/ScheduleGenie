@@ -74,7 +74,7 @@ public class TextFieldChecker {
 	
 	private void incrementErrorAndSetBooleanToTrue(Boolean bool){
 		recentErrors++;
-		bool = true;
+		bool = new Boolean(true);
 	}
 	
 	public int getRecentErrors() {

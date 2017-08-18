@@ -32,9 +32,9 @@ public class EmployeeScreen  extends Window{
 	private final Dimension JPANELINNERSIZE = new Dimension(320,130);
 	public EmployeeScreen(String name, ScreenType type ){
 		super(Window.EMPLOYEESCREEN,name);
-		setupJFrame(name,type);
+		setupJFrame(type);
 	}
-	private void setupJFrame(String name, ScreenType type) {
+	private void setupJFrame(ScreenType type) {
 		tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABETREQ,"First Name");
 		tfEmployeeLastName = new SGTextField(TypeOfTextField.ALPHABETREQ,"Last Name");
 		tfAge = new SGTextField(TypeOfTextField.NUMBERREQ, "Age");

@@ -11,7 +11,7 @@ import main.dewalddylan.schedulegenie.data.checker.TextFieldChecker;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
-public class EditEmployeeScreen extends Window{
+public class EditEmployeeScreen extends EmployeeScreen{
 	private Employee employeeToBeEdited;
 	public EditEmployeeScreen(Employee employee) {
 		super(Window.EDITSCREEN, ScreenType.EDITEMPLOYEE);
@@ -30,8 +30,8 @@ public class EditEmployeeScreen extends Window{
 				checker.check(this);
 				setEmployeeFieldsWithSGTextFields();
 			}
-			catch(GUITextFieldException guiEx){
-				guiEx.showMessage();
+			catch(GUITextFieldException  except){
+				 except.showMessage();
 			}
 		}
 	}

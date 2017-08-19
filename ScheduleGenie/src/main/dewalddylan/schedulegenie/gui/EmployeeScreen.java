@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -15,7 +16,7 @@ import main.dewalddylan.schedulegenie.data.SGTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 
-public class EmployeeScreen  extends Window{
+public class EmployeeScreen  extends Window implements ActionListener{
 	public static final int  TFSIZE = 10;
 	//All GUI components
 	protected SGTextField tfEmployeeFirstName;
@@ -121,10 +122,10 @@ public class EmployeeScreen  extends Window{
 		JPanel jpButPanel = new JPanel();
 		jpButPanel.setPreferredSize(JPANELOVERALLSIZE);
 		
-		butCancel.setPreferredSize(BUTTONSIZE);
+		butCancel.setPreferredSize(EMPLOYEEBUTTONSIZE);
 		jpButPanel.add(butCancel, BorderLayout.WEST);
 		
-		butUpdate.setPreferredSize(BUTTONSIZE);
+		butUpdate.setPreferredSize(EMPLOYEEBUTTONSIZE);
 		jpButPanel.add(butUpdate, BorderLayout.EAST);
 		return jpButPanel;
 	}

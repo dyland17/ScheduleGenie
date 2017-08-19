@@ -19,9 +19,12 @@ import main.dewalddylan.schedulegenie.data.SGTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 
-public abstract class Window implements ActionListener{
-	public static final Dimension BUTTONSIZE = new Dimension(140, 60);
+public abstract class Window{
+	public static final Dimension EMPLOYEEBUTTONSIZE = new Dimension(140, 60);
+	public static final Dimension SCHEDULEBUTTONSIZE = new Dimension(100, 40);
 	public static final Dimension EMPLOYEESCREEN = new Dimension(420,400);
+	public static final Dimension SCHEDULESCREEN = new Dimension(720,640);
+	public static final String MAINSCREEN = "Schedule Screen";
 	public static final String EDITSCREEN = "Edit employee screen." ;
 	public static final String NEWSCREEN = "New employee screen.";
 	protected JFrame window;
@@ -40,7 +43,8 @@ public abstract class Window implements ActionListener{
 
 	public static void main(String[] args){
 		//new NewEmployeeScreen();
-		new EditEmployeeScreen(new Employee("Danny" , "Phantom",21));
+		//new EditEmployeeScreen(new Employee("Danny" , "Phantom",21));
+		new ScheduleScreen();
 	}
 
 }

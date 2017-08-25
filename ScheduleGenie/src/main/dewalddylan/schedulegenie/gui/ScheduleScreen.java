@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 public class ScheduleScreen extends Window{
@@ -15,8 +16,8 @@ public class ScheduleScreen extends Window{
 	private JButton saveButton;
 	private JButton editButton;
 	//Dimensions for gui
-	private final Dimension OPTIONPANELSIZE = new Dimension(190,620);
-	private final Dimension SCHEDULEPANELSIZE = new Dimension(500,620);
+	public static final Dimension OPTIONPANELSIZE = new Dimension(190,620);
+	public static final Dimension SCHEDULEPANELSIZE = new Dimension(500,620);
 	public ScheduleScreen() {
 		super(Window.SCHEDULESCREEN, Window.MAINSCREEN);
 		setupScreen();
@@ -39,8 +40,8 @@ public class ScheduleScreen extends Window{
 							"Thursday","Friday","Saturday"};
 		for(int i = 0; i < 7; i++){
 			SchedulePanel drawPanel = new SchedulePanel();
-			drawPanel.setPreferredSize(SCHEDULEPANELSIZE);
-			tabbedPane.add(days[i], drawPanel);
+			JScrollPane scrollPane = new JScrollPane(drawPanel);
+			tabbedPane.add(days[i], scrollPane);
 		}
 		outsidePanel.add(tabbedPane,BorderLayout.EAST);
 	}

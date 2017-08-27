@@ -23,7 +23,7 @@ public abstract class Window{
 	public static final Dimension EMPLOYEEBUTTONSIZE = new Dimension(140, 60);
 	public static final Dimension SCHEDULEBUTTONSIZE = new Dimension(100, 40);
 	public static final Dimension EMPLOYEESCREEN = new Dimension(420,400);
-	public static final Dimension SCHEDULESCREEN = new Dimension(720,640);
+	public static final Dimension SCHEDULESCREEN = new Dimension(720,660);
 	public static final String MAINSCREEN = "Schedule Screen";
 	public static final String EDITSCREEN = "Edit employee screen." ;
 	public static final String NEWSCREEN = "New employee screen.";

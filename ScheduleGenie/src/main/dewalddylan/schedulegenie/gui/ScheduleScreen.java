@@ -33,9 +33,9 @@ public class ScheduleScreen extends Window{
 	public static EmployeeManager employeeMonitor;
 	public ScheduleScreen() {
 		super(Window.SCHEDULESCREEN, Window.MAINSCREEN);
+		employeeMonitor = new EmployeeManager();
 		setupScreen();
 		this.finishPackingScreen();
-		employeeMonitor = new EmployeeManager();
 	}
 
 	private void setupScreen() {
@@ -68,12 +68,11 @@ public class ScheduleScreen extends Window{
 		JLabel panelInfo = new JLabel("Employee Update Panel: ");
 		optionPanel.add(panelInfo);
 		comboBoxEmployee = new JComboBox<String>();
-		//Temporary name for comboBox.
-		comboBoxEmployee.addItem("Jeffery Hutchman");
 		optionPanel.add(comboBoxEmployee);
 		addButton = new JButton("Add");
 		addButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
 		addButton.addActionListener(new ActionListener(){
+			@Override
 			public void actionPerformed(ActionEvent e){
 				window.setEnabled(false);
 				new NewEmployeeScreen(ScheduleScreen.this);
@@ -82,6 +81,13 @@ public class ScheduleScreen extends Window{
 		optionPanel.add(addButton);
 		editButton = new JButton("Edit");
 		editButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
+		editButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				window.setEnabled(false);
+				new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
+			}
+		});
 		optionPanel.add(editButton);
 		
 		outsidePanel.add(optionPanel, BorderLayout.WEST);
@@ -97,8 +103,13 @@ public class ScheduleScreen extends Window{
 		employeeMonitor.addEmployee(updateEmployee);
 		screenUpdate();
 	}
+	
 	public void screenUpdate(){
-		SchedulePanel panel = (SchedulePanel) tabbedPane.getComponent(tabbedPane.getSelectedIndex());
+		comboBoxEmployee.removeAllItems();
+		for(Employee employee: employeeMonitor.getEmployeeList()){
+			comboBoxEmployee.addItem(employee.getFirstName() + " " + employee.getLastName());
+		}
+		SchedulePanel panel = (SchedulePanel) ((JScrollPane) tabbedPane.getSelectedComponent()).getViewport().getComponent(0);
 		panel.repaint();
 	}
 }

@@ -11,6 +11,7 @@ import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -36,6 +37,7 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	private final Dimension JPANELINNERSIZE = new Dimension(320,130);
 	public EmployeeScreen(String name, ScreenType type,ScheduleScreen mScreen){
 		super(Window.EMPLOYEESCREEN,name);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		mainScreen = mScreen;
 		setupJFrame(type);
 	}
@@ -150,11 +152,15 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	}
 		
 		@Override
-		public void windowClosed(WindowEvent e) {}
+		public void windowClosed(WindowEvent e) {
+			mainScreen.window.requestFocus();
+			mainScreen.window.setEnabled(true);
+		}
 		@Override
 		public void windowActivated(WindowEvent e){}
 		@Override
 		public void windowClosing(WindowEvent e){
+			mainScreen.window.requestFocus();
 			mainScreen.window.setEnabled(true);
 		}
 		@Override

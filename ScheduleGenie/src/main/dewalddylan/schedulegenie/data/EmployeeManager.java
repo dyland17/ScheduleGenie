@@ -52,6 +52,17 @@ public class EmployeeManager {
 	public LinkedList<Employee> getEmployeeList(){
 		return employeeList;
 	}
+	public Employee findEmployeeByName(String name){
+		if(employeeList.size() == 0){
+			return null;
+		}
+		for(Employee employee : employeeList){
+			if(employee.getFullName().equals(name)){
+				return employee;
+			}
+		}
+		return null;
+	}
 	public boolean checkIfDublicate(Employee originalEmployee,Employee listEmployee){
 		boolean isDublicate = false;
 		if(originalEmployee.getFirstName().equals(listEmployee.getFirstName()) && 

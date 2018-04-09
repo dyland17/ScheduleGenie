@@ -15,7 +15,6 @@ public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
 	
 	public NewEmployeeScreen(ScheduleScreen mScreen){
 		super(Window.NEWSCREEN, ScreenType.NEWEMPLOYEE,mScreen);
-		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		butUpdate.addActionListener(this);
 	}
 	//Creation button functionality.
@@ -29,7 +28,9 @@ public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
 				Employee newEmployee = new Employee(tfEmployeeFirstName.getText(),tfEmployeeLastName.getText()
 						,Integer.parseInt(tfAge.getText()),Integer.parseInt(tfTotalHours.getText()),tfTitle.getText());
 				mainScreen.employeeUpdate(newEmployee);
-				window.dispose();
+				mainScreen.window.requestFocus();
+				mainScreen.window.setEnabled(true);
+				this.window.dispose();
 			} catch (GUITextFieldException ex) {
 				ex.showMessage();
 			}

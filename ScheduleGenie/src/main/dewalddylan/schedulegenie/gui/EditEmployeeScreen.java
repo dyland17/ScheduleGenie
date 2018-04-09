@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JFrame;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.checker.TextFieldChecker;
@@ -29,6 +30,10 @@ public class EditEmployeeScreen extends EmployeeScreen{
 				TextFieldChecker checker = new TextFieldChecker();
 				checker.check(this);
 				setEmployeeFieldsWithSGTextFields();
+				mainScreen.employeeUpdate(employeeToBeEdited);
+				mainScreen.window.requestFocus();
+				mainScreen.window.setEnabled(true);
+				this.window.dispose();
 			}
 			catch(GUITextFieldException  except){
 				 except.showMessage();

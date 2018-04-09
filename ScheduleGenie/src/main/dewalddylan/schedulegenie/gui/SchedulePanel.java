@@ -7,6 +7,8 @@ import java.awt.Graphics;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
+import main.dewalddylan.schedulegenie.data.Employee;
+
 public class SchedulePanel extends JPanel{
 	private final Dimension PANELDIM;
 	private final int graphVerticalOffset = 40;
@@ -36,11 +38,21 @@ public class SchedulePanel extends JPanel{
 					g.drawString((x+1) + "pm", ((x*blockWidth)+ graphHorizontalOffset),((10*blockHeight)+labTimeOffset));
 					continue;
 				}
+				else if ((x+1) == 24){
+					g.drawString(((x+1)-12) + "am", ((x*blockWidth)+ graphHorizontalOffset),((10*blockHeight)+labTimeOffset));
+					continue;
+				}
 				g.drawString(((x+1)-12) + "pm", ((x*blockWidth)+graphHorizontalOffset),((10*blockHeight)+labTimeOffset));
 			}
 			else{
 				g.drawString((x+1) + "am", ((x*blockWidth)+graphHorizontalOffset),((10*blockHeight)+labTimeOffset));
 			}
+		}
+		int y = 1;
+		//Write names in
+		for(Employee employee: ScheduleScreen.employeeMonitor.getEmployeeList()){
+			g.drawString(employee.getFirstName() + " " + employee.getLastName(), 0, y*blockHeight);
+			y++;
 		}
 	}
 }

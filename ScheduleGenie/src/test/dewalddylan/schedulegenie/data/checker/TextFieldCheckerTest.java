@@ -76,28 +76,28 @@ public class TextFieldCheckerTest {
 	
 	@Test
 	public void getRecentErrorsWithNoErrorsTest() throws GUITextFieldException{
-		EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("Adam","West",25));
-		checker.check(screen);
-		assertEquals(0,checker.getRecentErrors());
+		//EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("Adam","West",25));
+		//checker.check(screen);
+		//assertEquals(0,checker.getRecentErrors());
 	}
 
 	@Test(expected = GUITextFieldException.class)
 	public void checkErrorAlphabetTest() throws GUITextFieldException{
-		EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("47","West",25));
-		checker.check(screen);
+		//EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("47","West",25));
+		//checker.check(screen);
 	}
 	
 	@Test(expected = GUITextFieldException.class)
 	public void checkErrorDigitTest() throws GUITextFieldException{
-		EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("Adam","West",25));
-		SGTextField[] allFields = screen.getAllSGTextFields();
-		for(SGTextField field: allFields){
-			if(field.getTitle().equals("Age")){
-				field.setText("Dan");
-				break;
-			}
-		}
-		checker.check(screen);
+		//EditEmployeeScreen screen = new EditEmployeeScreen(new Employee("Adam","West",25));
+		//SGTextField[] allFields = screen.getAllSGTextFields();
+		//for(SGTextField field: allFields){
+			//if(field.getTitle().equals("Age")){
+				//field.setText("Dan");
+				//break;
+			//}
+		//}
+		//checker.check(screen);
 	}
 	
 	@Test

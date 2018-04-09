@@ -7,6 +7,8 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,7 +18,7 @@ import main.dewalddylan.schedulegenie.data.SGTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 
-public class EmployeeScreen  extends Window implements ActionListener{
+public class EmployeeScreen  extends Window implements ActionListener, WindowListener{
 	public static final int  TFSIZE = 10;
 	//All GUI components
 	protected SGTextField tfEmployeeFirstName;
@@ -26,13 +28,15 @@ public class EmployeeScreen  extends Window implements ActionListener{
 	protected SGTextField tfTotalHours;
 	protected JButton butCancel;
 	protected JButton butUpdate;
+	ScheduleScreen mainScreen;
 	//Size fields
 	private final Font BOLDFONT = new Font(Font.SANS_SERIF,Font.BOLD,18);
 	private final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	private final Dimension JPANELOVERALLSIZE = new Dimension(320,130);
 	private final Dimension JPANELINNERSIZE = new Dimension(320,130);
-	public EmployeeScreen(String name, ScreenType type ){
+	public EmployeeScreen(String name, ScreenType type,ScheduleScreen mScreen){
 		super(Window.EMPLOYEESCREEN,name);
+		mainScreen = mScreen;
 		setupJFrame(type);
 	}
 	private void setupJFrame(ScreenType type) {
@@ -144,5 +148,22 @@ public class EmployeeScreen  extends Window implements ActionListener{
 		if(e.getSource() == butCancel)
 			window.dispose();
 	}
+		
+		@Override
+		public void windowClosed(WindowEvent e) {}
+		@Override
+		public void windowActivated(WindowEvent e){}
+		@Override
+		public void windowClosing(WindowEvent e){
+			mainScreen.window.setEnabled(true);
+		}
+		@Override
+		public void windowDeactivated(WindowEvent e){}
+		@Override
+		public void windowDeiconified(WindowEvent e) {}
+		@Override
+		public void windowIconified(WindowEvent e) {}
+		@Override
+		public void windowOpened(WindowEvent e){}
 	
 }

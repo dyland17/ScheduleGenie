@@ -2,6 +2,9 @@ package main.dewalddylan.schedulegenie.gui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+
+import javax.swing.JFrame;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.checker.TextFieldChecker;
@@ -9,9 +12,10 @@ import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
 public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
-
-	public NewEmployeeScreen() {
-		super(Window.NEWSCREEN, ScreenType.NEWEMPLOYEE);
+	
+	public NewEmployeeScreen(ScheduleScreen mScreen){
+		super(Window.NEWSCREEN, ScreenType.NEWEMPLOYEE,mScreen);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		butUpdate.addActionListener(this);
 	}
 	//Creation button functionality.
@@ -24,7 +28,8 @@ public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
 				checker.check(this);
 				Employee newEmployee = new Employee(tfEmployeeFirstName.getText(),tfEmployeeLastName.getText()
 						,Integer.parseInt(tfAge.getText()),Integer.parseInt(tfTotalHours.getText()),tfTitle.getText());
-				printEmployeeInfo(newEmployee);
+				mainScreen.employeeUpdate(newEmployee);
+				window.dispose();
 			} catch (GUITextFieldException ex) {
 				ex.showMessage();
 			}
@@ -37,5 +42,5 @@ public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
 		System.out.println("Age: " + newEmployee.getAge());
 		System.out.println("Title: "  + newEmployee.getTitle());
 		System.out.println("TotalHours: " + newEmployee.getTotalHours());
-	}	
+	}
 }

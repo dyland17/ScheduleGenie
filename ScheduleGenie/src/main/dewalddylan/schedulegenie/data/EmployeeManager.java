@@ -49,6 +49,26 @@ public class EmployeeManager {
 	public Employee getEmployee(int index){
 		return employeeList.get(index);
 	}
+	public LinkedList<Employee> getEmployeeList(){
+		return employeeList;
+	}
+	public boolean checkIfDublicate(Employee originalEmployee,Employee listEmployee){
+		boolean isDublicate = false;
+		if(originalEmployee.getFirstName().equals(listEmployee.getFirstName()) && 
+				originalEmployee.getLastName().equals(listEmployee.getLastName())){
+			isDublicate = true;
+		}
+		return isDublicate;
+			
+	}
+	
+	public void copyNewInformation(Employee updateEmployee, Employee oldEmployee){
+		oldEmployee.setTotalHours(updateEmployee.getTotalHours());
+		oldEmployee.setTitle(updateEmployee.getTitle());
+		oldEmployee.setFirstName(updateEmployee.getFirstName());	
+		oldEmployee.setLastName(updateEmployee.getLastName());
+	}
+	
 	public void printList(){
 		for(Employee employee: employeeList){
 			System.out.print("FirstName: " + employee.getFirstName() + " ");

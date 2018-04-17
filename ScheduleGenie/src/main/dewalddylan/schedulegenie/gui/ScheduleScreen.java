@@ -6,6 +6,7 @@ import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -92,15 +93,34 @@ public class ScheduleScreen extends Window{
 		
 		outsidePanel.add(optionPanel, BorderLayout.WEST);
 	}
-
+	
+	public void addNewEmployee(Employee newEmployee){
+		boolean wasDuplicate;
+		int employeeSize = employeeMonitor.getEmployeeList().size();
+		Random rand = new Random();
+		do{
+			wasDuplicate = false;
+			for(int i = 0; i < employeeSize; i++){
+				if(employeeMonitor.checkIfDublicate(newEmployee, employeeMonitor.getEmployee(i))){
+					wasDuplicate = true;
+					break;
+				}
+			}
+			if(wasDuplicate){
+				newEmployee.setEmployeeNumber(rand.nextInt(Employee.TOTALEMPLOYEENUMBERS));
+			}
+		}while(wasDuplicate);
+		employeeMonitor.addEmployee(newEmployee);
+		screenUpdate();
+	}
+	
 	public void employeeUpdate(Employee updateEmployee) {
 		for(Employee listEmployee: employeeMonitor.getEmployeeList()){
 			if(employeeMonitor.checkIfDublicate(updateEmployee, listEmployee)){
 				employeeMonitor.copyNewInformation(updateEmployee, listEmployee);
-				return;
+				break;
 			}	
 		}
-		employeeMonitor.addEmployee(updateEmployee);
 		screenUpdate();
 	}
 	

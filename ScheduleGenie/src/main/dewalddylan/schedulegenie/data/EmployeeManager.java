@@ -65,8 +65,7 @@ public class EmployeeManager {
 	}
 	public boolean checkIfDublicate(Employee originalEmployee,Employee listEmployee){
 		boolean isDublicate = false;
-		if(originalEmployee.getFirstName().equals(listEmployee.getFirstName()) && 
-				originalEmployee.getLastName().equals(listEmployee.getLastName())){
+		if(originalEmployee.getEmployeeNumber() == listEmployee.getEmployeeNumber()){
 			isDublicate = true;
 		}
 		return isDublicate;

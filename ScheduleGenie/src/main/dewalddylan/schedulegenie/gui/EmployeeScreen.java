@@ -147,8 +147,11 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	}
 		@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == butCancel)
+		if(e.getSource() == butCancel){
+			mainScreen.window.setEnabled(true);
+			mainScreen.window.requestFocus();
 			window.dispose();
+		}
 	}
 		
 		@Override

@@ -3,6 +3,7 @@ package main.dewalddylan.schedulegenie.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
+import java.util.Random;
 
 import javax.swing.JFrame;
 
@@ -23,11 +24,12 @@ public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
 		super.actionPerformed(e);
 		if(e.getSource() == butUpdate){
 			TextFieldChecker checker = new TextFieldChecker();
+			Random random = new Random();
 			try {
 				checker.check(this);
 				Employee newEmployee = new Employee(tfEmployeeFirstName.getText(),tfEmployeeLastName.getText()
-						,Integer.parseInt(tfAge.getText()),Integer.parseInt(tfTotalHours.getText()),tfTitle.getText());
-				mainScreen.employeeUpdate(newEmployee);
+						,Integer.parseInt(tfAge.getText()), random.nextInt(Employee.TOTALEMPLOYEENUMBERS),Integer.parseInt(tfTotalHours.getText()),tfTitle.getText());
+				mainScreen.addNewEmployee(newEmployee);
 				mainScreen.window.requestFocus();
 				mainScreen.window.setEnabled(true);
 				this.window.dispose();
@@ -41,6 +43,7 @@ public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
 		System.out.println("First Name: " + newEmployee.getFirstName());
 		System.out.println("Last Name: " + newEmployee.getLastName());
 		System.out.println("Age: " + newEmployee.getAge());
+		System.out.println("Employee #: " + newEmployee.getEmployeeNumber());
 		System.out.println("Title: "  + newEmployee.getTitle());
 		System.out.println("TotalHours: " + newEmployee.getTotalHours());
 	}

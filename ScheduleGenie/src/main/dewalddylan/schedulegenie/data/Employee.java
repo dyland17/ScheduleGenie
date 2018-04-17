@@ -1,20 +1,23 @@
 package main.dewalddylan.schedulegenie.data;
 
 public class Employee {
+	public static final int TOTALEMPLOYEENUMBERS = 999999;
 	//Most important information
 	private String firstName;
 	private String lastName;
 	private int age;
+	private int employeeNumber;
 	//Extra info
 	private String title;
 	private int totalHours;
 	private boolean minor;
 	private DayTracker dayTracker;
 	
-	public Employee(String firstName,String lastName, int age){
+	public Employee(String firstName,String lastName, int age, int employeeNum){
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
+		this.employeeNumber = employeeNum;
 		this.minor = false;
 		if(age < 18)
 			this.minor = true;
@@ -22,8 +25,8 @@ public class Employee {
 		title = "No title given";
 		dayTracker = new DayTracker();
 	}
-	public Employee(String firstName,String lastName, int age, int totalHours, String title){
-		this(firstName,lastName,age);
+	public Employee(String firstName,String lastName, int age, int employeeNum,int totalHours, String title){
+		this(firstName,lastName,age,employeeNum);
 		this.totalHours = totalHours;
 		this.title = title;
 		
@@ -79,8 +82,15 @@ public class Employee {
 	}
 
 	public Employee copy(){
-		return new Employee(firstName,lastName,age,totalHours,title) ;
+		return new Employee(firstName,lastName,age, employeeNumber,totalHours,title) ;
 	}
+	public int getEmployeeNumber() {
+		return employeeNumber;
+	}
+	public void setEmployeeNumber(int newEmployeeNumber){
+		employeeNumber = newEmployeeNumber;
+	}
+
 	public DayTracker getDayTracker(){
 		return dayTracker;
 	}

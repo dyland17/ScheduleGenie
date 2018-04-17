@@ -38,6 +38,7 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	public EmployeeScreen(String name, ScreenType type,ScheduleScreen mScreen){
 		super(Window.EMPLOYEESCREEN,name);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		window.addWindowListener(this);
 		mainScreen = mScreen;
 		setupJFrame(type);
 	}

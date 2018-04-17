@@ -12,7 +12,7 @@ import main.dewalddylan.schedulegenie.data.checker.TextFieldChecker;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
-public class NewEmployeeScreen extends EmployeeScreen implements ActionListener{
+public class NewEmployeeScreen extends EmployeeScreen{
 	
 	public NewEmployeeScreen(ScheduleScreen mScreen){
 		super(Window.NEWSCREEN, ScreenType.NEWEMPLOYEE,mScreen);

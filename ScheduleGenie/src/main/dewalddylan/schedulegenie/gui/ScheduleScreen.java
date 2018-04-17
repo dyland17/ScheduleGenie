@@ -18,6 +18,7 @@ import javax.swing.JTabbedPane;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.EmployeeManager;
+import main.dewalddylan.schedulegenie.data.exceptions.EmployeeNotSelectedException;
 
 public class ScheduleScreen extends Window{
 	//GUI components
@@ -27,8 +28,10 @@ public class ScheduleScreen extends Window{
 	private JComboBox<String> comboBoxEmployee;
 	private JButton addButton;
 	private JButton editButton;
+	private JButton scheduleButton;
 	//Dimensions for gui
-	public static final Dimension OPTIONPANELSIZE = new Dimension(190,620);
+	public static final Dimension OPTIONPANELSIZE = new Dimension(190,640);
+	public static final Dimension EDITEMPLOYEEPANELSIZE = new Dimension(190, 305);
 	public static final Dimension SCHEDULEPANELSIZE = new Dimension(500,560);
 	//Data
 	public static EmployeeManager employeeMonitor;
@@ -65,6 +68,34 @@ public class ScheduleScreen extends Window{
 		optionPanel = new JPanel();
 		optionPanel.setPreferredSize(OPTIONPANELSIZE);
 		optionPanel.setLayout(new FlowLayout());
+		//ActionListener to satisfy each button's needs.
+		ActionListener buttonListener = new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				try{
+					window.setEnabled(false);
+					if(e.getSource().equals( addButton)){
+						new NewEmployeeScreen(ScheduleScreen.this);
+					}
+					else if(e.getSource().equals(editButton)){
+						if(employeeMonitor.getEmployeeList().isEmpty()){
+							throw new EmployeeNotSelectedException();
+						}
+						new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
+					}
+					else if(e.getSource().equals(scheduleButton)){
+						if(employeeMonitor.getEmployeeList().isEmpty()){
+							throw new EmployeeNotSelectedException();
+						}
+						
+					}
+				}
+				catch(EmployeeNotSelectedException ex){
+					ex.showMessage();
+					window.setEnabled(true);
+				}
+			}
+		};
 		//Buttons for right now, might add scroll down menu before buttons.
 		JLabel panelInfo = new JLabel("Employee Update Panel: ");
 		optionPanel.add(panelInfo);
@@ -72,24 +103,17 @@ public class ScheduleScreen extends Window{
 		optionPanel.add(comboBoxEmployee);
 		addButton = new JButton("Add");
 		addButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
-		addButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				window.setEnabled(false);
-				new NewEmployeeScreen(ScheduleScreen.this);
-			}
-		});
+		addButton.addActionListener(buttonListener);
 		optionPanel.add(addButton);
 		editButton = new JButton("Edit");
 		editButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
-		editButton.addActionListener(new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				window.setEnabled(false);
-				new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
-			}
-		});
+		editButton.addActionListener(buttonListener);
 		optionPanel.add(editButton);
+		
+		scheduleButton = new JButton("Schedule");
+		scheduleButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
+		scheduleButton.addActionListener(buttonListener);
+		optionPanel.add(scheduleButton);
 		
 		outsidePanel.add(optionPanel, BorderLayout.WEST);
 	}

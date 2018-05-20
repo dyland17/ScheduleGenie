@@ -30,7 +30,7 @@ public class ScheduleScreen extends Window{
 	private JButton editButton;
 	private JButton scheduleButton;
 	//Dimensions for gui
-	public static final Dimension OPTIONPANELSIZE = new Dimension(190,640);
+	public static final Dimension OPTIONPANELSIZE = new Dimension(200,640);
 	public static final Dimension EDITEMPLOYEEPANELSIZE = new Dimension(190, 305);
 	public static final Dimension SCHEDULEPANELSIZE = new Dimension(500,560);
 	//Data

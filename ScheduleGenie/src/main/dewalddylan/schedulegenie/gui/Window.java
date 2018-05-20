@@ -4,6 +4,8 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
+
 public abstract class Window{
 	public static final Dimension EMPLOYEEBUTTONSIZE = new Dimension(140, 60);
 	public static final Dimension SCHEDULEBUTTONSIZE = new Dimension(100, 40);

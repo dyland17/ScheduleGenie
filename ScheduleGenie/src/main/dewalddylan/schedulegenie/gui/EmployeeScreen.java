@@ -16,8 +16,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.dewalddylan.schedulegenie.data.SGTextField;
+import main.dewalddylan.schedulegenie.data.ScheduleDayPanel;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
+import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class EmployeeScreen  extends Window implements ActionListener, WindowListener{
 	public static final int  TFSIZE = 10;
@@ -27,6 +29,7 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	protected SGTextField tfAge;
 	protected SGTextField tfTitle;
 	protected SGTextField tfTotalHours;
+	protected ScheduleDayPanel mondayPanel;
 	protected JButton butCancel;
 	protected JButton butUpdate;
 	ScheduleScreen mainScreen;
@@ -35,7 +38,7 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	private final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	private final Dimension JPANELOVERALLSIZE = new Dimension(320,130);
 	private final Dimension JPANELINNERSIZE = new Dimension(320,130);
-	
+	//vvvvvvvvvvvvvvvvvvvvvv Need to change how constructor works so, ScheduleDayPanel can work. vvvvvvvvvvvvvvvvvvvvvvvvvvv
 	public EmployeeScreen(String name, ScreenType type,ScheduleScreen mScreen){
 		super(Window.EMPLOYEESCREEN,name);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -44,18 +47,30 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 		setupJFrame(type);
 	}
 	private void setupJFrame(ScreenType type) {
-		tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABETREQ,"First Name");
-		tfEmployeeLastName = new SGTextField(TypeOfTextField.ALPHABETREQ,"Last Name");
-		tfAge = new SGTextField(TypeOfTextField.NUMBERREQ, "Age");
-		tfTitle = new SGTextField(TypeOfTextField.ALPHABETOP,"Title");
-		tfTotalHours = new SGTextField(TypeOfTextField.NUMBEROP,"Total Hours");
 		butCancel = new JButton("Cancel");
 		butCancel.addActionListener(this);
 		if(type == ScreenType.NEWEMPLOYEE)
 			butUpdate = new JButton("Create");
-		else if(type == ScreenType.EDITEMPLOYEE)
+		else if(type == ScreenType.EDITEMPLOYEE || type == ScreenType.SCHEDULEEMPLOYEE)
 			butUpdate = new JButton("Update");
-		createEmployeeScreen(type);
+		
+		if(type == ScreenType.EDITEMPLOYEE || type == ScreenType.NEWEMPLOYEE){
+			tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABETREQ,"First Name");
+			tfEmployeeLastName = new SGTextField(TypeOfTextField.ALPHABETREQ,"Last Name");
+			tfAge = new SGTextField(TypeOfTextField.NUMBERREQ, "Age");
+			tfTitle = new SGTextField(TypeOfTextField.ALPHABETOP,"Title");
+			tfTotalHours = new SGTextField(TypeOfTextField.NUMBEROP,"Total Hours");
+			createEmployeeScreen(type);
+		}
+		else{
+			//vvvvvvvvvvvvvvvvv don't keep this vvvvvvvvvvvvvvvvvvvv
+			Container c = window.getContentPane();
+			c.setLayout(new FlowLayout());
+			mondayPanel = new ScheduleDayPanel(WorkDay.MONDAY);
+			c.add(mondayPanel);
+			finishPackingScreen();
+		}
+		
 	}
 	
 	private void createEmployeeScreen(ScreenType type) {

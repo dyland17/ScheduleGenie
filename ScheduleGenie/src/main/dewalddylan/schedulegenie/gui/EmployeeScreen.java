@@ -35,6 +35,7 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	private final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	private final Dimension JPANELOVERALLSIZE = new Dimension(320,130);
 	private final Dimension JPANELINNERSIZE = new Dimension(320,130);
+	
 	public EmployeeScreen(String name, ScreenType type,ScheduleScreen mScreen){
 		super(Window.EMPLOYEESCREEN,name);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);

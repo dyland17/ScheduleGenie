@@ -10,8 +10,9 @@ public abstract class Window{
 	public static final Dimension EMPLOYEESCREEN = new Dimension(420,400);
 	public static final Dimension SCHEDULESCREEN = new Dimension(720,660);
 	public static final String MAINSCREEN = "Schedule Screen";
-	public static final String EDITSCREEN = "Edit employee screen." ;
-	public static final String NEWSCREEN = "New employee screen.";
+	public static final String EDITEMPLOYEESCREEN = "Edit employee screen." ;
+	public static final String NEWEMPLOYEESCREEN = "New employee screen.";
+	public static final String SCHEDULEEMPLOYEESCREEN = "Schedule employee screen.";
 	protected JFrame window;
 	public Window(Dimension dim, String name){
 		window = new JFrame(name);

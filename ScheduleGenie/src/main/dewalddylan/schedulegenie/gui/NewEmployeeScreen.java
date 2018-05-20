@@ -15,7 +15,7 @@ import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 public class NewEmployeeScreen extends EmployeeScreen{
 	
 	public NewEmployeeScreen(ScheduleScreen mScreen){
-		super(Window.NEWSCREEN, ScreenType.NEWEMPLOYEE,mScreen);
+		super(Window.NEWEMPLOYEESCREEN, ScreenType.NEWEMPLOYEE,mScreen);
 		butUpdate.addActionListener(this);
 	}
 	//Creation button functionality.

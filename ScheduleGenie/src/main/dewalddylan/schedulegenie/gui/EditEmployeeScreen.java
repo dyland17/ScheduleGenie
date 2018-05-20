@@ -15,7 +15,7 @@ import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 public class EditEmployeeScreen extends EmployeeScreen{
 	private Employee employeeToBeEdited;
 	public EditEmployeeScreen(Employee employee,ScheduleScreen mScreen) {
-		super(Window.EDITSCREEN, ScreenType.EDITEMPLOYEE,mScreen);
+		super(Window.EDITEMPLOYEESCREEN, ScreenType.EDITEMPLOYEE,mScreen);
 		employeeToBeEdited = employee;
 		butUpdate.addActionListener(this);
 		setupTfInfo();

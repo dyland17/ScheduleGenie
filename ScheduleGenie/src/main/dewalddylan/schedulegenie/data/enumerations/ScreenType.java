@@ -1,5 +1,5 @@
 package main.dewalddylan.schedulegenie.data.enumerations;
 
 public enum ScreenType {
-NEWEMPLOYEE(),EDITEMPLOYEE();
+NEWEMPLOYEE(),EDITEMPLOYEE(), SCHEDULEEMPLOYEE();
 }

@@ -74,20 +74,20 @@ public class ScheduleScreen extends Window{
 			public void actionPerformed(ActionEvent e){
 				try{
 					window.setEnabled(false);
+					boolean employeeListIsEmpty = employeeMonitor.getEmployeeList().isEmpty();
 					if(e.getSource().equals( addButton)){
 						new NewEmployeeScreen(ScheduleScreen.this);
 					}
-					else if(e.getSource().equals(editButton)){
-						if(employeeMonitor.getEmployeeList().isEmpty()){
+					else{
+						if(employeeListIsEmpty){
 							throw new EmployeeNotSelectedException();
 						}
-						new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
-					}
-					else if(e.getSource().equals(scheduleButton)){
-						if(employeeMonitor.getEmployeeList().isEmpty()){
-							throw new EmployeeNotSelectedException();
+						else if(e.getSource().equals(editButton)){
+							new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
 						}
-						
+						else if(e.getSource().equals(scheduleButton)){
+							new ScheduleEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), ScheduleScreen.this);
+						}
 					}
 				}
 				catch(EmployeeNotSelectedException ex){

@@ -1,17 +1,16 @@
 package main.dewalddylan.schedulegenie.data;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.util.Vector;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 
 import main.dewalddylan.schedulegenie.data.enumerations.TimeOfDay;
 import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
-import main.dewalddylan.schedulegenie.gui.Window;
 
 public class ScheduleDayPanel extends JPanel{
 	//ST = Start time	ET = End Time
@@ -24,9 +23,8 @@ public class ScheduleDayPanel extends JPanel{
 	
 	
 	public ScheduleDayPanel(){
-		super();
-		this.setPreferredSize(new Dimension(400,120));
-		this.setLayout(new FlowLayout());
+		this.setPreferredSize(new Dimension(430,280));
+		this.setLayout(new GridBagLayout());
 		Integer hourTime[] = {1,2,3,4,5,6,7,8,9,10,11,12};
 		Integer minTime[] = {0,15,30,45};
 		hourSTBox = new JComboBox[7];
@@ -45,38 +43,34 @@ public class ScheduleDayPanel extends JPanel{
 		}
 		setupPanel();
 	}
-	class HourPanel extends JPanel{
-		private JComboBox[] hourBox;
-		private JComboBox[] minBox;
-		private JComboBox[] TODBox;
-		public HourPanel(JComboBox[] hBox, JComboBox[] mBox, JComboBox[] todBox){
-			hourBox = hBox;
-			minBox = mBox;
-			TODBox = todBox;
-			this.setLayout(new FlowLayout());
-			this.setPreferredSize(new Dimension(200, 100));
-			for(int i = 0; i < hBox.length; i++){
-				this.add(hourBox[i]);
-				this.add(minBox[i]);
-				this.add(TODBox[i]);
-			}
-		}
-		public JComboBox[] getHourBox() {
-			return hourBox;
-		}
-		public JComboBox[] getMinBox() {
-			return minBox;
-		}
-		public JComboBox[] getTODBox() {
-			return TODBox;
-		}
-		
-		
-	}
+	
 	private void setupPanel() {
-		HourPanel STPanel = new HourPanel(hourSTBox, minuteSTBox,timeOfDaySTBox);
-		HourPanel ETPanel = new HourPanel(hourETBox, minuteETBox,timeOfDayETBox);
-		add(STPanel);
-		add(ETPanel);
+		WorkDay[] day = WorkDay.values();
+		GridBagConstraints gbc = new GridBagConstraints();
+		for(int i = 0; i < 7; i++){
+			//Gridy is what row it is on.
+				//Gridx is the column that the component is placed.
+			gbc.gridx = 0;
+			gbc.gridy = i;
+			gbc.insets = new Insets(5,5,5,5);
+			add(new JLabel(day[i].toString()),gbc);
+			moveGBCRightOneCol(gbc);
+			add(hourSTBox[i], gbc);
+			moveGBCRightOneCol(gbc);
+			add(minuteSTBox[i], gbc);
+			moveGBCRightOneCol(gbc);
+			add(timeOfDaySTBox[i], gbc);
+			moveGBCRightOneCol(gbc);
+			add(new JLabel(" To "), gbc);
+			moveGBCRightOneCol(gbc);
+			add(hourETBox[i], gbc);
+			moveGBCRightOneCol(gbc);
+			add(minuteETBox[i], gbc);
+			moveGBCRightOneCol(gbc);
+			add(timeOfDayETBox[i], gbc);
+		}
+	}
+	private void moveGBCRightOneCol(GridBagConstraints gbc){
+		gbc.gridx += 1;
 	}
 }

@@ -38,7 +38,7 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 	private final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	private final Dimension JPANELOVERALLSIZE = new Dimension(320,130);
 	private final Dimension JPANELINNERSIZE = new Dimension(320,130);
-	//vvvvvvvvvvvvvvvvvvvvvv Need to change how constructor works so, ScheduleDayPanel can work. vvvvvvvvvvvvvvvvvvvvvvvvvvv
+	
 	public EmployeeScreen(String name, ScreenType type,ScheduleScreen mScreen){
 		super(Window.EMPLOYEESCREEN,name);
 		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -46,15 +46,21 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 		mainScreen = mScreen;
 		setupJFrame(type);
 	}
+	
+	public EmployeeScreen(String name,Dimension screenDim, ScreenType type,ScheduleScreen mScreen){
+		super(screenDim,name);
+		window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		window.addWindowListener(this);
+		mainScreen = mScreen;
+		setupJFrame(type);
+	}
+	
 	private void setupJFrame(ScreenType type) {
 		//Buttons getting initialized.
-		boolean employeeScreen;
 		butCancel = new JButton("Cancel");
 		butCancel.addActionListener(this);
-		if(type == ScreenType.NEWEMPLOYEE)
-			butUpdate = new JButton("Create");
-		else
-			butUpdate = new JButton("Update");
+		butUpdate = new JButton("Update");
+		
 		//Initializing objects needed for that particular screen.
 		if(type == ScreenType.EDITEMPLOYEE || type == ScreenType.NEWEMPLOYEE){
 			tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABETREQ,"First Name");
@@ -62,16 +68,16 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 			tfAge = new SGTextField(TypeOfTextField.NUMBERREQ, "Age");
 			tfTitle = new SGTextField(TypeOfTextField.ALPHABETOP,"Title");
 			tfTotalHours = new SGTextField(TypeOfTextField.NUMBEROP,"Total Hours");
-			employeeScreen = true;
+			
+			if(type == ScreenType.NEWEMPLOYEE)
+				butUpdate.setText("Create");
+			
+			createEmployeeScreen(type);
 		}
 		else{
 			daysPanel = new ScheduleDayPanel();
-			employeeScreen = false;
-		}
-		if(employeeScreen)
-			createEmployeeScreen(type);
-		else
 			createScheduleScreen(type);
+		}
 		finishPackingScreen();
 	}
 	
@@ -89,7 +95,7 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 		JPanel jpButPanel = this.setupButtonGUIForEmployeeScreen(type);
 		c.add(jpButPanel);
 	}
-	//vvvvvvvvvvvvvvv Not finished yet vvvvvvvvvvvvvv
+	
 	private void createScheduleScreen(ScreenType type) {
 		Container c = window.getContentPane();
 		c.setLayout(new FlowLayout());

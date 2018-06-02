@@ -21,7 +21,7 @@ import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
-public class EmployeeScreen  extends Window implements ActionListener, WindowListener{
+public class EmployeeScreen  extends Window{
 	public static final int  TFSIZE = 10;
 	//All GUI components
 	protected SGTextField tfEmployeeFirstName;
@@ -179,13 +179,13 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 		
 	}
 		@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == butCancel){
-			mainScreen.window.setEnabled(true);
-			mainScreen.window.requestFocus();
-			window.dispose();
+		public void actionPerformed(ActionEvent e) {
+			if(e.getSource() == butCancel){
+				mainScreen.window.setEnabled(true);
+				mainScreen.window.requestFocus();
+				window.dispose();
+			}
 		}
-	}
 		
 		@Override
 		public void windowClosed(WindowEvent e) {
@@ -193,19 +193,9 @@ public class EmployeeScreen  extends Window implements ActionListener, WindowLis
 			mainScreen.window.setEnabled(true);
 		}
 		@Override
-		public void windowActivated(WindowEvent e){}
-		@Override
 		public void windowClosing(WindowEvent e){
 			mainScreen.window.requestFocus();
 			mainScreen.window.setEnabled(true);
 		}
-		@Override
-		public void windowDeactivated(WindowEvent e){}
-		@Override
-		public void windowDeiconified(WindowEvent e) {}
-		@Override
-		public void windowIconified(WindowEvent e) {}
-		@Override
-		public void windowOpened(WindowEvent e){}
-	
+
 }

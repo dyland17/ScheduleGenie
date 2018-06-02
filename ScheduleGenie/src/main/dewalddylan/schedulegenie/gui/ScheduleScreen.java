@@ -68,34 +68,6 @@ public class ScheduleScreen extends Window{
 		optionPanel = new JPanel();
 		optionPanel.setPreferredSize(OPTIONPANELSIZE);
 		optionPanel.setLayout(new FlowLayout());
-		//ActionListener to satisfy each button's needs.
-		ActionListener buttonListener = new ActionListener(){
-			@Override
-			public void actionPerformed(ActionEvent e){
-				try{
-					window.setEnabled(false);
-					boolean employeeListIsEmpty = employeeMonitor.getEmployeeList().isEmpty();
-					if(e.getSource().equals( addButton)){
-						new NewEmployeeScreen(ScheduleScreen.this);
-					}
-					else{
-						if(employeeListIsEmpty){
-							throw new EmployeeNotSelectedException();
-						}
-						else if(e.getSource().equals(editButton)){
-							new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
-						}
-						else if(e.getSource().equals(scheduleButton)){
-							new ScheduleEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), ScheduleScreen.this);
-						}
-					}
-				}
-				catch(EmployeeNotSelectedException ex){
-					ex.showMessage();
-					window.setEnabled(true);
-				}
-			}
-		};
 		//Buttons for right now, might add scroll down menu before buttons.
 		JLabel panelInfo = new JLabel("Employee Update Panel: ");
 		optionPanel.add(panelInfo);
@@ -103,16 +75,16 @@ public class ScheduleScreen extends Window{
 		optionPanel.add(comboBoxEmployee);
 		addButton = new JButton("Add");
 		addButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
-		addButton.addActionListener(buttonListener);
+		addButton.addActionListener(this);
 		optionPanel.add(addButton);
 		editButton = new JButton("Edit");
 		editButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
-		editButton.addActionListener(buttonListener);
+		editButton.addActionListener(this);
 		optionPanel.add(editButton);
 		
 		scheduleButton = new JButton("Schedule");
 		scheduleButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
-		scheduleButton.addActionListener(buttonListener);
+		scheduleButton.addActionListener(this);
 		optionPanel.add(scheduleButton);
 		
 		outsidePanel.add(optionPanel, BorderLayout.WEST);
@@ -155,5 +127,31 @@ public class ScheduleScreen extends Window{
 		}
 		SchedulePanel panel = (SchedulePanel) ((JScrollPane) tabbedPane.getSelectedComponent()).getViewport().getComponent(0);
 		panel.repaint();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		try{
+			window.setEnabled(false);
+			boolean employeeListIsEmpty = employeeMonitor.getEmployeeList().isEmpty();
+			if(e.getSource().equals( addButton)){
+				new NewEmployeeScreen(ScheduleScreen.this);
+			}
+			else{
+				if(employeeListIsEmpty){
+					throw new EmployeeNotSelectedException();
+				}
+				else if(e.getSource().equals(editButton)){
+					new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
+				}
+				else if(e.getSource().equals(scheduleButton)){
+					new ScheduleEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), ScheduleScreen.this);
+				}
+			}
+		}
+		catch(EmployeeNotSelectedException ex){
+			ex.showMessage();
+			window.setEnabled(true);
+		}
 	}
 }

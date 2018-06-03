@@ -6,9 +6,9 @@ import main.dewalddylan.schedulegenie.data.DayTracker;
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
-public class ScheduleEmployeeScreen  extends EmployeeScreen{
+public class TimeSheetEmployeeScreen  extends EmployeeScreen{
 	private Employee employeeBeingScheduled;
-	public ScheduleEmployeeScreen(Employee employeeToBeScheduled, ScheduleScreen scheduleScreen) {
+	public TimeSheetEmployeeScreen(Employee employeeToBeScheduled, ScheduleScreen scheduleScreen) {
 		super(Window.SCHEDULEEMPLOYEESCREEN,Window.EMPLOYEETIMESHEETSCREEN,ScreenType.SCHEDULEEMPLOYEE, scheduleScreen);
 		employeeBeingScheduled =	employeeToBeScheduled;
 	}

@@ -1,14 +1,11 @@
 package main.dewalddylan.schedulegenie.gui;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.Random;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -145,7 +142,7 @@ public class ScheduleScreen extends Window{
 					new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
 				}
 				else if(e.getSource().equals(scheduleButton)){
-					new ScheduleEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), ScheduleScreen.this);
+					new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), ScheduleScreen.this);
 				}
 			}
 		}

@@ -16,11 +16,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import main.dewalddylan.schedulegenie.data.SGTextField;
-import main.dewalddylan.schedulegenie.data.ScheduleDayPanel;
+import main.dewalddylan.schedulegenie.data.TimeSheetPanel;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
+//vvvvvvvvv need to split this class into smaller bits because it is to big vvvvvvvvvvvvv
 public class EmployeeScreen  extends Window{
 	public static final int  TFSIZE = 10;
 	//All GUI components
@@ -29,7 +30,7 @@ public class EmployeeScreen  extends Window{
 	protected SGTextField tfAge;
 	protected SGTextField tfTitle;
 	protected SGTextField tfTotalHours;
-	protected ScheduleDayPanel daysPanel;
+	protected TimeSheetPanel daysPanel;
 	protected JButton butCancel;
 	protected JButton butUpdate;
 	protected ScheduleScreen mainScreen;
@@ -75,7 +76,7 @@ public class EmployeeScreen  extends Window{
 			createEmployeeScreen(type);
 		}
 		else{
-			daysPanel = new ScheduleDayPanel();
+			daysPanel = new TimeSheetPanel();
 			createScheduleScreen(type);
 		}
 		finishPackingScreen();

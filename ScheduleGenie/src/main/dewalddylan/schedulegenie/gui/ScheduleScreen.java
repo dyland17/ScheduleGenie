@@ -4,6 +4,7 @@ import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
+import java.awt.event.WindowEvent;
 import java.util.Random;
 
 import javax.swing.JButton;
@@ -15,9 +16,12 @@ import javax.swing.JTabbedPane;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.EmployeeManager;
+import main.dewalddylan.schedulegenie.data.GUIDim;
+import main.dewalddylan.schedulegenie.data.TitleName;
+import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.EmployeeNotSelectedException;
 
-public class ScheduleScreen extends Window{
+public class ScheduleScreen extends EmployeeScreen{
 	//GUI components
 	private JPanel optionPanel;
 	private JTabbedPane tabbedPane;
@@ -26,31 +30,17 @@ public class ScheduleScreen extends Window{
 	private JButton addButton;
 	private JButton editButton;
 	private JButton scheduleButton;
-	//Dimensions for gui
-	public static final Dimension OPTIONPANELSIZE = new Dimension(200,640);
-	public static final Dimension EDITEMPLOYEEPANELSIZE = new Dimension(190, 305);
-	public static final Dimension SCHEDULEPANELSIZE = new Dimension(500,560);
-	//Data
 	public static EmployeeManager employeeMonitor;
 	public ScheduleScreen() {
-		super(Window.SCHEDULESCREEN, Window.MAINSCREEN);
+		super(TitleName.MAINSCREENNAME, ScreenType.SCHEDULESCREEN);
 		employeeMonitor = new EmployeeManager();
-		setupScreen();
-		this.finishPackingScreen();
-	}
-
-	private void setupScreen() {
-		Container c = window.getContentPane();
-		outsidePanel = new JPanel();
-		outsidePanel.setPreferredSize(Window.SCHEDULESCREEN);
-		setupOptionPanel();
-		setupGraphPanel();
-		c.add(outsidePanel);
+		styleJFrame();
+		super.finishPackingScreen();
 	}
 
 	private void setupGraphPanel() {
 		tabbedPane = new JTabbedPane();
-		tabbedPane.setPreferredSize(SCHEDULEPANELSIZE);
+		tabbedPane.setPreferredSize(GUIDim.SCHEDULEPANELDIM);
 		String[] days = {"Sunday","Monday","Tuesday","Wednesday",
 							"Thursday","Friday","Saturday"};
 		for(int i = 0; i < 7; i++){
@@ -63,7 +53,7 @@ public class ScheduleScreen extends Window{
 
 	private void setupOptionPanel() {
 		optionPanel = new JPanel();
-		optionPanel.setPreferredSize(OPTIONPANELSIZE);
+		optionPanel.setPreferredSize(GUIDim.OPTIONPANELDIM);
 		optionPanel.setLayout(new FlowLayout());
 		//Buttons for right now, might add scroll down menu before buttons.
 		JLabel panelInfo = new JLabel("Employee Update Panel: ");
@@ -71,16 +61,16 @@ public class ScheduleScreen extends Window{
 		comboBoxEmployee = new JComboBox<String>();
 		optionPanel.add(comboBoxEmployee);
 		addButton = new JButton("Add");
-		addButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
+		addButton.setPreferredSize(GUIDim.SCHEDULEBUTTONDIM);
 		addButton.addActionListener(this);
 		optionPanel.add(addButton);
 		editButton = new JButton("Edit");
-		editButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
+		editButton.setPreferredSize(GUIDim.SCHEDULEBUTTONDIM);
 		editButton.addActionListener(this);
 		optionPanel.add(editButton);
 		
 		scheduleButton = new JButton("Schedule");
-		scheduleButton.setPreferredSize(Window.SCHEDULEBUTTONSIZE);
+		scheduleButton.setPreferredSize(GUIDim.SCHEDULEBUTTONDIM);
 		scheduleButton.addActionListener(this);
 		optionPanel.add(scheduleButton);
 		
@@ -150,5 +140,15 @@ public class ScheduleScreen extends Window{
 			ex.showMessage();
 			window.setEnabled(true);
 		}
+	}
+
+	@Override
+	protected void styleJFrame() {
+		Container c = window.getContentPane();
+		outsidePanel = new JPanel();
+		outsidePanel.setPreferredSize(GUIDim.SCHEDULESCREENDIM);
+		setupOptionPanel();
+		setupGraphPanel();
+		c.add(outsidePanel);
 	}
 }

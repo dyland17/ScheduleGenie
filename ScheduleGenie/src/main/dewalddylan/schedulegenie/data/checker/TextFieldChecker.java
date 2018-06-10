@@ -6,11 +6,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import main.dewalddylan.schedulegenie.data.SGTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
-import main.dewalddylan.schedulegenie.gui.EmployeeScreen;
+import main.dewalddylan.schedulegenie.gui.ManipulatorEmployeeScreen;
 
 public class TextFieldChecker {
 	private int recentErrors;
-	public void check(EmployeeScreen screen)throws GUITextFieldException{
+	public void check(ManipulatorEmployeeScreen screen)throws GUITextFieldException{
 		recentErrors = 0;
 		SGTextField[] allTextFields = screen.getAllSGTextFields();
 		for(SGTextField field: allTextFields){

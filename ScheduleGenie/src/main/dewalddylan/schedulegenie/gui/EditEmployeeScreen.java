@@ -3,19 +3,21 @@ package main.dewalddylan.schedulegenie.gui;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
 
 import main.dewalddylan.schedulegenie.data.Employee;
+import main.dewalddylan.schedulegenie.data.TitleName;
 import main.dewalddylan.schedulegenie.data.checker.TextFieldChecker;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
-public class EditEmployeeScreen extends EmployeeScreen{
+public class EditEmployeeScreen extends ManipulatorEmployeeScreen{
 	private Employee employeeToBeEdited;
 	public EditEmployeeScreen(Employee employee,ScheduleScreen mScreen) {
-		super(Window.EDITEMPLOYEESCREEN, ScreenType.EDITEMPLOYEE,mScreen);
+		super(TitleName.EDITEMPLOYEESCREENNAME, ScreenType.EDITEMPLOYEE,mScreen);
 		employeeToBeEdited = employee;
 		butUpdate.addActionListener(this);
 		setupTfInfo();

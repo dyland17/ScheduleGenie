@@ -8,14 +8,15 @@ import java.util.Random;
 import javax.swing.JFrame;
 
 import main.dewalddylan.schedulegenie.data.Employee;
+import main.dewalddylan.schedulegenie.data.TitleName;
 import main.dewalddylan.schedulegenie.data.checker.TextFieldChecker;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
-public class NewEmployeeScreen extends EmployeeScreen{
+public class NewEmployeeScreen extends ManipulatorEmployeeScreen{
 	
 	public NewEmployeeScreen(ScheduleScreen mScreen){
-		super(Window.NEWEMPLOYEESCREEN, ScreenType.NEWEMPLOYEE,mScreen);
+		super(TitleName.NEWEMPLOYEESCREENNAME, ScreenType.NEWEMPLOYEE,mScreen);
 		butUpdate.addActionListener(this);
 	}
 	//Creation button functionality.

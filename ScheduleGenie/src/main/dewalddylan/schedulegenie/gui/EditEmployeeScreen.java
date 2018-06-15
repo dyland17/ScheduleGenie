@@ -21,6 +21,7 @@ public class EditEmployeeScreen extends ManipulatorEmployeeScreen{
 		employeeToBeEdited = employee;
 		butUpdate.addActionListener(this);
 		setupTfInfo();
+		super.styleEmployeeScreen();
 	}
 	
 

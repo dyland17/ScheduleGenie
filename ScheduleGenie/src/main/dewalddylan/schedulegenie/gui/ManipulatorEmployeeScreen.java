@@ -6,6 +6,7 @@ import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -20,33 +21,63 @@ public abstract class ManipulatorEmployeeScreen extends EmployeeScreen {
 	protected SGTextField tfAge;
 	protected SGTextField tfTitle;
 	protected SGTextField tfTotalHours;
+	protected JButton butCancel;
+	protected JButton butUpdate;
 	protected ScheduleScreen mainScreen;
 	
 	public ManipulatorEmployeeScreen(String titleName, ScreenType type, ScheduleScreen mScreen) {
 		super(titleName, type);
 		mainScreen = mScreen;
-		tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABETREQ,"First Name");
-		tfEmployeeLastName = new SGTextField(TypeOfTextField.ALPHABETREQ,"Last Name");
-		tfAge = new SGTextField(TypeOfTextField.NUMBERREQ, "Age");
-		tfTitle = new SGTextField(TypeOfTextField.ALPHABETOP,"Title");
-		tfTotalHours = new SGTextField(TypeOfTextField.NUMBEROP,"Total Hours");
-	}
-	@Override
-	protected void styleJFrame() {
-		Container c = window.getContentPane();
-		c.setLayout(new FlowLayout());
-		
-		JPanel jpReqPanel = setupRequiredGUIForEmployeeScreen();
-		c.add(jpReqPanel);
-		
-		JPanel jpOptPanel = setupOptionalGUIForEmployeeScreen();
-		c.add(jpOptPanel);
-		
-		JPanel jpButPanel = super.setupButtonGUIForEmployeeScreen();
-		c.add(jpButPanel);
+		if(type != ScreenType.TIMESHEETEMPLOYEE){
+			tfEmployeeFirstName = new SGTextField(TypeOfTextField.ALPHABETREQ,"First Name");
+			tfEmployeeLastName = new SGTextField(TypeOfTextField.ALPHABETREQ,"Last Name");
+			tfAge = new SGTextField(TypeOfTextField.NUMBERREQ, "Age");
+			tfTitle = new SGTextField(TypeOfTextField.ALPHABETOP,"Title");
+			tfTotalHours = new SGTextField(TypeOfTextField.NUMBEROP,"Total Hours");
+		}
+		initializeButtons(type);
 	}
 	
-	private JPanel setupRequiredGUIForEmployeeScreen(){
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == butCancel){
+			mainScreen.window.setEnabled(true);
+			mainScreen.window.requestFocus();
+			window.dispose();
+		}
+	}
+	@Override
+	public void windowClosing(WindowEvent e) {
+		mainScreen.window.requestFocus();
+		mainScreen.window.setEnabled(true);
+	}
+	@Override
+	public void windowClosed(WindowEvent e) {
+		mainScreen.window.requestFocus();
+		mainScreen.window.setEnabled(true);
+	}
+
+	
+	public SGTextField[] getAllSGTextFields(){
+		SGTextField[] allFields = new SGTextField[5];
+		allFields[0] = tfEmployeeFirstName;
+		allFields[1] = tfEmployeeLastName;
+		allFields[2] = tfAge;
+		allFields[3] = tfTitle;
+		allFields[4] = tfTotalHours;
+		return allFields;
+		
+	}
+	@Override
+	protected void styleEmployeeScreen(){
+		Container c = window.getContentPane();
+		c.setLayout(new FlowLayout());
+		c.add(createRequiredGUIPanel());
+		c.add(createOptionalGUIPanel());
+		c.add(createButtonGUIPanel());
+		this.finishPackingScreen();
+	}
+	protected JPanel createRequiredGUIPanel(){
 		JPanel jpReqPanel = new JPanel();
 		jpReqPanel.setPreferredSize(GUIDim.JPANELOVERALLDIM);
 		JLabel jlRequired = new JLabel("<HTML><U>Required:</U></HTML>");
@@ -73,8 +104,8 @@ public abstract class ManipulatorEmployeeScreen extends EmployeeScreen {
 		jpReqPanel.add(jpReqInnerPanel,BorderLayout.SOUTH);
 		return jpReqPanel;
 	}
-	
-	private JPanel setupOptionalGUIForEmployeeScreen(){
+
+	protected JPanel createOptionalGUIPanel(){
 		JPanel jpOptPanelOuter = new JPanel();
 		jpOptPanelOuter.setPreferredSize(GUIDim.JPANELOVERALLDIM);
 		
@@ -98,49 +129,26 @@ public abstract class ManipulatorEmployeeScreen extends EmployeeScreen {
 		jpOptPanelOuter.add(jpOptFieldsPanel, BorderLayout.SOUTH);
 		return jpOptPanelOuter;
 	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == butCancel){
-			mainScreen.window.setEnabled(true);
-			mainScreen.window.requestFocus();
-			window.dispose();
-		}
-	}
-	@Override
-	public void windowClosing(WindowEvent e) {
-		mainScreen.window.requestFocus();
-		mainScreen.window.setEnabled(true);
-	}
-	@Override
-	public void windowClosed(WindowEvent e) {
-		mainScreen.window.requestFocus();
-		mainScreen.window.setEnabled(true);
-	}
-	@Override
-	public void windowOpened(WindowEvent e) {
-	}
-	@Override
-	public void windowIconified(WindowEvent e) {
-	}
-	@Override
-	public void windowDeiconified(WindowEvent e) {
-	}
-	@Override
-	public void windowActivated(WindowEvent e) {
-	}
-	@Override
-	public void windowDeactivated(WindowEvent e) {
-	}
-	
-	public SGTextField[] getAllSGTextFields(){
-		SGTextField[] allFields = new SGTextField[5];
-		allFields[0] = tfEmployeeFirstName;
-		allFields[1] = tfEmployeeLastName;
-		allFields[2] = tfAge;
-		allFields[3] = tfTitle;
-		allFields[4] = tfTotalHours;
-		return allFields;
+
+	protected JPanel createButtonGUIPanel() {
+		JPanel jpButPanel = new JPanel();
+		jpButPanel.setPreferredSize(GUIDim.JPANELOVERALLDIM);
 		
+		butCancel.setPreferredSize(GUIDim.EMPLOYEEBUTTONDIM);
+		jpButPanel.add(butCancel, BorderLayout.WEST);
+		
+		butUpdate.setPreferredSize(GUIDim.EMPLOYEEBUTTONDIM);
+		jpButPanel.add(butUpdate, BorderLayout.EAST);
+		return jpButPanel;
+	}
+
+	private void initializeButtons(ScreenType type){
+		//Buttons getting initialized.
+		butCancel = new JButton("Cancel");
+		butCancel.addActionListener(this);
+		if(type == ScreenType.NEWEMPLOYEE)
+			butUpdate = new JButton("Create");
+		else
+			butUpdate = new JButton("Update");
 	}
 }

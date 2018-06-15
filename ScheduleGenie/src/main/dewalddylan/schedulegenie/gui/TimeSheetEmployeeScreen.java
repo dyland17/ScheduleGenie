@@ -13,15 +13,15 @@ import main.dewalddylan.schedulegenie.data.TimeSheetPanel;
 import main.dewalddylan.schedulegenie.data.TitleName;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 
-public class TimeSheetEmployeeScreen  extends EmployeeScreen{
+public class TimeSheetEmployeeScreen  extends ManipulatorEmployeeScreen{
 	private Employee employeeBeingScheduled;
 	private TimeSheetPanel daysPanel;
-	protected ScheduleScreen mainScreen;
+	
 	public TimeSheetEmployeeScreen(Employee employeeToBeScheduled, ScheduleScreen scheduleScreen) {
-		super(TitleName.TIMESHEETEMPLOYEESCREENNAME,ScreenType.TIMESHEETEMPLOYEE);
+		super(TitleName.TIMESHEETEMPLOYEESCREENNAME,ScreenType.TIMESHEETEMPLOYEE,scheduleScreen);
 		mainScreen = scheduleScreen;
 		employeeBeingScheduled =	employeeToBeScheduled;
-		styleJFrame();
+		this.styleEmployeeScreen();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -43,17 +43,16 @@ public class TimeSheetEmployeeScreen  extends EmployeeScreen{
 	}
 	
 	@Override
-	protected void styleJFrame() {
+	protected void styleEmployeeScreen() {
 		Container c = window.getContentPane();
 		c.setLayout(new FlowLayout());
 		
 		c.add(daysPanel);
 		
-		JPanel jpButPanel = setupButtonGUIForEmployeeScreen();
+		JPanel jpButPanel = createButtonGUIPanel();
 		
 		c.add(jpButPanel);
 		
 	}
-	
-	
+		
 }

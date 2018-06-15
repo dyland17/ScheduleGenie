@@ -34,7 +34,7 @@ public class ScheduleScreen extends EmployeeScreen{
 	public ScheduleScreen() {
 		super(TitleName.MAINSCREENNAME, ScreenType.SCHEDULESCREEN);
 		employeeMonitor = new EmployeeManager();
-		styleJFrame();
+		styleEmployeeScreen();
 		super.finishPackingScreen();
 	}
 
@@ -143,12 +143,13 @@ public class ScheduleScreen extends EmployeeScreen{
 	}
 
 	@Override
-	protected void styleJFrame() {
+	protected void styleEmployeeScreen() {
 		Container c = window.getContentPane();
 		outsidePanel = new JPanel();
 		outsidePanel.setPreferredSize(GUIDim.SCHEDULESCREENDIM);
 		setupOptionPanel();
 		setupGraphPanel();
 		c.add(outsidePanel);
+		
 	}
 }

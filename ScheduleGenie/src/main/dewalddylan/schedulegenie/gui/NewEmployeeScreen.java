@@ -18,6 +18,7 @@ public class NewEmployeeScreen extends ManipulatorEmployeeScreen{
 	public NewEmployeeScreen(ScheduleScreen mScreen){
 		super(TitleName.NEWEMPLOYEESCREENNAME, ScreenType.NEWEMPLOYEE,mScreen);
 		butUpdate.addActionListener(this);
+		super.styleEmployeeScreen();
 	}
 	//Creation button functionality.
 	@Override

@@ -24,14 +24,12 @@ import main.dewalddylan.schedulegenie.tools.GUIBuilderFactory;
 
 public class MainScreen extends EmployeeScreen{
 	//GUI components
-	private JPanel optionPanel;
+	private OptionPanel optionPanel;
 	private JTabbedPane tabbedPane;
 	private JPanel outsidePanel;
-	private JComboBox<String> comboBoxEmployee;
-	private JButton addButton;
-	private JButton editButton;
-	private JButton scheduleButton;
+	//Data fields
 	public static EmployeeManager employeeMonitor;
+	
 	public MainScreen() {
 		super(TitleName.MAINSCREENNAME, ScreenType.MAINSCREEN);
 		employeeMonitor = new EmployeeManager();
@@ -50,28 +48,6 @@ public class MainScreen extends EmployeeScreen{
 			tabbedPane.add(days[i], scrollPane);
 		}
 		outsidePanel.add(tabbedPane,BorderLayout.EAST);
-	}
-
-	private void setupOptionPanel() {
-		optionPanel = new JPanel();
-		optionPanel.setPreferredSize(GUIDim.OPTIONPANELDIM);
-		optionPanel.setLayout(new FlowLayout());
-		//Buttons for right now, might add scroll down menu before buttons.
-		JLabel panelInfo = new JLabel("Employee Update Panel: ");
-		optionPanel.add(panelInfo);
-		comboBoxEmployee = new JComboBox<String>();
-		optionPanel.add(comboBoxEmployee);
-		
-		addButton = GUIBuilderFactory.buildButton("Add", this);
-		optionPanel.add(addButton);
-		
-		editButton = GUIBuilderFactory.buildButton("Edit", this);
-		optionPanel.add(editButton);
-		
-		scheduleButton = GUIBuilderFactory.buildButton("Schedule", this);
-		optionPanel.add(scheduleButton);
-		
-		outsidePanel.add(optionPanel, BorderLayout.WEST);
 	}
 	
 	public void addNewEmployee(Employee newEmployee){
@@ -105,9 +81,10 @@ public class MainScreen extends EmployeeScreen{
 	}
 	
 	public void screenUpdate(){
-		comboBoxEmployee.removeAllItems();
+		JComboBox selectedEmployeeBox = optionPanel.getSelectedEmployeeBox();
+		selectedEmployeeBox.removeAllItems();
 		for(Employee employee: employeeMonitor.getEmployeeList()){
-			comboBoxEmployee.addItem(employee.getFullName());
+			selectedEmployeeBox.addItem(employee.getFullName());
 		}
 		MainPanel panel = (MainPanel) ((JScrollPane) tabbedPane.getSelectedComponent()).getViewport().getComponent(0);
 		panel.repaint();
@@ -118,19 +95,18 @@ public class MainScreen extends EmployeeScreen{
 		try{
 			window.setEnabled(false);
 			Object source = e.getSource();
-			
-			if(source.equals( addButton)){
+			JComboBox<String> selectedEmployeeBox = optionPanel.getSelectedEmployeeBox();
+			if(source.equals( optionPanel.getAddButton())){
 				new NewEmployeeScreen(MainScreen.this);
 			}
-			
-			if(employeeMonitor.isListEmpty()){
+			else if(employeeMonitor.isListEmpty()){
 				throw new EmployeeNotSelectedException();
 			}
-			else if(source.equals(editButton)){
-				new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),MainScreen.this);
+			else if(source.equals(optionPanel.getEditButton())){
+				new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) selectedEmployeeBox.getSelectedItem())),MainScreen.this);
 			}
-			else if(source.equals(scheduleButton)){
-				new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), MainScreen.this);
+			else if(source.equals(optionPanel.getScheduleButton())){
+				new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) selectedEmployeeBox.getSelectedItem())), MainScreen.this);
 			}
 		}
 		catch(EmployeeNotSelectedException ex){
@@ -145,7 +121,9 @@ public class MainScreen extends EmployeeScreen{
 		Container c = window.getContentPane();
 		outsidePanel = new JPanel();
 		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
-		setupOptionPanel();
+		
+		optionPanel = new OptionPanel(this);
+		outsidePanel.add(optionPanel,BorderLayout.WEST);
 		setupGraphPanel();
 		c.add(outsidePanel);
 		

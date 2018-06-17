@@ -15,7 +15,7 @@ import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
 public class NewEmployeeScreen extends ManipulatorEmployeeScreen{
 	
-	public NewEmployeeScreen(ScheduleScreen mScreen){
+	public NewEmployeeScreen(MainScreen mScreen){
 		super(TitleName.NEWEMPLOYEESCREENNAME, ScreenType.NEWEMPLOYEE,mScreen);
 		butUpdate.addActionListener(this);
 		super.styleEmployeeScreen();

@@ -9,7 +9,7 @@ public class GUIDim {
 	public static final Dimension SCHEDULEBUTTONDIM = new Dimension(100, 40);
 	public static final Dimension EMPLOYEESCREENDIM= new Dimension(420,400);
 	public static final Dimension EMPLOYEETIMESHEETSCREENDIM = new Dimension(460,400);
-	public static final Dimension SCHEDULESCREENDIM = new Dimension(720,660);
+	public static final Dimension MAINSCREENDIM = new Dimension(720,660);
 	public static final Dimension OPTIONPANELDIM = new Dimension(200,640);
-	public static final Dimension SCHEDULEPANELDIM = new Dimension(500,560);
+	public static final Dimension MAINPANELDIM = new Dimension(500,560);
 }

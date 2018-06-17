@@ -17,23 +17,19 @@ public class TimeSheetEmployeeScreen  extends ManipulatorEmployeeScreen{
 	private Employee employeeBeingScheduled;
 	private TimeSheetPanel daysPanel;
 	
-	public TimeSheetEmployeeScreen(Employee employeeToBeScheduled, ScheduleScreen scheduleScreen) {
+	public TimeSheetEmployeeScreen(Employee employeeToBeScheduled, MainScreen scheduleScreen) {
 		super(TitleName.TIMESHEETEMPLOYEESCREENNAME,ScreenType.TIMESHEETEMPLOYEE,scheduleScreen);
 		mainScreen = scheduleScreen;
 		employeeBeingScheduled =	employeeToBeScheduled;
+		daysPanel = new TimeSheetPanel();
+		butUpdate.addActionListener(this);
 		this.styleEmployeeScreen();
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		super.actionPerformed(e);
 		if(e.getSource() == butUpdate){
 			updateEmployeeSchedule();
-		}
-		else if(e.getSource() == butCancel){
-			if(e.getSource() == butCancel){
-				mainScreen.window.setEnabled(true);
-				mainScreen.window.requestFocus();
-				window.dispose();
-			}
 		}
 	}
 	private void updateEmployeeSchedule() {
@@ -52,7 +48,7 @@ public class TimeSheetEmployeeScreen  extends ManipulatorEmployeeScreen{
 		JPanel jpButPanel = createButtonGUIPanel();
 		
 		c.add(jpButPanel);
-		
+		this.finishPackingScreen();
 	}
 		
 }

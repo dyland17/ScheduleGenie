@@ -23,9 +23,9 @@ public abstract class ManipulatorEmployeeScreen extends EmployeeScreen {
 	protected SGTextField tfTotalHours;
 	protected JButton butCancel;
 	protected JButton butUpdate;
-	protected ScheduleScreen mainScreen;
+	protected MainScreen mainScreen;
 	
-	public ManipulatorEmployeeScreen(String titleName, ScreenType type, ScheduleScreen mScreen) {
+	public ManipulatorEmployeeScreen(String titleName, ScreenType type, MainScreen mScreen) {
 		super(titleName, type);
 		mainScreen = mScreen;
 		if(type != ScreenType.TIMESHEETEMPLOYEE){

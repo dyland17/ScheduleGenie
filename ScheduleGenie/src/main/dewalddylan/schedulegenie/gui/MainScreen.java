@@ -21,7 +21,7 @@ import main.dewalddylan.schedulegenie.data.TitleName;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.EmployeeNotSelectedException;
 
-public class ScheduleScreen extends EmployeeScreen{
+public class MainScreen extends EmployeeScreen{
 	//GUI components
 	private JPanel optionPanel;
 	private JTabbedPane tabbedPane;
@@ -31,8 +31,8 @@ public class ScheduleScreen extends EmployeeScreen{
 	private JButton editButton;
 	private JButton scheduleButton;
 	public static EmployeeManager employeeMonitor;
-	public ScheduleScreen() {
-		super(TitleName.MAINSCREENNAME, ScreenType.SCHEDULESCREEN);
+	public MainScreen() {
+		super(TitleName.MAINSCREENNAME, ScreenType.MAINSCREEN);
 		employeeMonitor = new EmployeeManager();
 		styleEmployeeScreen();
 		super.finishPackingScreen();
@@ -40,11 +40,11 @@ public class ScheduleScreen extends EmployeeScreen{
 
 	private void setupGraphPanel() {
 		tabbedPane = new JTabbedPane();
-		tabbedPane.setPreferredSize(GUIDim.SCHEDULEPANELDIM);
+		tabbedPane.setPreferredSize(GUIDim.MAINPANELDIM);
 		String[] days = {"Sunday","Monday","Tuesday","Wednesday",
 							"Thursday","Friday","Saturday"};
 		for(int i = 0; i < 7; i++){
-			SchedulePanel drawPanel = new SchedulePanel();
+			MainPanel drawPanel = new MainPanel();
 			JScrollPane scrollPane = new JScrollPane(drawPanel);
 			tabbedPane.add(days[i], scrollPane);
 		}
@@ -112,7 +112,7 @@ public class ScheduleScreen extends EmployeeScreen{
 		for(Employee employee: employeeMonitor.getEmployeeList()){
 			comboBoxEmployee.addItem(employee.getFirstName() + " " + employee.getLastName());
 		}
-		SchedulePanel panel = (SchedulePanel) ((JScrollPane) tabbedPane.getSelectedComponent()).getViewport().getComponent(0);
+		MainPanel panel = (MainPanel) ((JScrollPane) tabbedPane.getSelectedComponent()).getViewport().getComponent(0);
 		panel.repaint();
 	}
 
@@ -122,17 +122,17 @@ public class ScheduleScreen extends EmployeeScreen{
 			window.setEnabled(false);
 			boolean employeeListIsEmpty = employeeMonitor.getEmployeeList().isEmpty();
 			if(e.getSource().equals( addButton)){
-				new NewEmployeeScreen(ScheduleScreen.this);
+				new NewEmployeeScreen(MainScreen.this);
 			}
 			else{
 				if(employeeListIsEmpty){
 					throw new EmployeeNotSelectedException();
 				}
 				else if(e.getSource().equals(editButton)){
-					new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),ScheduleScreen.this);
+					new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),MainScreen.this);
 				}
 				else if(e.getSource().equals(scheduleButton)){
-					new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), ScheduleScreen.this);
+					new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), MainScreen.this);
 				}
 			}
 		}
@@ -146,7 +146,7 @@ public class ScheduleScreen extends EmployeeScreen{
 	protected void styleEmployeeScreen() {
 		Container c = window.getContentPane();
 		outsidePanel = new JPanel();
-		outsidePanel.setPreferredSize(GUIDim.SCHEDULESCREENDIM);
+		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
 		setupOptionPanel();
 		setupGraphPanel();
 		c.add(outsidePanel);

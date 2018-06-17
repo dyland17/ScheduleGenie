@@ -22,7 +22,6 @@ import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
-//vvvvvvvvv need to split this class into smaller bits because it is to big vvvvvvvvvvvvv
 public abstract class EmployeeScreen implements ActionListener, WindowListener{
 	//All GUI components
 	protected JFrame window;
@@ -30,7 +29,6 @@ public abstract class EmployeeScreen implements ActionListener, WindowListener{
 	protected static final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	
 	public EmployeeScreen(String screenName, ScreenType type){
-		window.addWindowListener(this);
 		initializeWindow(screenName,type);
 	}
 	
@@ -39,6 +37,7 @@ public abstract class EmployeeScreen implements ActionListener, WindowListener{
 			window.setResizable(false);
 			window.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 			window.setPreferredSize(type.myDim());
+			window.addWindowListener(this);
 		}
 		protected abstract void styleEmployeeScreen();
 		
@@ -75,6 +74,6 @@ public abstract class EmployeeScreen implements ActionListener, WindowListener{
 		public static void main(String[] args){
 			//new NewEmployeeScreen();
 			//new EditEmployeeScreen(new Employee("Danny" , "Phantom",21));
-			new ScheduleScreen();
+			new MainScreen();
 		}
 }

@@ -16,7 +16,7 @@ import main.dewalddylan.schedulegenie.data.exceptions.GUITextFieldException;
 
 public class EditEmployeeScreen extends ManipulatorEmployeeScreen{
 	private Employee employeeToBeEdited;
-	public EditEmployeeScreen(Employee employee,ScheduleScreen mScreen) {
+	public EditEmployeeScreen(Employee employee,MainScreen mScreen) {
 		super(TitleName.EDITEMPLOYEESCREENNAME, ScreenType.EDITEMPLOYEE,mScreen);
 		employeeToBeEdited = employee;
 		butUpdate.addActionListener(this);

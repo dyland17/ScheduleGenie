@@ -20,6 +20,7 @@ import main.dewalddylan.schedulegenie.data.GUIDim;
 import main.dewalddylan.schedulegenie.data.TitleName;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.EmployeeNotSelectedException;
+import main.dewalddylan.schedulegenie.tools.GUIBuilderFactory;
 
 public class MainScreen extends EmployeeScreen{
 	//GUI components
@@ -60,18 +61,14 @@ public class MainScreen extends EmployeeScreen{
 		optionPanel.add(panelInfo);
 		comboBoxEmployee = new JComboBox<String>();
 		optionPanel.add(comboBoxEmployee);
-		addButton = new JButton("Add");
-		addButton.setPreferredSize(GUIDim.SCHEDULEBUTTONDIM);
-		addButton.addActionListener(this);
+		
+		addButton = GUIBuilderFactory.buildButton("Add", this);
 		optionPanel.add(addButton);
-		editButton = new JButton("Edit");
-		editButton.setPreferredSize(GUIDim.SCHEDULEBUTTONDIM);
-		editButton.addActionListener(this);
+		
+		editButton = GUIBuilderFactory.buildButton("Edit", this);
 		optionPanel.add(editButton);
 		
-		scheduleButton = new JButton("Schedule");
-		scheduleButton.setPreferredSize(GUIDim.SCHEDULEBUTTONDIM);
-		scheduleButton.addActionListener(this);
+		scheduleButton = GUIBuilderFactory.buildButton("Schedule", this);
 		optionPanel.add(scheduleButton);
 		
 		outsidePanel.add(optionPanel, BorderLayout.WEST);
@@ -110,7 +107,7 @@ public class MainScreen extends EmployeeScreen{
 	public void screenUpdate(){
 		comboBoxEmployee.removeAllItems();
 		for(Employee employee: employeeMonitor.getEmployeeList()){
-			comboBoxEmployee.addItem(employee.getFirstName() + " " + employee.getLastName());
+			comboBoxEmployee.addItem(employee.getFullName());
 		}
 		MainPanel panel = (MainPanel) ((JScrollPane) tabbedPane.getSelectedComponent()).getViewport().getComponent(0);
 		panel.repaint();
@@ -120,25 +117,26 @@ public class MainScreen extends EmployeeScreen{
 	public void actionPerformed(ActionEvent e) {
 		try{
 			window.setEnabled(false);
-			boolean employeeListIsEmpty = employeeMonitor.getEmployeeList().isEmpty();
-			if(e.getSource().equals( addButton)){
+			Object source = e.getSource();
+			
+			if(source.equals( addButton)){
 				new NewEmployeeScreen(MainScreen.this);
 			}
-			else{
-				if(employeeListIsEmpty){
-					throw new EmployeeNotSelectedException();
-				}
-				else if(e.getSource().equals(editButton)){
-					new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),MainScreen.this);
-				}
-				else if(e.getSource().equals(scheduleButton)){
-					new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), MainScreen.this);
-				}
+			
+			if(employeeMonitor.isListEmpty()){
+				throw new EmployeeNotSelectedException();
+			}
+			else if(source.equals(editButton)){
+				new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())),MainScreen.this);
+			}
+			else if(source.equals(scheduleButton)){
+				new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) comboBoxEmployee.getSelectedItem())), MainScreen.this);
 			}
 		}
 		catch(EmployeeNotSelectedException ex){
 			ex.showMessage();
 			window.setEnabled(true);
+			window.toFront();
 		}
 	}
 

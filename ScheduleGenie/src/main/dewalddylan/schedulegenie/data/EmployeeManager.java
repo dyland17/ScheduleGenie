@@ -78,7 +78,9 @@ public class EmployeeManager {
 		oldEmployee.setFirstName(updateEmployee.getFirstName());	
 		oldEmployee.setLastName(updateEmployee.getLastName());
 	}
-	
+	public boolean isListEmpty() {
+		return employeeList.isEmpty();
+	}
 	public void printList(){
 		for(Employee employee: employeeList){
 			System.out.print("FirstName: " + employee.getFirstName() + " ");

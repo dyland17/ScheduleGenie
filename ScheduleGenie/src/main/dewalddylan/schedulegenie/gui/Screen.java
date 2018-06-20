@@ -1,34 +1,20 @@
 package main.dewalddylan.schedulegenie.gui;
 
-import java.awt.BorderLayout;
-import java.awt.Container;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-import main.dewalddylan.schedulegenie.data.GUIDim;
-import main.dewalddylan.schedulegenie.data.SGTextField;
-import main.dewalddylan.schedulegenie.data.TimeSheetPanel;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
-import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
-import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
-public abstract class EmployeeScreen implements ActionListener, WindowListener{
+public abstract class Screen implements ActionListener, WindowListener{
 	//All GUI components
 	protected JFrame window;
 	protected static final Font BOLDFONT = new Font(Font.SANS_SERIF,Font.BOLD,18);
 	protected static final Font TEXTFONT = new Font(Font.SANS_SERIF,Font.PLAIN,18);
 	
-	public EmployeeScreen(String screenName, ScreenType type){
+	public Screen(String screenName, ScreenType type){
 		initializeWindow(screenName,type);
 	}
 	

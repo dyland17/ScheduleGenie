@@ -1,4 +1,4 @@
-package main.dewalddylan.schedulegenie.data;
+package main.dewalddylan.schedulegenie.data.names;
 
 public class TitleName {
 	public static final String MAINSCREENNAME = "Schedule Screen";

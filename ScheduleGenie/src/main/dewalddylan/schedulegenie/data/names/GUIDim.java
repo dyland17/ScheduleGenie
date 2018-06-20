@@ -1,4 +1,4 @@
-package main.dewalddylan.schedulegenie.data;
+package main.dewalddylan.schedulegenie.data.names;
 
 import java.awt.Dimension;
 

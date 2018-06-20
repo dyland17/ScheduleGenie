@@ -3,6 +3,9 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.WindowEvent;
 import java.util.Random;
@@ -16,17 +19,17 @@ import javax.swing.JTabbedPane;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.EmployeeManager;
-import main.dewalddylan.schedulegenie.data.GUIDim;
-import main.dewalddylan.schedulegenie.data.TitleName;
+import main.dewalddylan.schedulegenie.data.names.*;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.data.exceptions.EmployeeNotSelectedException;
 import main.dewalddylan.schedulegenie.tools.GUIBuilderFactory;
 
-public class MainScreen extends EmployeeScreen{
+public class MainScreen extends Screen{
 	//GUI components
 	private OptionPanel optionPanel;
 	private JTabbedPane tabbedPane;
 	private JPanel outsidePanel;
+	private InfoPanel infoPanel;
 	//Data fields
 	public static EmployeeManager employeeMonitor;
 	
@@ -92,40 +95,45 @@ public class MainScreen extends EmployeeScreen{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		try{
-			window.setEnabled(false);
-			Object source = e.getSource();
-			JComboBox<String> selectedEmployeeBox = optionPanel.getSelectedEmployeeBox();
-			if(source.equals( optionPanel.getAddButton())){
-				new NewEmployeeScreen(MainScreen.this);
-			}
-			else if(employeeMonitor.isListEmpty()){
-				throw new EmployeeNotSelectedException();
-			}
-			else if(source.equals(optionPanel.getEditButton())){
-				new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) selectedEmployeeBox.getSelectedItem())),MainScreen.this);
-			}
-			else if(source.equals(optionPanel.getScheduleButton())){
-				new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) selectedEmployeeBox.getSelectedItem())), MainScreen.this);
-			}
+//		try{
+//			window.setEnabled(false);
+//			Object source = e.getSource();
+//			JComboBox<String> selectedEmployeeBox = optionPanel.getSelectedEmployeeBox();
+//			if(source.equals( optionPanel.getAddButton())){
+//				new NewEmployeeScreen(MainScreen.this);
+//			}
+//			else if(employeeMonitor.isListEmpty()){
+//				throw new EmployeeNotSelectedException();
+//			}
+//			else if(source.equals(optionPanel.getEditButton())){
+//				new EditEmployeeScreen(employeeMonitor.findEmployeeByName(((String) selectedEmployeeBox.getSelectedItem())),MainScreen.this);
+//			}
+//			else if(source.equals(optionPanel.getScheduleButton())){
+//				new TimeSheetEmployeeScreen(employeeMonitor.findEmployeeByName(((String) selectedEmployeeBox.getSelectedItem())), MainScreen.this);
+//			}
 		}
-		catch(EmployeeNotSelectedException ex){
-			ex.showMessage();
-			window.setEnabled(true);
-			window.toFront();
-		}
-	}
+//		catch(EmployeeNotSelectedException ex){
+//			ex.showMessage();
+//			window.setEnabled(true);
+//			window.toFront();
+//		}
+//	}
 
 	@Override
 	protected void styleEmployeeScreen() {
 		Container c = window.getContentPane();
 		outsidePanel = new JPanel();
+		outsidePanel.setLayout(new GridBagLayout());
+		GridBagConstraints rules = new GridBagConstraints();
+		rules.insets = new Insets(5,5,5,5);
+		
 		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
+		Dimension dim = new Dimension((int)(outsidePanel.getPreferredSize().getWidth()*.3),(int)(outsidePanel.getPreferredSize().getWidth()*.3));
 		
-		optionPanel = new OptionPanel(this);
-		outsidePanel.add(optionPanel,BorderLayout.WEST);
-		setupGraphPanel();
+		rules.gridx = 0;
+		rules.gridy = 1;
+		infoPanel = new InfoPanel(dim);
+		outsidePanel.add(infoPanel,rules);
 		c.add(outsidePanel);
-		
 	}
 }

@@ -2,7 +2,7 @@ package main.dewalddylan.schedulegenie.data.enumerations;
 
 import java.awt.Dimension;
 
-import main.dewalddylan.schedulegenie.data.GUIDim;
+import main.dewalddylan.schedulegenie.data.names.GUIDim;
 
 public enum ScreenType {
 	NEWEMPLOYEE(GUIDim.EMPLOYEESCREENDIM),

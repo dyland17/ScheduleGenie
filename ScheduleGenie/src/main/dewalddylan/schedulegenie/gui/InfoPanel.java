@@ -2,7 +2,6 @@ package main.dewalddylan.schedulegenie.gui;
 
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -15,6 +14,7 @@ import javax.swing.JTextField;
 import main.dewalddylan.schedulegenie.data.LabelComponentPair;
 import main.dewalddylan.schedulegenie.data.component.ComponentFactory;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
+import main.dewalddylan.schedulegenie.data.names.GUIDim;
 
 public class InfoPanel extends JPanel{
 	private LabelComponentPair<JTextField> firstName;
@@ -25,9 +25,9 @@ public class InfoPanel extends JPanel{
 	private LabelComponentPair<JComboBox> time_in;
 	private LabelComponentPair<JComboBox> time_out;
 	
-	public InfoPanel(Dimension dim){
+	public InfoPanel(){
 		initialize();
-		setupPanel(dim);
+		setupPanel();
 	}
 
 	private void initialize() {
@@ -42,8 +42,8 @@ public class InfoPanel extends JPanel{
 		time_out = new LabelComponentPair<JComboBox>("Time-out",ComponentFactory.createTimeComboBox(hourTime, minTime));
 	}
 
-	private void setupPanel(Dimension dim) {
-		this.setPreferredSize(dim);
+	private void setupPanel() {
+		this.setPreferredSize(GUIDim.SIDEPANELDIM);
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(2,2,2,2);

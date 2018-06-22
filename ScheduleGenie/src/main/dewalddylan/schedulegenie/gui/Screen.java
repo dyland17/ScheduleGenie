@@ -60,6 +60,7 @@ public abstract class Screen implements ActionListener, WindowListener{
 		public static void main(String[] args){
 			//new NewEmployeeScreen();
 			//new EditEmployeeScreen(new Employee("Danny" , "Phantom",21));
-			new MainScreen();
+			MainScreen screen = new MainScreen();
+			screen.paintPanels();
 		}
 }

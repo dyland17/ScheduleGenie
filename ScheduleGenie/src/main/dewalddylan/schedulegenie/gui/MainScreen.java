@@ -125,15 +125,15 @@ public class MainScreen extends Screen{
 		rules.insets = new Insets(5,5,5,5);
 		
 		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
-		EmployeePanel panel = new EmployeePanel();
+		employeePanel = new EmployeePanel();
 		
 		rules.gridx = 0;
+		rules.gridy = 0;
+		outsidePanel.add(employeePanel, rules);
+		rules.gridx = 0;
 		rules.gridy = 1;
-		outsidePanel.add(panel, rules);
-//		rules.gridx = 0;
-//		rules.gridy = 1;
-//		infoPanel = new InfoPanel();
-//		outsidePanel.add(infoPanel,rules);
+		infoPanel = new InfoPanel();
+		outsidePanel.add(infoPanel,rules);
 		c.add(outsidePanel);
 	}
 	

@@ -9,7 +9,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import main.dewalddylan.schedulegenie.data.GUIDim;
+import main.dewalddylan.schedulegenie.data.names.GUIDim;
 import main.dewalddylan.schedulegenie.tools.GUIBuilderFactory;
 
 public class OptionPanel extends JPanel{

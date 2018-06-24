@@ -35,7 +35,7 @@ public class EmployeePanel extends JPanel implements MouseListener{
 		addNewEmployee("Dylan Dewald");
 		addNewEmployee("Gary Anderson");
 		addNewEmployee("Duke Hill");
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
+		this.setBorder(BorderFactory.createLineBorder(Color.black, 2,true));
 		this.addMouseListener(this);
 	}
 	

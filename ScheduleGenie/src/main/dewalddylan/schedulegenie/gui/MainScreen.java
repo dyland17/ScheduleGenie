@@ -1,29 +1,18 @@
 package main.dewalddylan.schedulegenie.gui;
 import java.awt.BorderLayout;
 import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.WindowEvent;
-import java.util.Random;
-
-import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-
-import main.dewalddylan.schedulegenie.data.Employee;
-import main.dewalddylan.schedulegenie.data.EmployeeManager;
 import main.dewalddylan.schedulegenie.data.names.*;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
-import main.dewalddylan.schedulegenie.data.exceptions.EmployeeNotSelectedException;
-import main.dewalddylan.schedulegenie.tools.GUIBuilderFactory;
 
 public class MainScreen extends Screen{
 	//GUI components
-	private OptionPanel optionPanel;
 	private JTabbedPane tabbedPane;
 	private JPanel outsidePanel;
 	//New panels that replace old panels
@@ -43,7 +32,7 @@ public class MainScreen extends Screen{
 		String[] days = {"Sunday","Monday","Tuesday","Wednesday",
 							"Thursday","Friday","Saturday"};
 		for(int i = 0; i < 7; i++){
-			MainPanel drawPanel = new MainPanel();
+			GraphPanel drawPanel = new GraphPanel();
 			JScrollPane scrollPane = new JScrollPane(drawPanel);
 			tabbedPane.add(days[i], scrollPane);
 		}

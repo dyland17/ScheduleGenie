@@ -9,7 +9,7 @@ import javax.swing.JScrollPane;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 
-public class MainPanel extends JPanel{
+public class GraphPanel extends JPanel{
 	private final Dimension PANELDIM;
 	private final int GRAPHVERTICALOFFSET = 40;
 	private final int GRAPHHORIZONTALOFFSET = 160;
@@ -19,7 +19,7 @@ public class MainPanel extends JPanel{
 	private final int BLOCKWIDTH = 80;
 	private final int BLOCKHEIGHT = 50;
 	private int amountOfEmployees;
-	public MainPanel(){
+	public GraphPanel(){
 		PANELDIM = new Dimension(((BLOCKWIDTH*24)+GRAPHHORIZONTALOFFSET),550);
 		this.setPreferredSize(PANELDIM);
 		//Graph starts out at 9 employee blocks. Will be updated if Employees exceed 9.
@@ -55,9 +55,9 @@ public class MainPanel extends JPanel{
 		}
 		int y = 1;
 		//Write names in
-		for(Employee employee: MainScreen.employeeMonitor.getEmployeeList()){
-			g.drawString(employee.getFirstName() + " " + employee.getLastName(), EMPLOYEEOFFSET, y*BLOCKHEIGHT + NAMEOFFSET);
-			y++;
-		}
+//		for(Employee employee: MainScreen.employeeMonitor.getEmployeeList()){
+//			g.drawString(employee.getFirstName() + " " + employee.getLastName(), EMPLOYEEOFFSET, y*BLOCKHEIGHT + NAMEOFFSET);
+//			y++;
+//		}
 	}
 }

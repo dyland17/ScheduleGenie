@@ -13,10 +13,11 @@ import main.dewalddylan.schedulegenie.data.EmployeeManager;
 import main.dewalddylan.schedulegenie.data.ListItem;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
 
-public class EmployeePanel extends JPanel implements MouseListener{
+public class EmployeePanel extends Panel implements MouseListener{
 	private static EmployeeManager employeeManager;
 	private ArrayList<ListItem> guiList;
 	public EmployeePanel(){
+		super(GUIDim.SIDEPANELDIM);
 		employeeManager = new EmployeeManager();
 		guiList = new ArrayList<ListItem>();
 		setupPanel();
@@ -29,19 +30,22 @@ public class EmployeePanel extends JPanel implements MouseListener{
 		for(ListItem item: guiList) 
 			item.paint(g);
 	}
-
-	private void setupPanel(){
-		setPreferredSize(GUIDim.SIDEPANELDIM);
+	@Override
+	protected void init(){
+		
+	}
+	@Override
+	protected void setupPanel(){
 		addNewEmployee("Dylan Dewald");
 		addNewEmployee("Gary Anderson");
 		addNewEmployee("Duke Hill");
-		this.setBorder(BorderFactory.createLineBorder(Color.black, 2,true));
-		this.addMouseListener(this);
+		addMouseListener(this);
 	}
 	
 	private void addNewEmployee(String name) {
-		int yPos = guiList.size() * ListItem.HEIGHT;
+		int yPos = ListItem.getProperYPos(guiList.size());
 		guiList.add(new ListItem(name, yPos));
+		ListItem.plusButton.moveButtonDown(yPos);
 	}
 
 	@Override

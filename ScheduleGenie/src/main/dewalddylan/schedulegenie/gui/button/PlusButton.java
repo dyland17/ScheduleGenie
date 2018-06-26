@@ -4,17 +4,15 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class PlusButton extends Button{
-	private final int horizontalRectX;
-	private final int horizontalRectY;
-	private final int verticalRectX;
-	private final int verticalRectY;
+	private int horizontalRectX;
+	private int horizontalRectY;
+	private int verticalRectX;
+	private int verticalRectY;
+	private final int butYOffset = 5;
 
 	public PlusButton(int butXPos, int butYPos) {
 		super(butXPos, butYPos, Button.PLUSBUTTONSIZE);
-		this.horizontalRectX = (int) (this.butXPos + (.15 * this.butLength));
-		this.horizontalRectY = (int)(this.butYPos + (.44 * this.butLength));
-		this.verticalRectX = ((int)(horizontalRectX + HORIZONTALBARWIDTH/2 - VERTICALBARWIDTH/2));
-		this.verticalRectY = ((int)(this.butYPos + this.butLength * .15));
+		setPlusPositions();
 	}
 
 	@Override
@@ -37,5 +35,16 @@ public class PlusButton extends Button{
 	protected void paintClickedButton(Graphics g) {
 		// TODO Auto-generated method stub
 		
+	}
+	public void moveButtonDown(int newYPos){
+		this.butYPos = newYPos + butYOffset;
+		setPlusPositions();
+	}
+	
+	private void setPlusPositions(){
+		this.horizontalRectX = (int) (this.butXPos + (.15 * this.butLength));
+		this.horizontalRectY = (int)(this.butYPos + (.44 * this.butLength));
+		this.verticalRectX = ((int)(horizontalRectX + HORIZONTALBARWIDTH/2 - VERTICALBARWIDTH/2));
+		this.verticalRectY = ((int)(this.butYPos + this.butLength * .15));
 	}
 }

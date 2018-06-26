@@ -16,7 +16,7 @@ import main.dewalddylan.schedulegenie.data.component.ComponentFactory;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
 
-public class InfoPanel extends JPanel{
+public class InfoPanel extends Panel{
 	private LabelComponentPair<JTextField> firstName;
 	private LabelComponentPair<JTextField> lastName;
 	private LabelComponentPair<JTextField> age;
@@ -26,11 +26,12 @@ public class InfoPanel extends JPanel{
 	private LabelComponentPair<JComboBox> time_out;
 	
 	public InfoPanel(){
-		initialize();
+		super(GUIDim.SIDEPANELDIM);
+		init();
 		setupPanel();
 	}
-
-	private void initialize() {
+	@Override
+	protected void init() {
 		firstName = new LabelComponentPair<JTextField>("First name:", ComponentFactory.createComponentJTextField(ComponentFactory.FIRSTNAME));
 		lastName = new LabelComponentPair<JTextField>("Last name:", ComponentFactory.createComponentJTextField(ComponentFactory.LASTNAME));
 		age = new LabelComponentPair<JTextField>("Age:", ComponentFactory.createComponentJTextField(ComponentFactory.AGE));
@@ -42,8 +43,7 @@ public class InfoPanel extends JPanel{
 		time_out = new LabelComponentPair<JComboBox>("Time-out",ComponentFactory.createTimeComboBox(hourTime, minTime));
 	}
 
-	private void setupPanel() {
-		this.setPreferredSize(GUIDim.SIDEPANELDIM);
+	protected void setupPanel() {
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(2,2,2,2);
@@ -61,7 +61,6 @@ public class InfoPanel extends JPanel{
 		this.addLabelComponentPair(time_in,constraints);
 		setRulesForLayout(0, 6, constraints);
 		this.addLabelComponentPair(time_out,constraints);
-		this.setBorder(BorderFactory.createLineBorder(Color.black));
 	}
 	
 	private void setRulesForLayout(int posX, int posY, GridBagConstraints rules) {

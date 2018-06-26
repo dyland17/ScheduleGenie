@@ -4,8 +4,8 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 public abstract class Button {
-	protected final int butXPos;
-	protected final int butYPos;
+	protected  int butXPos;
+	protected  int butYPos;
 	protected final int butLength;
 	protected boolean buttonClicked;
 	protected final int HORIZONTALBARWIDTH;

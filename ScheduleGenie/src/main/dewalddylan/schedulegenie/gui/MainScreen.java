@@ -10,6 +10,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import main.dewalddylan.schedulegenie.data.names.*;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
+import main.dewalddylan.schedulegenie.gui.panel.*;
 
 public class MainScreen extends Screen{
 	//GUI components

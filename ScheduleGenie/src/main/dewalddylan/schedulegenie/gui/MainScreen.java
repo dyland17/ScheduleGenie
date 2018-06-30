@@ -1,10 +1,13 @@
 package main.dewalddylan.schedulegenie.gui;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -14,30 +17,20 @@ import main.dewalddylan.schedulegenie.gui.panel.*;
 
 public class MainScreen extends Screen{
 	//GUI components
-	private JTabbedPane tabbedPane;
+//	private JTabbedPane tabbedPane;
 	private JPanel outsidePanel;
 	//New panels that replace old panels
 	private InfoPanel infoPanel;
 	private EmployeePanel employeePanel;
+	private GraphPanel graphPanel;
 	
 	public MainScreen() {
 		super(TitleName.MAINSCREENNAME, ScreenType.MAINSCREEN);
 //		employeeMonitor = new EmployeeManager();
 		styleEmployeeScreen();
 		super.finishPackingScreen();
-	}
-
-	private void setupGraphPanel() {
-		tabbedPane = new JTabbedPane();
-		tabbedPane.setPreferredSize(GUIDim.MAINPANELDIM);
-		String[] days = {"Sunday","Monday","Tuesday","Wednesday",
-							"Thursday","Friday","Saturday"};
-		for(int i = 0; i < 7; i++){
-			GraphPanel drawPanel = new GraphPanel();
-			JScrollPane scrollPane = new JScrollPane(drawPanel);
-			tabbedPane.add(days[i], scrollPane);
-		}
-		outsidePanel.add(tabbedPane,BorderLayout.EAST);
+		
+		System.out.println("Step 1: prefSize = " + outsidePanel.getPreferredSize());
 	}
 	
 //	public void addNewEmployee(Employee newEmployee){
@@ -110,11 +103,10 @@ public class MainScreen extends Screen{
 	protected void styleEmployeeScreen() {
 		Container c = window.getContentPane();
 		outsidePanel = new JPanel();
+		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
 		outsidePanel.setLayout(new GridBagLayout());
 		GridBagConstraints rules = new GridBagConstraints();
 		rules.insets = new Insets(5,5,5,5);
-		
-		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
 		employeePanel = new EmployeePanel();
 		
 		rules.gridx = 0;
@@ -124,6 +116,11 @@ public class MainScreen extends Screen{
 		rules.gridy = 1;
 		infoPanel = new InfoPanel();
 		outsidePanel.add(infoPanel,rules);
+		rules.gridx = 1;
+		rules.gridy = 0;
+		rules.fill = GridBagConstraints.VERTICAL;
+		graphPanel = new GraphPanel();
+		outsidePanel.add(graphPanel, rules);
 		c.add(outsidePanel);
 	}
 	

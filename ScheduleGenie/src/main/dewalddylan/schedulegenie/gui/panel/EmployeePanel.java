@@ -1,4 +1,4 @@
-package main.dewalddylan.schedulegenie.gui;
+package main.dewalddylan.schedulegenie.gui.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;

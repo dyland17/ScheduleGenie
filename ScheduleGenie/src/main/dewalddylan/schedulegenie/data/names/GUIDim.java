@@ -11,6 +11,7 @@ public class GUIDim {
 	public static final Dimension EMPLOYEETIMESHEETSCREENDIM = new Dimension(460,400);
 	public static final Dimension MAINSCREENDIM = new Dimension(720,660);
 	public static final Dimension SIDEPANELDIM = new Dimension((int)(MAINSCREENDIM.getWidth() *.3), (int)(MAINSCREENDIM.getHeight() *.3));
+	public static final Dimension MAINPANELDIM = new Dimension((int)(MAINSCREENDIM.getWidth() *.62),(int)(MAINSCREENDIM.getHeight() *.9));
 	public static final Dimension OPTIONPANELDIM = new Dimension(200,640);
-	public static final Dimension MAINPANELDIM = new Dimension(500,560);
+	
 }

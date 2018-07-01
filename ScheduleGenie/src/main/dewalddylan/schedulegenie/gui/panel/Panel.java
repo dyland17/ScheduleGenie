@@ -17,11 +17,13 @@ public abstract class Panel extends JPanel{
 	
 	public Panel(Dimension dim){
 		setPreferredSize(dim);
+		setMinimumSize(dim);
 		setBorderLook();
 	}
 	
 	public Panel(Dimension dim, int borderStyle){
 		setPreferredSize(dim);
+		setMinimumSize(dim);
 		setBorderLook(borderStyle);
 	}
 	

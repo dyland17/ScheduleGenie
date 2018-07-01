@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 
+import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
@@ -18,7 +19,7 @@ public class GraphPanel extends Panel{
 														"Thursday","Friday","Saturday"};
 	
 	public GraphPanel() {
-		super(GUIDim.MAINPANELDIM, Panel.DARKBORDER);
+		super(GUIDim.MAINPANELDIM, Panel.NOTHINGBORDER);
 		init();
 		setupPanel();
 	}

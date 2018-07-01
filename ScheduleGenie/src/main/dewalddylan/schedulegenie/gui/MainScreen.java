@@ -2,6 +2,7 @@ package main.dewalddylan.schedulegenie.gui;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -14,6 +15,7 @@ import javax.swing.JTabbedPane;
 import main.dewalddylan.schedulegenie.data.names.*;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
 import main.dewalddylan.schedulegenie.gui.panel.*;
+import main.dewalddylan.schedulegenie.tools.GridBagHelper;
 
 public class MainScreen extends Screen{
 	//GUI components
@@ -105,20 +107,20 @@ public class MainScreen extends Screen{
 		outsidePanel = new JPanel();
 		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
 		outsidePanel.setLayout(new GridBagLayout());
+		
 		GridBagConstraints rules = new GridBagConstraints();
 		rules.insets = new Insets(5,5,5,5);
-		employeePanel = new EmployeePanel();
 		
-		rules.gridx = 0;
-		rules.gridy = 0;
+		GridBagHelper.setupConstraints(rules, 0, 0, GridBagConstraints.VERTICAL, 0.0 , 1.0);
+		employeePanel = new EmployeePanel();
 		outsidePanel.add(employeePanel, rules);
-		rules.gridx = 0;
-		rules.gridy = 1;
+		
+		GridBagHelper.setupConstraints(rules, 0, 1);
 		infoPanel = new InfoPanel();
 		outsidePanel.add(infoPanel,rules);
-		rules.gridx = 1;
-		rules.gridy = 0;
-		rules.fill = GridBagConstraints.VERTICAL;
+		
+		final int remainder = GridBagConstraints.REMAINDER;
+		GridBagHelper.setupConstraints(rules, 1, 0, remainder, remainder);
 		graphPanel = new GraphPanel();
 		outsidePanel.add(graphPanel, rules);
 		c.add(outsidePanel);

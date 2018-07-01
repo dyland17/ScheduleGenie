@@ -15,6 +15,7 @@ import main.dewalddylan.schedulegenie.data.LabelComponentPair;
 import main.dewalddylan.schedulegenie.data.component.ComponentFactory;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
+import main.dewalddylan.schedulegenie.tools.GridBagHelper;
 
 public class InfoPanel extends Panel{
 	private LabelComponentPair<JTextField> firstName;
@@ -47,32 +48,33 @@ public class InfoPanel extends Panel{
 		this.setLayout(new GridBagLayout());
 		GridBagConstraints constraints = new GridBagConstraints();
 		constraints.insets = new Insets(2,2,2,2);
-		setRulesForLayout(0, 0, constraints);
-		this.addLabelComponentPair(firstName, ComponentFactory.FIRSTNAME,constraints);
-		setRulesForLayout(0, 1, constraints);
-		this.addLabelComponentPair(lastName, ComponentFactory.LASTNAME,constraints);
-		setRulesForLayout(0, 2, constraints);
-		this.addLabelComponentPair(age, ComponentFactory.AGE,constraints);
-		setRulesForLayout(0, 3, constraints);
-		this.addLabelComponentPair(title, ComponentFactory.TITLE,constraints);
-		setRulesForLayout(0, 4, constraints);
-		this.addLabelComponentPair(totalHours, ComponentFactory.TOTALHOURS,constraints);
-		setRulesForLayout(0, 5, constraints);
-		this.addLabelComponentPair(time_in,constraints);
-		setRulesForLayout(0, 6, constraints);
-		this.addLabelComponentPair(time_out,constraints);
-	}
-	
-	private void setRulesForLayout(int posX, int posY, GridBagConstraints rules) {
-		rules.gridx = posX;
-		rules.gridy = posY;
 		
+		GridBagHelper.setupConstraints(constraints,0, 0);
+		this.addLabelComponentPair(firstName, ComponentFactory.FIRSTNAME,constraints);
+		GridBagHelper.setupConstraints(constraints,0, 1);
+		this.addLabelComponentPair(lastName, ComponentFactory.LASTNAME,constraints);
+		GridBagHelper.setupConstraints(constraints,0, 2);
+		this.addLabelComponentPair(age, ComponentFactory.AGE,constraints);
+		GridBagHelper.setupConstraints(constraints,0, 3);
+		this.addLabelComponentPair(title, ComponentFactory.TITLE,constraints);
+		GridBagHelper.setupConstraints(constraints,0, 4);
+		this.addLabelComponentPair(totalHours, ComponentFactory.TOTALHOURS,constraints);
+		GridBagHelper.setupConstraints(constraints,0, 5);
+		this.addLabelComponentPair(time_in,constraints);
+		GridBagHelper.setupConstraints(constraints,0, 6);
+		this.addLabelComponentPair(time_out,constraints);
 	}
 
 	private  void addLabelComponentPair(LabelComponentPair<JTextField> componentPair, String name,GridBagConstraints rules){
 		this.add(componentPair.getJLabel(),rules);
 		rules.gridx +=1;
+		rules.gridwidth = GridBagConstraints.REMAINDER;
+		rules.fill = GridBagConstraints.HORIZONTAL;
 		this.add(componentPair.getComponentPart(name),rules);
+		//Resets rules for next method call.
+		rules.gridwidth = 1;
+		rules.fill = GridBagConstraints.NONE;
+		
 		
 	}
 	

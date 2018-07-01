@@ -11,7 +11,7 @@ public class LabelComponentPair<T>{
 	//private TypeOfTextField textFieldType;
 	private Component editableField;
 	private JLabel labelName;
-	public static final int  TFSIZE = 6;
+	public static final int  TFSIZE = 8;
 	
 	public <T> LabelComponentPair(String name, Component<T> editableComponent){
 		//textField = new JTextField(TFSIZE);

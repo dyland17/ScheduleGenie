@@ -4,66 +4,35 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+import main.dewalddylan.schedulegenie.data.enumerations.LabelState;
+import main.dewalddylan.schedulegenie.data.names.ChartViewLimit;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
+import main.dewalddylan.schedulegenie.gui.panel.widget.TimeChart;
+import static main.dewalddylan.schedulegenie.tools.PointMath.*;
 
 public class ChartPanel extends Panel implements MouseListener{
 	private final int GRAPHVERTICALOFFSET = 20;
 	private static final int GRAPHHORIZONTALOFFSET = 120;
-	private final int LABTIMEOFFSET = 10;
-	private final int EMPLOYEEOFFSET = 20;
-	private final int NAMEOFFSET = 20;
-	private static final int BLOCKWIDTH = 30;
-	private static final int BLOCKHEIGHT = 50;
-	private int amountOfEmployees;
-	private int viewXPoint;
-	private int viewYPoint;
+	private TimeChart chart;
+	private Point viewPoint;
+	private Point pressedPoint;
 	public ChartPanel(){
 		super(GUIDim.MAINPANELDIM,Panel.LOWERBORDER);
-		//Graph starts out at 9 employee blocks. Will be updated if Employees exceed 9.
-		amountOfEmployees = 9;
-		viewXPoint = 0;
-		viewYPoint = 0;
+		chart = new TimeChart(20,20,this, LabelState.HASLABELS);
+		viewPoint = new Point();
+		pressedPoint = new Point();
 		init();
 	}
 	@Override
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g; 
-		g2d.setColor(Color.white);
-		g2d.fillRect(0, 0, getWidth(), getHeight());
-		g2d.setColor(Color.black);
-		//Horizontal Lines and Vertical Lines
-			//S.N. the 10 is not set it is a place value for now.
-			//Later, I will implement it based on current number of employees.
-		for(int i = 0; i < 10; i++){
-			g.drawLine(GRAPHHORIZONTALOFFSET,((i*BLOCKHEIGHT)+ GRAPHVERTICALOFFSET), getWidth(), (i*BLOCKHEIGHT) + GRAPHVERTICALOFFSET);
-		}
-		//Drawing Times and vertical lines.
-		for(int x = 6; x < 24; x+=2){
-			g2d.drawLine((((x - 6)*BLOCKWIDTH)+ GRAPHHORIZONTALOFFSET), GRAPHVERTICALOFFSET, (((x - 6)*BLOCKWIDTH)+GRAPHHORIZONTALOFFSET), ((9*BLOCKHEIGHT)+GRAPHVERTICALOFFSET));
-			if(x  >= 12){
-				if(x == 12){
-					g2d.drawString((x) + "pm", (((x - 6)*BLOCKWIDTH)+ GRAPHHORIZONTALOFFSET),(((amountOfEmployees + 1)*BLOCKHEIGHT)+LABTIMEOFFSET));
-					continue;
-				}
-				else if (x == 24){
-					g2d.drawString((x-12) + "am", (((x - 6)*BLOCKWIDTH)+ GRAPHHORIZONTALOFFSET),(((amountOfEmployees + 1)*BLOCKHEIGHT)+LABTIMEOFFSET));
-					continue;
-				}
-				g2d.drawString(((x) -12) + "pm", (((x - 6)*BLOCKWIDTH)+GRAPHHORIZONTALOFFSET),(((amountOfEmployees + 1)*BLOCKHEIGHT)+LABTIMEOFFSET));
-			}
-			else{
-				g2d.drawString(x + "am", (((x - 6)*BLOCKWIDTH)+GRAPHHORIZONTALOFFSET),(((amountOfEmployees + 1)*BLOCKHEIGHT)+LABTIMEOFFSET));
-			}
-		}
-		int y = 1;
-		//Write names in
-//		for(Employee employee: MainScreen.employeeMonitor.getEmployeeList()){
-//			g.drawString(employee.getFirstName() + " " + employee.getLastName(), EMPLOYEEOFFSET, y*BLOCKHEIGHT + NAMEOFFSET);
-//			y++;
-//		}
+		chart.paint(g2d);
+		
 	}
 
 	@Override
@@ -84,13 +53,16 @@ public class ChartPanel extends Panel implements MouseListener{
 	}
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		pressedPoint.move(e.getX(), e.getY());
+		System.out.println("X: " + e.getX() + "Y: " + e.getY());
 	}
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
+		//Point deltaPoint = new Point((int)(pressedPoint.getX() - e.getX()),(int)(pressedPoint.getY() - e.getY()));
+		Point deltaPoint = getDeltaPoint(e.getPoint(), pressedPoint);
+	
+		chart.moveChart(deltaPoint);
+		repaint();
 	}
 	@Override
 	public void mouseEntered(MouseEvent e) {

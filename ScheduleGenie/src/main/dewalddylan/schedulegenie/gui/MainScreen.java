@@ -128,5 +128,6 @@ public class MainScreen extends Screen{
 	
 	public void paintPanels(){
 		employeePanel.repaint();
+		graphPanel.paint();
 	}
 }

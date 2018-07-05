@@ -24,18 +24,6 @@ public class GraphPanel extends Panel{
 		setupPanel();
 	}
 	
-//	private void setupGraphPanel() {
-//		tabbedPane = new JTabbedPane();
-//		tabbedPane.setPreferredSize(this.getPreferredSize());
-//		String[] days = {"Sunday","Monday","Tuesday","Wednesday",
-//							"Thursday","Friday","Saturday"};
-//		for(int i = 0; i < 7; i++){
-//			GraphPanel drawPanel = new GraphPanel();
-//			JScrollPane scrollPane = new JScrollPane(drawPanel);
-//			tabbedPane.add(days[i], scrollPane);
-//		}
-//		outsidePanel.add(tabbedPane,BorderLayout.EAST);
-//	}
 	@Override
 	protected void init() {
 		tabbedPane = new JTabbedPane();
@@ -48,6 +36,10 @@ public class GraphPanel extends Panel{
 	@Override
 	protected void setupPanel() {
 		this.add(tabbedPane);
+	}
+	
+	public void paint(){
+		getSelectedTabPanel().repaint();
 	}
 	
 	public Panel getSelectedTabPanel(){

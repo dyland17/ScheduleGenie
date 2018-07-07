@@ -7,8 +7,9 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
-import main.dewalddylan.schedulegenie.data.enumerations.LabelState;
+import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.names.ChartViewLimit;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
 import main.dewalddylan.schedulegenie.gui.panel.widget.TimeChart;
@@ -22,7 +23,7 @@ public class ChartPanel extends Panel implements MouseListener{
 	private Point pressedPoint;
 	public ChartPanel(){
 		super(GUIDim.MAINPANELDIM,Panel.LOWERBORDER);
-		chart = new TimeChart(20,20,this, LabelState.HASLABELS);
+		chart = new TimeChart(20,20,this);
 		viewPoint = new Point();
 		pressedPoint = new Point();
 		init();
@@ -74,4 +75,5 @@ public class ChartPanel extends Panel implements MouseListener{
 		// TODO Auto-generated method stub
 		
 	}
+	
 }

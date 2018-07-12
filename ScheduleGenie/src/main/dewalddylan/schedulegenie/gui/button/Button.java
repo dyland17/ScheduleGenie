@@ -1,6 +1,7 @@
 package main.dewalddylan.schedulegenie.gui.button;
 
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 public abstract class Button {
@@ -24,16 +25,16 @@ public abstract class Button {
 		VERTICALBARHEIGHT = ((int)(butLength * .75));
 		buttonClicked = false;
 	}
-	protected abstract void paintUnClickedButton(Graphics g);
-	protected abstract void paintClickedButton(Graphics g);
+	protected abstract void paintUnClickedButton(Graphics2D g2d);
+	protected abstract void paintClickedButton(Graphics2D g2d);
 	
-	public void paint(Graphics g){
+	public void paint(Graphics2D g2d){
 		//Button when it is not clicked.
 		if(!buttonClicked){
-			paintUnClickedButton(g);
+			paintUnClickedButton(g2d);
 		}
 		else {
-			paintClickedButton(g);
+			paintClickedButton(g2d);
 		}
 	}
 	

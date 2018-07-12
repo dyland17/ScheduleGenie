@@ -2,6 +2,7 @@ package main.dewalddylan.schedulegenie.gui.button;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class MinusButton extends Button{
 	private final int minusXPos;
@@ -16,21 +17,21 @@ public class MinusButton extends Button{
 	
 	//vvvv Have to implement yet. vvvv
 	@Override
-	protected void paintClickedButton(Graphics g) {
+	protected void paintClickedButton(Graphics2D g2d) {
 		
 	}
 
 	@Override
-	protected void paintUnClickedButton(Graphics g) {
+	protected void paintUnClickedButton(Graphics2D g2d) {
 		//Background red color.
-		g.setColor(Color.red);
-		g.fillRect(butXPos, butYPos, butLength, butLength);
+		g2d.setColor(Color.red);
+		g2d.fillRect(butXPos, butYPos, butLength, butLength);
 		//White minus sign
-		g.setColor(Color.white);
-		g.fillRect(minusXPos, minusYPos,  HORIZONTALBARWIDTH , HORIZONTALBARHEIGHT);
+		g2d.setColor(Color.white);
+		g2d.fillRect(minusXPos, minusYPos,  HORIZONTALBARWIDTH , HORIZONTALBARHEIGHT);
 		// black Border
-		g.setColor(Color.black);
-		g.drawRect(butXPos, butYPos, butLength, butLength);
+		g2d.setColor(Color.black);
+		g2d.drawRect(butXPos, butYPos, butLength, butLength);
 		
 	}
 	

@@ -19,7 +19,7 @@ public class GraphPanel extends Panel{
 														"Thursday","Friday","Saturday"};
 	
 	public GraphPanel() {
-		super(GUIDim.MAINPANELDIM, Panel.NOTHINGBORDER);
+		super(GUIDim.MAINPANELDIM, "GraphPanel: " ,Panel.NOTHINGBORDER);
 		init();
 		setupPanel();
 	}

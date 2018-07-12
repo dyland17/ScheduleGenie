@@ -2,6 +2,7 @@ package main.dewalddylan.schedulegenie.gui.panel;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -17,9 +18,8 @@ public class EmployeePanel extends Panel implements MouseListener{
 	private static EmployeeManager employeeManager;
 	private ArrayList<ListItem> guiList;
 	public EmployeePanel(){
-		super(GUIDim.SIDEPANELDIM);
-		employeeManager = new EmployeeManager();
-		guiList = new ArrayList<ListItem>();
+		super(GUIDim.SIDEPANELDIM, "EmployeePanel: ");
+		init();
 		setupPanel();
 		
 	}
@@ -27,13 +27,18 @@ public class EmployeePanel extends Panel implements MouseListener{
 	@Override
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		this.drawTitleLineCenteredTop(g2d);
 		for(ListItem item: guiList) 
-			item.paint(g);
+			item.paint(g2d);
 	}
+	
 	@Override
 	protected void init(){
-		
+		employeeManager = new EmployeeManager();
+		guiList = new ArrayList<ListItem>();
 	}
+	
 	@Override
 	protected void setupPanel(){
 		addNewEmployee("Dylan Dewald");

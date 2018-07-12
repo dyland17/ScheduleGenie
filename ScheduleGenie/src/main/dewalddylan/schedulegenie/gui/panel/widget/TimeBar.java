@@ -1,7 +1,9 @@
 package main.dewalddylan.schedulegenie.gui.panel.widget;
 
 import java.awt.Color;
+import java.awt.GradientPaint;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 public class TimeBar {
 	private int x, y;
@@ -21,11 +23,8 @@ public class TimeBar {
 	}
 	public void paint(Graphics2D g2d) {
 		g2d.setColor(barColor);
-		g2d.fillRoundRect(x, y, width, height, 14, 48);
-		g2d.setColor(Color.BLACK);
-		//for(int i = 0; i < 3; i++)
-			g2d.drawRoundRect(x, y, width, height, 14, 48);
+		g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+		g2d.fill3DRect(x, y, width, height, true);
 		
-		//g2d.fill3DRect(x, y, width, height, true);
 	}
 }

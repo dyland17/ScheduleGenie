@@ -2,6 +2,7 @@ package main.dewalddylan.schedulegenie.gui.button;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
 public class PlusButton extends Button{
 	private int horizontalRectX;
@@ -16,23 +17,23 @@ public class PlusButton extends Button{
 	}
 
 	@Override
-	protected void paintUnClickedButton(Graphics g) {
+	protected void paintUnClickedButton(Graphics2D g2d) {
 		//Green background
-		g.setColor(Color.green);
-		g.fillRect(butXPos, butYPos, butLength, butLength);
+		g2d.setColor(Color.green);
+		g2d.fillRect(butXPos, butYPos, butLength, butLength);
 		//Horizontal bar
-		g.setColor(Color.black);
-		g.fillRect(horizontalRectX, horizontalRectY, HORIZONTALBARWIDTH, HORIZONTALBARHEIGHT);
+		g2d.setColor(Color.black);
+		g2d.fillRect(horizontalRectX, horizontalRectY, HORIZONTALBARWIDTH, HORIZONTALBARHEIGHT);
 		//Vertical bar
-		g.fillRect(verticalRectX, verticalRectY, VERTICALBARWIDTH, VERTICALBARHEIGHT);
+		g2d.fillRect(verticalRectX, verticalRectY, VERTICALBARWIDTH, VERTICALBARHEIGHT);
 		//Border
-		g.setColor(Color.black);
-		g.drawRect(butXPos, butYPos, butLength, butLength);
+		g2d.setColor(Color.black);
+		g2d.drawRect(butXPos, butYPos, butLength, butLength);
 		
 	}
 
 	@Override
-	protected void paintClickedButton(Graphics g) {
+	protected void paintClickedButton(Graphics2D g2d) {
 		// TODO Auto-generated method stub
 		
 	}

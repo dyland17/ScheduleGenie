@@ -1,19 +1,16 @@
 package main.dewalddylan.schedulegenie.data;
 
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 import main.dewalddylan.schedulegenie.data.component.Component;
-public class LabelComponentPair<T>{
+public class LabelComponentPair{
 	//private TypeOfTextField textFieldType;
-	private Component editableField;
+	private Component<JComponent> editableField;
 	private JLabel labelName;
 	public static final int  TFSIZE = 8;
 	
-	public <T> LabelComponentPair(String name, Component<T> editableComponent){
+	public LabelComponentPair(String name, Component<JComponent> editableComponent){
 		//textField = new JTextField(TFSIZE);
 		labelName = new JLabel(name);
 		editableField = editableComponent;
@@ -31,11 +28,11 @@ public class LabelComponentPair<T>{
 		return labelName;
 	}
 	
-	public T getComponentPart(String name){
-		return (T) editableField.get(name);
+	public JComponent getComponentPart(String name){
+		return (JComponent) editableField.get(name);
 	}
 	
-	public <T> void  addComponentPart(String name, T componentPart){
+	public void  addComponentPart(String name, JComponent componentPart){
 		editableField.add(name, componentPart);
 	}
 }

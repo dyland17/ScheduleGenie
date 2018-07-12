@@ -22,7 +22,7 @@ public class ChartPanel extends Panel implements MouseListener{
 	private Point viewPoint;
 	private Point pressedPoint;
 	public ChartPanel(){
-		super(GUIDim.MAINPANELDIM,Panel.LOWERBORDER);
+		super(GUIDim.MAINPANELDIM,"ChartPanel: ",Panel.LOWERBORDER);
 		chart = new TimeChart(20,20,this);
 		viewPoint = new Point();
 		pressedPoint = new Point();

@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 public class EmployeeManager {
 	private LinkedList<Employee> employeeList;
+	private Employee selectedEmployee;
 	public EmployeeManager(){
 		employeeList = new LinkedList<Employee>();
 	}
@@ -17,6 +18,10 @@ public class EmployeeManager {
 			employeeList.add(newEmployee);
 			sortAlphabetically();
 		}
+	}
+	
+	public Employee getSelectedEmployee() {
+		return selectedEmployee;
 	}
 
 	private void sortAlphabetically() {

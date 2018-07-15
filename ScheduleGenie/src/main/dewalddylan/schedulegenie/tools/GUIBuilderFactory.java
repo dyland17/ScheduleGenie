@@ -4,7 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 
-import main.dewalddylan.schedulegenie.data.GUIDim;
+import main.dewalddylan.schedulegenie.data.names.GUIDim;
 
 public class GUIBuilderFactory {
 	public static JButton buildButton(String buttonName, ActionListener listener) {

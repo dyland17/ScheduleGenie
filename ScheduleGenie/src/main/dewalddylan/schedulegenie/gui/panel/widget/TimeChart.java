@@ -3,7 +3,9 @@ package main.dewalddylan.schedulegenie.gui.panel.widget;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.util.ArrayList;
 
+import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.gui.panel.ChartPanel;
 import main.dewalddylan.schedulegenie.tools.LabelGroupFactory;
 
@@ -26,7 +28,7 @@ public class TimeChart {
 		this.startHour = 6;
 		this.endHour = 22;
 		timeLabels = LabelGroupFactory.createTimeLabelsForFullDay(xPos, getChartHeight() + 5);
-		//employeeLabels = LabelGroupFactory.createEmployeeLabels(xPos - 20, yPos, parentPanel.getEmployeeList());
+		//employeeLabels = LabelGroupFactory.createEmployeeLabels(xPos - 20, yPos, parentPanel.getList());
 	}
 	
 	public void moveChart(Point newDrawPoint){

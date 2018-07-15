@@ -7,13 +7,17 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
+import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import main.dewalddylan.schedulegenie.data.names.*;
+import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.enumerations.ScreenType;
+import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
+import main.dewalddylan.schedulegenie.data.manager.PanelManager;
 import main.dewalddylan.schedulegenie.gui.panel.*;
 import main.dewalddylan.schedulegenie.tools.GridBagHelper;
 
@@ -25,56 +29,23 @@ public class MainScreen extends Screen{
 	private InfoPanel infoPanel;
 	private EmployeePanel employeePanel;
 	private GraphPanel graphPanel;
-	
+	private PanelManager panelManager;
 	public MainScreen() {
 		super(TitleName.MAINSCREENNAME, ScreenType.MAINSCREEN);
-//		employeeMonitor = new EmployeeManager();
 		styleEmployeeScreen();
 		super.finishPackingScreen();
 		
 		System.out.println("Step 1: prefSize = " + outsidePanel.getPreferredSize());
 	}
 	
-//	public void addNewEmployee(Employee newEmployee){
-//		boolean wasDuplicate;
-//		int employeeSize = employeeMonitor.getEmployeeList().size();
-//		Random rand = new Random();
-//		do{
-//			wasDuplicate = false;
-//			for(int i = 0; i < employeeSize; i++){
-//				if(employeeMonitor.checkIfDublicate(newEmployee, employeeMonitor.getEmployee(i))){
-//					wasDuplicate = true;
-//					break;
-//				}
-//			}
-//			if(wasDuplicate){
-//				newEmployee.setEmployeeNumber(rand.nextInt(Employee.TOTALEMPLOYEENUMBERS));
-//			}
-//		}while(wasDuplicate);
-//		employeeMonitor.addEmployee(newEmployee);
-//		screenUpdate();
-//	}
-//	
-//	public void employeeUpdate(Employee updateEmployee) {
-//		for(Employee listEmployee: employeeMonitor.getEmployeeList()){
-//			if(employeeMonitor.checkIfDublicate(updateEmployee, listEmployee)){
-//				employeeMonitor.copyNewInformation(updateEmployee, listEmployee);
-//				break;
-//			}	
-//		}
-//		screenUpdate();
-//	}
-//	
-//	public void screenUpdate(){
-//		JComboBox selectedEmployeeBox = optionPanel.getSelectedEmployeeBox();
-//		selectedEmployeeBox.removeAllItems();
-//		for(Employee employee: employeeMonitor.getEmployeeList()){
-//			selectedEmployeeBox.addItem(employee.getFullName());
-//		}
-//		MainPanel panel = (MainPanel) ((JScrollPane) tabbedPane.getSelectedComponent()).getViewport().getComponent(0);
-//		panel.repaint();
-//	}
-
+	public LinkedList<Employee> getEmployeeList(){
+		return employeePanel.getEmployeeList();
+	}
+	
+	public Employee getSelectedEmployee() {
+		return employeePanel.getSelectedEmployee();
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 //		try{
@@ -103,6 +74,7 @@ public class MainScreen extends Screen{
 
 	@Override
 	protected void styleEmployeeScreen() {
+		panelManager = new PanelManager(this);
 		Container c = window.getContentPane();
 		outsidePanel = new JPanel();
 		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
@@ -129,5 +101,14 @@ public class MainScreen extends Screen{
 	public void paintPanels(){
 		employeePanel.repaint();
 		graphPanel.paint();
+	}
+
+	public void updateSelectedEmployee(Employee employee, WorkDay currentDay) {
+		infoPanel.displayInfo(employee, currentDay);
+		
+	}
+
+	public WorkDay getCurrentDay() {
+		return graphPanel.getCurrentDay();
 	}
 }

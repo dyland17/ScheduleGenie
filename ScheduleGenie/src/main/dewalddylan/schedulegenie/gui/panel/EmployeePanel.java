@@ -6,10 +6,12 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
+import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.EmployeeManager;
 import main.dewalddylan.schedulegenie.data.ListItem;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
@@ -81,5 +83,12 @@ public class EmployeePanel extends Panel implements MouseListener{
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public LinkedList<Employee> getEmployeeList(){
+		return employeeManager.getEmployeeList();
+	}
+	public Employee getSelectedEmployee() {
+		return employeeManager.getSelectedEmployee();
 	}
 }

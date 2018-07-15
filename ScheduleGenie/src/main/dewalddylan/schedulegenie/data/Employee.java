@@ -1,5 +1,7 @@
 package main.dewalddylan.schedulegenie.data;
 
+import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
+
 public class Employee {
 	public static final int TOTALEMPLOYEENUMBERS = 999999;
 	//Most important information
@@ -91,7 +93,11 @@ public class Employee {
 		employeeNumber = newEmployeeNumber;
 	}
 
-	public DayTracker getDayTracker(){
-		return dayTracker;
+	public Time getStartTime(WorkDay day) {
+		return dayTracker.getTimeSheetByDay(day).getStartTime();
+	}
+	
+	public Time getEndTime(WorkDay day) {
+		return dayTracker.getTimeSheetByDay(day).getEndTime();
 	}
 }

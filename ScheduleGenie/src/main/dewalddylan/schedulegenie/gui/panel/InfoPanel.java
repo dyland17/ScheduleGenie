@@ -15,12 +15,15 @@ import javax.swing.JComboBox;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.LabelComponentPair;
+import main.dewalddylan.schedulegenie.data.Time;
 import main.dewalddylan.schedulegenie.data.component.ComponentFactory;
 import main.dewalddylan.schedulegenie.data.enumerations.TypeOfTextField;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
 import main.dewalddylan.schedulegenie.data.names.LabelInfo;
 import main.dewalddylan.schedulegenie.tools.GridBagHelper;
+import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class InfoPanel extends Panel{
 	private LabelComponentPair firstName;
@@ -100,4 +103,33 @@ public class InfoPanel extends Panel{
 		this.add(componentPair.getComponentPart(ComponentFactory.TIMEOFDAY),rules);
 	}
 	
+	private void setJTextField(LabelComponentPair componentPair, String keyValue, String value) {
+		JTextField currentField = (JTextField)componentPair.getComponentPart(keyValue);
+		currentField.setText(value);
+	}
+	
+	private void setJComboBoxes(LabelComponentPair componentPair, final Time setTime) {
+		JComboBox currentBox = (JComboBox) componentPair.getComponentPart(ComponentFactory.TIME_HOUR);
+		currentBox.setSelectedIndex(setTime.getHour());
+		
+		currentBox = (JComboBox) componentPair.getComponentPart(ComponentFactory.TIME_MIN);
+		currentBox.setSelectedIndex(setTime.getMinute());
+		
+		currentBox = (JComboBox) componentPair.getComponentPart(ComponentFactory.TIMEOFDAY);
+		currentBox.setSelectedItem(setTime.getTimeOfDay());
+	}
+	
+	public void displayInfo(Employee employee, WorkDay currentDay) {
+		setJTextField(firstName, ComponentFactory.FIRSTNAME, employee.getFirstName());
+		setJTextField(lastName, ComponentFactory.LASTNAME, employee.getLastName());
+		setJTextField(age, ComponentFactory.AGE,Integer.toString(employee.getAge()));
+		setJTextField(title,ComponentFactory.TITLE,employee.getTitle());
+		setJTextField(totalHours, ComponentFactory.TOTALHOURS,Integer.toString(employee.getTotalHours()));
+		
+		final Time startTime = employee.getStartTime(currentDay);
+		setJComboBoxes(time_in, startTime);
+		
+		final Time endTime = employee.getEndTime(currentDay);
+		setJComboBoxes(time_out, endTime);
+	}
 }

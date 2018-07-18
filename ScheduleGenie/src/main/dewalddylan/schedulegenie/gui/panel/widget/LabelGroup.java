@@ -113,6 +113,10 @@ public class LabelGroup {
 			label = newLabel;
 		}
 	}
+	//vvvv Do latervvvv
+	public void removeAllLabels() {
+		
+	}
 }
 class Label{
 	private  int xPos, yPos;

@@ -18,6 +18,7 @@ public class ListItem {
 	public static final int HEIGHT = 20;
 	public static final int WIDTH = GUIDim.SIDEPANELDIM.width;
 	private static final int YOFFSET = (18 * 3);
+	private boolean selected = false;
 	private MinusButton minusBut;
 	public static PlusButton plusButton = new PlusButton((int)(WIDTH/2 -Button.PLUSBUTTONSIZE/2),getProperYPos(0));
 	
@@ -30,6 +31,11 @@ public class ListItem {
 	}
 	
 	public void paint(Graphics2D g2d){
+		//Need to create class to update selected field
+		if(selected) {
+			g2d.setColor(new Color(0,0,210,120));
+			g2d.fill(getBounds());
+		}
 		g2d.setColor(Color.black);
 		g2d.setFont(LabelInfo.PLAINFONT);
 		g2d.drawString(name, (xPos + indent), yPos);
@@ -45,6 +51,10 @@ public class ListItem {
 		plusButton.moveButtonDown(getProperYPos(listSize));
 	}
 	public Rectangle getBounds(){
-		return new Rectangle(xPos, yPos, WIDTH, HEIGHT);
+		return new Rectangle(xPos, yPos-HEIGHT, WIDTH, HEIGHT);
+	}
+
+	public void setSelected(boolean b) {
+		selected = b;
 	}
 }

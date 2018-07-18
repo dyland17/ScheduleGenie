@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.gui.panel.ChartPanel;
@@ -94,5 +95,10 @@ public class TimeChart {
 	public int getXBarPosition(int col) {
 		return (drawPoint.x +(BLOCKSIZE * col));
 	}
+
+//	public void updateEmployeeLabels(LinkedList<Employee> listEmployee) {
+//		employeeLabels.
+//		
+//	}
 	
 }

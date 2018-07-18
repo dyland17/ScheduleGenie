@@ -26,24 +26,11 @@ public class MainScreen extends Screen{
 //	private JTabbedPane tabbedPane;
 	private JPanel outsidePanel;
 	//New panels that replace old panels
-	private InfoPanel infoPanel;
-	private EmployeePanel employeePanel;
-	private GraphPanel graphPanel;
 	private PanelManager panelManager;
 	public MainScreen() {
 		super(TitleName.MAINSCREENNAME, ScreenType.MAINSCREEN);
 		styleEmployeeScreen();
 		super.finishPackingScreen();
-		
-		System.out.println("Step 1: prefSize = " + outsidePanel.getPreferredSize());
-	}
-	
-	public LinkedList<Employee> getEmployeeList(){
-		return employeePanel.getEmployeeList();
-	}
-	
-	public Employee getSelectedEmployee() {
-		return employeePanel.getSelectedEmployee();
 	}
 	
 	@Override
@@ -74,7 +61,6 @@ public class MainScreen extends Screen{
 
 	@Override
 	protected void styleEmployeeScreen() {
-		panelManager = new PanelManager(this);
 		Container c = window.getContentPane();
 		outsidePanel = new JPanel();
 		outsidePanel.setPreferredSize(GUIDim.MAINSCREENDIM);
@@ -84,31 +70,21 @@ public class MainScreen extends Screen{
 		rules.insets = new Insets(5,5,5,5);
 		
 		GridBagHelper.setupConstraints(rules, 0, 0, GridBagConstraints.VERTICAL, 0.0 , 1.0);
-		employeePanel = new EmployeePanel();
+		EmployeePanel employeePanel = new EmployeePanel();
 		outsidePanel.add(employeePanel, rules);
 		
 		GridBagHelper.setupConstraints(rules, 0, 1);
-		infoPanel = new InfoPanel();
+		InfoPanel infoPanel = new InfoPanel();
 		outsidePanel.add(infoPanel,rules);
 		
 		final int remainder = GridBagConstraints.REMAINDER;
 		GridBagHelper.setupConstraints(rules, 1, 0, remainder, remainder);
-		graphPanel = new GraphPanel();
+		GraphPanel graphPanel = new GraphPanel();
 		outsidePanel.add(graphPanel, rules);
 		c.add(outsidePanel);
+		panelManager = new PanelManager(employeePanel, infoPanel,graphPanel);
 	}
-	
 	public void paintPanels(){
-		employeePanel.repaint();
-		graphPanel.paint();
-	}
-
-	public void updateSelectedEmployee(Employee employee, WorkDay currentDay) {
-		infoPanel.displayInfo(employee, currentDay);
-		
-	}
-
-	public WorkDay getCurrentDay() {
-		return graphPanel.getCurrentDay();
+		panelManager.paintPanels();
 	}
 }

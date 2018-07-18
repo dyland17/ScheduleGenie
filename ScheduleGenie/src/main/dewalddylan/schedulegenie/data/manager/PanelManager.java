@@ -5,22 +5,46 @@ import java.util.LinkedList;
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 import main.dewalddylan.schedulegenie.gui.MainScreen;
+import main.dewalddylan.schedulegenie.gui.panel.EmployeePanel;
+import main.dewalddylan.schedulegenie.gui.panel.GraphPanel;
+import main.dewalddylan.schedulegenie.gui.panel.InfoPanel;
 
 public class PanelManager {
-	private MainScreen mainScreen;
-	public PanelManager(MainScreen screen) {
-		mainScreen = screen;
-	}
+	private EmployeePanel employeePanel;
+	private InfoPanel infoPanel;
+	private GraphPanel graphPanel;
 	
+	
+	public PanelManager(EmployeePanel employeePanel, InfoPanel infoPanel, GraphPanel graphPanel) {
+		this.employeePanel = employeePanel;
+		this.infoPanel = infoPanel;
+		this.graphPanel = graphPanel;
+	}
+
 	public LinkedList<Employee> getEmployeeList(){
-		return mainScreen.getEmployeeList();
+		return employeePanel.getEmployeeList();
 	}
 	public Employee getSelectedEmployee() {
-		return mainScreen.getSelectedEmployee();
+		return employeePanel.getSelectedEmployee();
+	}
+	//Updating infoPanel
+	private void updateSelectedEmployee(Employee employee) {
+		WorkDay currentDay = graphPanel.getCurrentDay();
+		infoPanel.displayInfo(employee, currentDay);
 	}
 	
-	public void updateSelectedEmployee(Employee employee) {
-		WorkDay currentDay = mainScreen.getCurrentDay();
-		mainScreen.updateSelectedEmployee(employee, currentDay);
+	public void updateInfoPanel() {
+		Employee selectedEmployee = employeePanel.getSelectedEmployee();
+		updateSelectedEmployee(selectedEmployee);
+	}
+	
+//	public void updateGraphPanel() {
+//		LinkedList<Employee> employeeList = employeePanel.getEmployeeList();
+//		graphPanel.pa
+//	}
+	
+	public void paintPanels(){
+		employeePanel.repaint();
+		graphPanel.repaint();
 	}
 }

@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.util.LinkedList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
@@ -41,9 +42,10 @@ public class GraphPanel extends Panel{
 		return WorkDay.values()[tabbedPane.getSelectedIndex()];
 	}
 	
-	public void paint(){
-		getSelectedTabPanel().repaint();
-	}
+//	public void paint(LinkedList<Employee> employeeList){
+//		ChartPanel panel = (ChartPanel) getSelectedTabPanel();
+//		panel.pai
+//	}
 	
 	public Panel getSelectedTabPanel(){
 		return (Panel) tabbedPane.getSelectedComponent();

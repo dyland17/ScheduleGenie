@@ -8,6 +8,7 @@ import java.awt.Point;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.names.ChartViewLimit;
@@ -35,7 +36,10 @@ public class ChartPanel extends Panel implements MouseListener{
 		chart.paint(g2d);
 		
 	}
-
+	
+//	public void updatePaintElements(LinkedList<Employee> listEmployee) {
+//		chart.updateEmployeeLabels(listEmployee);
+//	}
 	@Override
 	protected void setupPanel() {
 		// TODO Auto-generated method stub

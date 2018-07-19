@@ -1,13 +1,14 @@
 package main.dewalddylan.schedulegenie.data;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
 
 public class EmployeeManager {
-	private LinkedList<Employee> employeeList;
+	private ArrayList<Employee> employeeList;
 	private Employee selectedEmployee;
 	public EmployeeManager(){
-		employeeList = new LinkedList<Employee>();
+		employeeList = new ArrayList<Employee>();
 	}
 	
 	public void addEmployee(Employee newEmployee){
@@ -54,8 +55,21 @@ public class EmployeeManager {
 	public Employee getEmployee(int index){
 		return employeeList.get(index);
 	}
-	public LinkedList<Employee> getEmployeeList(){
+	public ArrayList<Employee> getEmployeeList(){
 		return employeeList;
+	}
+	
+	public void remove(SelectionItem item){
+		Employee employeeBeingRemoved = null;
+		for(Employee employee: employeeList){
+			if(employee.getFullName().equals(item.toString())){
+				employeeBeingRemoved = employee;
+				break;
+			}
+		}
+		if(employeeBeingRemoved != null){
+			employeeList.remove(employeeBeingRemoved);
+		}
 	}
 	public Employee findEmployeeByName(String name){
 		if(employeeList.size() == 0){

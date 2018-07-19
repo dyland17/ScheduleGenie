@@ -37,8 +37,8 @@ public class PlusButton extends Button{
 		// TODO Auto-generated method stub
 		
 	}
-	public void moveButtonDown(int newYPos){
-		this.butYPos = newYPos + butYOffset;
+	public void moveButton(int newYPos){
+		butYPos = newYPos + butYOffset;
 		setPlusPositions();
 	}
 	

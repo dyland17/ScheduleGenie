@@ -37,6 +37,13 @@ public abstract class Button {
 			paintClickedButton(g2d);
 		}
 	}
+	public void setClicked(boolean b){
+		buttonClicked = b;
+	}
+	
+	public boolean getClicked() {
+		return buttonClicked;
+	}
 	
 	public Rectangle getBounds(){
 		return new Rectangle(butXPos, butYPos, butLength, butLength);

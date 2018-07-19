@@ -1,25 +1,27 @@
 package main.dewalddylan.schedulegenie.gui.panel;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
-import javax.swing.BorderFactory;
-import javax.swing.JPanel;
+import javax.swing.JOptionPane;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.EmployeeManager;
-import main.dewalddylan.schedulegenie.data.ListItem;
+import main.dewalddylan.schedulegenie.data.SelectionItem;
+import main.dewalddylan.schedulegenie.data.SelectionList;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
+
+import static main.dewalddylan.schedulegenie.data.manager.MouseManager.*;
+import static javax.swing.JOptionPane.*;
 
 public class EmployeePanel extends Panel implements MouseListener{
 	private static EmployeeManager employeeManager;
-	private ArrayList<ListItem> guiList;
+	private SelectionList selectionList;
 	public EmployeePanel(){
 		super(GUIDim.SIDEPANELDIM, "EmployeePanel: ");
 		init();
@@ -28,83 +30,83 @@ public class EmployeePanel extends Panel implements MouseListener{
 	}
 	
 	@Override
-	protected void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		Graphics2D g2d = (Graphics2D) g;
-		this.drawTitleLineCenteredTop(g2d);
-		for(ListItem item: guiList) 
-			item.paint(g2d);
-	}
-	
-	@Override
 	protected void init(){
 		employeeManager = new EmployeeManager();
-		guiList = new ArrayList<ListItem>();
 	}
-	
+
 	@Override
 	protected void setupPanel(){
 		employeeManager.addEmployee(new Employee("Dylan","Dewald",18,1));
 		employeeManager.addEmployee(new Employee("Gary","Anderson",18,2));
 		employeeManager.addEmployee(new Employee("Duke","Hill",18,3));
-		addEmployees(employeeManager.getEmployeeList());
+		selectionList = SelectionList.convert(employeeManager.getEmployeeList());
 		addMouseListener(this);
 	}
-	
-	private void addNewEmployee(String name) {
-		final int yPos = ListItem.getProperYPos(guiList.size());
-		guiList.add(new ListItem(name, yPos));
-		ListItem.plusButton.moveButtonDown(yPos);
+
+	@Override
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		Graphics2D g2d = (Graphics2D) g;
+		this.drawTitleLineCenteredTop(g2d);
+		selectionList.paint(g2d);
+
 	}
-	
-	private void addEmployees(LinkedList<Employee> employeeList) {
-		int yPos = 0;
-		for(Employee employee: employeeList) {
-			yPos = ListItem.getProperYPos(guiList.size());
-			ListItem item = new ListItem(employee.getFullName(),yPos);
-			guiList.add(item);
+
+	private void showUserRemovalDialog(SelectionItem item) {
+		int optionSelected = showConfirmDialog(null, "Would you like to remove " +  item);
+		if(optionSelected == YES_OPTION){
+			remove(item);
 		}
-		ListItem.plusButton.moveButtonDown(yPos);
-	}
-
-	@Override
-	public void mouseClicked(MouseEvent me) {
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent me) {
-		// TODO Auto-generated method stub
+		else{
+			item.setMinusButtonClicked(false);
+		}
 		
 	}
-
-	@Override
-	public void mouseExited(MouseEvent me) {
-		// TODO Auto-generated method stub
-		
+	private void remove(SelectionItem item){
+		selectionList.remove(item);
+		employeeManager.remove(item);
 	}
-
-	@Override
-	public void mousePressed(MouseEvent me) {
-		Point clickPoint = new Point(me.getX(),me.getY());
-		for(int index = 0; index < guiList.size(); index++) {
-			if(guiList.get(index).getBounds().contains(clickPoint)) {
-				guiList.get(index).setSelected(true);
-				repaint();
-			}
-		}
-	}
-	
-
 	@Override
 	public void mouseReleased(MouseEvent arg0) {
 		// TODO Auto-generated method stub
 		
 	}
 	
-	public LinkedList<Employee> getEmployeeList(){
+	public ArrayList<Employee> getEmployeeList(){
 		return employeeManager.getEmployeeList();
 	}
 	public Employee getSelectedEmployee() {
 		return employeeManager.getSelectedEmployee();
 	}
+	
+	@Override
+	public void mouseClicked(MouseEvent me) {
+		final Point clickPoint = new Point(me.getX(),me.getY());
+		if(wasThePlusButtonClicked(selectionList.getPlusButtonBounds(), clickPoint)){
+			System.out.println("PlusButton was clicked.");
+		}
+		SelectionItem selectedItem = wasASelectedItemClicked(selectionList, clickPoint);
+		if(selectedItem != null){
+			if(selectedItem.getMinusButtonClicked()){
+				showUserRemovalDialog(selectedItem);
+			}
+			selectionList.setSelectedItem(selectedItem);;
+		}
+		else{
+			selectionList.resetSelectedItem();
+		}
+		repaint();
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent me) {}
+
+	@Override
+	public void mouseExited(MouseEvent me) {}
+
+	@Override
+	public void mousePressed(MouseEvent me) {}
+	
+
 }

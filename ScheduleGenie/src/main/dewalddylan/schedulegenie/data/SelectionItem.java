@@ -12,20 +12,15 @@ import main.dewalddylan.schedulegenie.gui.button.*;
 
 public class SelectionItem {
 	private final String name;
-	private int yPos;
-	private final int xPos;
-	private final int indent;
+	private Position myPosition;
 	public static final int HEIGHT = 20;
 	public static final int WIDTH = GUIDim.SIDEPANELDIM.width;
-	public static final int YOFFSET = (18 * 3);
 	private boolean selected = false;
 	private MinusButton minusBut;
 	
 	public SelectionItem(String name,int yPos){
-		this.indent = 10;
+		myPosition = new Position(0,yPos, 10, (18*3));
 		this.name = name;
-		this.xPos = 0;
-		this.yPos = yPos;
 		this.minusBut = new MinusButton(yPos);
 	}
 	
@@ -35,14 +30,19 @@ public class SelectionItem {
 			g2d.setColor(new Color(0,0,210,120));
 			g2d.fill(getBounds());
 		}
+		int yPos = myPosition.getTrueYPos();
+		int xPos = myPosition.getTrueXPos();
+		
 		g2d.setColor(Color.black);
 		g2d.setFont(LabelInfo.PLAINFONT);
-		g2d.drawString(name, (xPos + indent), yPos);
-		g2d.drawLine(xPos, yPos, WIDTH, yPos);
+		g2d.drawString(name, xPos, yPos);
+		g2d.drawLine(0, yPos, WIDTH, yPos);
 		minusBut.paint(g2d);
 	}
 	
 	public Rectangle getBounds(){
+		int xPos = myPosition.getTrueXPos();
+		int yPos = myPosition.getTrueYPos();
 		return new Rectangle(xPos, yPos-HEIGHT, WIDTH, HEIGHT);
 	}
 	
@@ -72,7 +72,7 @@ public class SelectionItem {
 	}
 
 	public void setLocation(int yPos) {
-		this.yPos = yPos;
+		myPosition = myPosition.newInstance(myPosition.getxPos(), yPos);
 		minusBut.setYPos(yPos);
 		
 	}

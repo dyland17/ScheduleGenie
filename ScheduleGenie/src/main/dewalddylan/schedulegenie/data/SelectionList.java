@@ -7,25 +7,25 @@ import java.util.Iterator;
 
 import main.dewalddylan.schedulegenie.gui.button.Button;
 import main.dewalddylan.schedulegenie.gui.button.PlusButton;
-
+//vvvv Trying to get rid of this extra list class. vvvv
 public class SelectionList implements Iterable<SelectionItem>{
 	private ArrayList<SelectionItem> itemList;
-	private static PlusButton plusButton = new PlusButton((int)(SelectionItem.WIDTH/2 -Button.PLUSBUTTONSIZE/2),getProperYPos(0));
+	//private static PlusButton plusButton = new PlusButton((int)(SelectionItem.WIDTH/2 -Button.PLUSBUTTONSIZE/2),getProperYPos(0));
 	private SelectionItem currentSelectedItem;
 	public SelectionList(){
 		itemList = new ArrayList<SelectionItem>();
 		currentSelectedItem = null;
 	}
-	public SelectionList(ArrayList<SelectionItem> itemList){
-		this.itemList = itemList;
-		plusButton.moveButton(getProperYPos(this.itemList.size()));
-		currentSelectedItem = null;
-	}
+	//public SelectionList(ArrayList<SelectionItem> itemList){
+//		this.itemList = itemList;
+//		plusButton.moveButton(getProperYPos(this.itemList.size()));
+//		currentSelectedItem = null;
+	//}
 	
 	public void add(String itemName){
-		final int YPos = getProperYPos(itemList.size());
-		itemList.add(new SelectionItem(itemName, YPos));
-		plusButton.moveButton(YPos);
+//		final int YPos = getProperYPos(itemList.size());
+//		itemList.add(new SelectionItem(itemName, YPos));
+//		plusButton.moveButton(YPos);
 	}
 	
 	public void remove(SelectionItem item){
@@ -34,29 +34,29 @@ public class SelectionList implements Iterable<SelectionItem>{
 	}
 	
 	private void updateItemLocations() {
-		for(int item = 0; item < itemList.size(); item++){
-			itemList.get(item).setLocation(getProperYPos(item));
-		}
-		plusButton.moveButton(getProperPlusButtonYPos());
+//		for(int item = 0; item < itemList.size(); item++){
+//			itemList.get(item).setLocation(getProperYPos(item));
+//		}
+//		plusButton.moveButton(getProperPlusButtonYPos());
 	}
 	public boolean isEmpty(){
 		return itemList.isEmpty();
 	}
 	
-	public static int getProperYPos(int listIndex){
-		return ((listIndex * SelectionItem.HEIGHT) + SelectionItem.YOFFSET);
-	}
+//	public static int getProperYPos(int listIndex){
+//		return ((listIndex * SelectionItem.HEIGHT) + SelectionItem.YOFFSET);
+//	}
+//	
+//	private int getProperPlusButtonYPos(){
+//		return getProperYPos((itemList.size() - 1));
+//	}
 	
-	private int getProperPlusButtonYPos(){
-		return getProperYPos((itemList.size() - 1));
-	}
-	
-	public void paint(Graphics2D g2d){
-		for(SelectionItem item: itemList){
-			item.paint(g2d);
-		}
-		plusButton.paint(g2d);
-	}
+//	public void paint(Graphics2D g2d){
+//		for(SelectionItem item: itemList){
+//			item.paint(g2d);
+//		}
+//		plusButton.paint(g2d);
+//	}
 	
 	public void setSelectedItem(SelectionItem item){
 		if(item == null){
@@ -79,9 +79,9 @@ public class SelectionList implements Iterable<SelectionItem>{
 			currentSelectedItem = null;
 		}
 	}
-	public Rectangle getPlusButtonBounds(){
-		return plusButton.getBounds();
-	}
+//	public Rectangle getPlusButtonBounds(){
+//		return plusButton.getBounds();
+//	}
 	public static SelectionList convert(ArrayList<Employee> employeeList){
 		SelectionList selectionList = new SelectionList();
 		for(Employee employee: employeeList){

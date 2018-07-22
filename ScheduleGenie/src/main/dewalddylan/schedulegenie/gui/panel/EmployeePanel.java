@@ -48,7 +48,7 @@ public class EmployeePanel extends Panel implements MouseListener{
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		this.drawTitleLineCenteredTop(g2d);
-		selectionList.paint(g2d);
+		//selectionList.paint(g2d);
 
 	}
 
@@ -82,9 +82,9 @@ public class EmployeePanel extends Panel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent me) {
 		final Point clickPoint = new Point(me.getX(),me.getY());
-		if(wasThePlusButtonClicked(selectionList.getPlusButtonBounds(), clickPoint)){
-			System.out.println("PlusButton was clicked.");
-		}
+		//if(wasThePlusButtonClicked(selectionList.getPlusButtonBounds(), clickPoint)){
+			//System.out.println("PlusButton was clicked.");
+	//	}
 		SelectionItem selectedItem = wasASelectedItemClicked(selectionList, clickPoint);
 		if(selectedItem != null){
 			if(selectedItem.getMinusButtonClicked()){

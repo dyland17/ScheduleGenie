@@ -5,6 +5,7 @@ public class Position {
 	private final int yPos;
 	private final int xOffset;
 	private final int yOffset;
+	public static final int NO_OFFSET = 0;
 	/**
 	 * 
 	 * @param xPos position of x coordinate.

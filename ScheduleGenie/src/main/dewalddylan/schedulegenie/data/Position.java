@@ -30,23 +30,18 @@ public class Position {
 		this.yIndent = yIndent;
 	}
 	/**
-	 * @return position of xPos plus it's x indentation.
+	 * 
+	 * @return xPos plus xIndent if a indent exist.
 	 */
-	public int getTrueXPos(){
+	public int xPos() {
 		return (xPos + xIndent);
 	}
 	/**
-	 * @return position of yPos plus it's y indentation.
+	 * 
+	 * @return yPos plus yIndent if a indent exist.
 	 */
-	public int getTrueYPos(){
+	public int yPos() {
 		return (yPos + yIndent);
-	}
-	
-	public int getxPos() {
-		return xPos;
-	}
-	public int getyPos() {
-		return yPos;
 	}
 	public int getxIndent() {
 		return xIndent;

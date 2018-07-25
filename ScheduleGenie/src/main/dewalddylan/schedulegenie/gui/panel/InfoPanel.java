@@ -120,10 +120,10 @@ public class InfoPanel extends Panel{
 	}
 	
 	public void displayInfo(Employee employee, WorkDay currentDay) {
-		setJTextField(firstName, ComponentFactory.FIRSTNAME, employee.getFirstName());
-		setJTextField(lastName, ComponentFactory.LASTNAME, employee.getLastName());
-		setJTextField(age, ComponentFactory.AGE,Integer.toString(employee.getAge()));
-		setJTextField(title,ComponentFactory.TITLE,employee.getTitle());
+		setJTextField(firstName, ComponentFactory.FIRSTNAME, employee.firstName());
+		setJTextField(lastName, ComponentFactory.LASTNAME, employee.lastName());
+		setJTextField(age, ComponentFactory.AGE,Integer.toString(employee.age()));
+		setJTextField(title,ComponentFactory.TITLE,employee.title());
 		setJTextField(totalHours, ComponentFactory.TOTALHOURS,Integer.toString(employee.getTotalHours()));
 		
 		final Time startTime = employee.getStartTime(currentDay);

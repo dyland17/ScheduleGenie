@@ -123,6 +123,6 @@ class Label{
 	
 	public void paint(Graphics2D g2d){
 		g2d.setColor(Color.black);
-		g2d.drawString(name, labelPosition.xPos(), labelPosition.yPos());
+		g2d.drawString(name, labelPosition.xPosPlusOffset(), labelPosition.yPosPlusOffset());
 	}
 }

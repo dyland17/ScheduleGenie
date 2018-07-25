@@ -21,7 +21,7 @@ public class PanelManager {
 		this.graphPanel = graphPanel;
 	}
 
-	public LinkedList<Employee> getEmployeeList(){
+	public ArrayList<Employee> getEmployeeList(){
 		return employeePanel.getEmployeeList();
 	}
 	public Employee getSelectedEmployee() {

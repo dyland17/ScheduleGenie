@@ -1,5 +1,6 @@
 package main.dewalddylan.schedulegenie.data;
 
+import java.awt.Graphics2D;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
@@ -11,13 +12,10 @@ public class EmployeeManager {
 		employeeList = new ArrayList<Employee>();
 	}
 	
-	public void addEmployee(Employee newEmployee){
-		if(employeeList.isEmpty()){
+	public void add(Employee newEmployee){
+		if(newEmployee != null){
+			newEmployee.setLocation(getNextEmployeePosition());
 			employeeList.add(newEmployee);
-		}
-		else{
-			employeeList.add(newEmployee);
-			sortAlphabetically();
 		}
 	}
 	
@@ -25,33 +23,6 @@ public class EmployeeManager {
 		return selectedEmployee;
 	}
 
-	private void sortAlphabetically() {
-		Employee previousEmployee;
-		Employee nextEmployee;
-		int sortSize = employeeList.size();
-		int listSize = employeeList.size();
-		for(int i = 0; i <  listSize; i++){
-			for(int n = 0; n < sortSize; n++){
-				if((n+1) >= sortSize)
-					break;
-				previousEmployee = employeeList.get(n);
-				nextEmployee = employeeList.get(n+1);
-				if(  nextEmployee.getLastName().charAt(0)<previousEmployee.getLastName().charAt(0)){
-					Collections.swap(employeeList, (n+1), n);
-				}
-				else if(nextEmployee.getLastName().charAt(0) == previousEmployee.getLastName().charAt(0)){
-					for(int c = 1; c < 6; c++ ){
-						if(nextEmployee.getLastName().charAt(c)<previousEmployee.getLastName().charAt(c)){
-							Collections.swap(employeeList, (n+1), n);
-							break;
-						}
-					}
-				}
-			}
-			sortSize--;
-		}
-		
-	}
 	public Employee getEmployee(int index){
 		return employeeList.get(index);
 	}
@@ -59,51 +30,39 @@ public class EmployeeManager {
 		return employeeList;
 	}
 	
-	public void remove(SelectionItem item){
-		Employee employeeBeingRemoved = null;
-		for(Employee employee: employeeList){
-			if(employee.getFullName().equals(item.toString())){
-				employeeBeingRemoved = employee;
-				break;
-			}
-		}
-		if(employeeBeingRemoved != null){
-			employeeList.remove(employeeBeingRemoved);
-		}
+	public void remove(Employee item){
+		employeeList.remove(item);
 	}
 	public Employee findEmployeeByName(String name){
 		if(employeeList.size() == 0){
 			return null;
 		}
 		for(Employee employee : employeeList){
-			if(employee.getFullName().equals(name)){
+			if(employee.fullName().equals(name)){
 				return employee;
 			}
 		}
 		return null;
 	}
-	public boolean checkIfDublicate(Employee originalEmployee,Employee listEmployee){
-		boolean isDublicate = false;
-		if(originalEmployee.getEmployeeNumber() == listEmployee.getEmployeeNumber()){
-			isDublicate = true;
-		}
-		return isDublicate;
-			
-	}
 	
-	public void copyNewInformation(Employee updateEmployee, Employee oldEmployee){
-		oldEmployee.setTotalHours(updateEmployee.getTotalHours());
-		oldEmployee.setTitle(updateEmployee.getTitle());
-		oldEmployee.setFirstName(updateEmployee.getFirstName());	
-		oldEmployee.setLastName(updateEmployee.getLastName());
-	}
 	public boolean isListEmpty() {
 		return employeeList.isEmpty();
 	}
 	public void printList(){
 		for(Employee employee: employeeList){
-			System.out.print("FirstName: " + employee.getFirstName() + " ");
-			System.out.println("LastName: " + employee.getLastName());
+			System.out.print("FirstName: " + employee.firstName() + " ");
+			System.out.println("LastName: " + employee.lastName());
 		}
+	}
+
+	public void paint(Graphics2D g2d) {
+		for(Employee employee: employeeList){
+			employee.paint(g2d);
+		}
+	}
+	
+	private Position getNextEmployeePosition(){
+		final int yOffset = SelectionItem.HEIGHT * employeeList.size();
+		return new Position(0, 0, 0,yOffset);
 	}
 }

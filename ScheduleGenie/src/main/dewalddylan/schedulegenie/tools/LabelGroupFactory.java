@@ -11,8 +11,6 @@ public class LabelGroupFactory {
 	
 	public static LabelGroup createTimeLabelsForFullDay(int startXPos, int startYPos){
 		LabelGroup timeLabels = new LabelGroup(startXPos, startYPos, LabelOrientation.LEFTTORIGHT);
-		timeLabels.setXLabelMargin(	LabelInfo.TIMEXMARGIN);
-		timeLabels.setYLabelMargin(	LabelInfo.TIMEYMARGIN);
 		for(int timeIndex = 6; timeIndex < 23; timeIndex++){
 			if(timeIndex <= 12)
 				timeLabels.add(timeIndex+"am");
@@ -24,10 +22,8 @@ public class LabelGroupFactory {
 	
 	public static LabelGroup createEmployeeLabels(int startXPos, int startYPos,ArrayList<Employee> employeeList){
 		LabelGroup employeeLabels = new LabelGroup(startXPos, startYPos, LabelOrientation.TOPTOBOTTOM);
-		employeeLabels.setYLabelMargin(LabelInfo.EMPLOYEEYMARGIN);
-		employeeLabels.setXLabelMargin(LabelInfo.EMPLOYEEXMARGIN);
 		for(Employee employee: employeeList){
-			String modifiedName = employee.getFirstName().charAt(0) + ". " + employee.getLastName(); 
+			String modifiedName = employee.firstName().charAt(0) + ". " + employee.lastName(); 
 			employeeLabels.add(modifiedName);
 		}
 		return employeeLabels;

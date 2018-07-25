@@ -1,96 +1,83 @@
 package main.dewalddylan.schedulegenie.data;
 
+import java.awt.Component;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
+
 import main.dewalddylan.schedulegenie.data.enumerations.WorkDay;
 
 public class Employee {
-	public static final int TOTALEMPLOYEENUMBERS = 999999;
-	//Most important information
-	private String firstName;
-	private String lastName;
-	private int age;
-	private int employeeNumber;
-	//Extra info
-	private String title;
-	private int totalHours;
-	private boolean minor;
+	private BasicInfo employeeInfo;
+	private ExtraInfo employeeExtraInfo;
+	private SelectionItem employeeItem;
 	private DayTracker dayTracker;
 	
-	public Employee(String firstName,String lastName, int age, int employeeNum){
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.age = age;
-		this.employeeNumber = employeeNum;
-		this.minor = false;
+	public Employee(String firstName,String lastName, int age){
+		employeeInfo = new BasicInfo(firstName,lastName,age);
+		boolean isMinor = false;
 		if(age < 18)
-			this.minor = true;
-		totalHours = 0;
-		title = "No title given";
+			isMinor = true;
+		employeeExtraInfo = new ExtraInfo("Not given", 0, isMinor);
+		employeeItem = new SelectionItem(employeeInfo.fullName());
 		dayTracker = new DayTracker();
 	}
-	public Employee(String firstName,String lastName, int age, int employeeNum,int totalHours, String title){
-		this(firstName,lastName,age,employeeNum);
-		this.totalHours = totalHours;
-		this.title = title;
-		
+	
+	public Employee(BasicInfo basicInfo, ExtraInfo extraInfo, int yPos){
+		employeeInfo = basicInfo;
+		employeeExtraInfo = extraInfo;
+	//	employeeItem = new SelectionItem(employeeInfo.fullName(), yPos);
+		dayTracker = new DayTracker();
 	}
-	public String getFirstName() {
-		return firstName;
+	public String firstName() {
+		return employeeInfo.firstName();
 	}
 	
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
 
-	public String getLastName() {
-		return lastName;
-	}
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public String lastName() {
+		return employeeInfo.lastName();
 	}
 	
-	public String getFullName(){
-		return firstName + " " + lastName;
+	public String fullName(){
+		return employeeInfo.fullName();
 	}
-	public int getAge() {
-		return age;
-	}
-
-	public void setAge(int age) {
-		this.age = age;
-		if(age < 18)
-			minor = true;
-		else
-			minor = false;
+	public int age() {
+		return employeeInfo.age();
 	}
 
-	public String getTitle() {
-		return title;
+	public String title() {
+		return employeeExtraInfo.title();
 	}
 
 	public void setTitle(String title) {
-		this.title = title;
+		employeeExtraInfo = employeeExtraInfo.newInstance(title, employeeExtraInfo.totalHours(),
+																						employeeExtraInfo.isMinor());
 	}
 
 	public int getTotalHours() {
-		return totalHours;
+		return employeeExtraInfo.totalHours();
 	}
 
 	public void setTotalHours(int totalHours) {
-		this.totalHours = totalHours;
+		employeeExtraInfo = employeeExtraInfo.newInstance(employeeExtraInfo.title(), totalHours,
+																						employeeExtraInfo.isMinor());
 	}
 
 	public boolean isMinor() {
-		return minor;
+		return employeeExtraInfo.isMinor();
 	}
 
-	public Employee copy(){
-		return new Employee(firstName,lastName,age, employeeNumber,totalHours,title) ;
+	public Employee clone(){
+		BasicInfo basicInfo = new BasicInfo(employeeInfo.firstName(),employeeInfo.lastName(),
+																employeeInfo.age());
+		ExtraInfo extraInfo = new ExtraInfo(employeeExtraInfo.title(),employeeExtraInfo.totalHours(),
+																employeeExtraInfo.isMinor());
+		return new Employee(basicInfo,extraInfo,employeeItem.yPos()) ;
 	}
-	public int getEmployeeNumber() {
-		return employeeNumber;
+	public void setLocation(Position position){
+		employeeItem.setLocation(position);
 	}
-	public void setEmployeeNumber(int newEmployeeNumber){
-		employeeNumber = newEmployeeNumber;
+	public void paint(Graphics2D g2d){
+		employeeItem.paint(g2d);
 	}
 
 	public Time getStartTime(WorkDay day) {
@@ -99,5 +86,12 @@ public class Employee {
 	
 	public Time getEndTime(WorkDay day) {
 		return dayTracker.getTimeSheetByDay(day).getEndTime();
+	}
+
+	public Rectangle getBounds() {
+		return employeeItem.getBounds();
+	}
+	public void setSelected(boolean selected){
+		employeeItem.setSelected(selected);
 	}
 }

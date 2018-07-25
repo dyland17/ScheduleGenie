@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 
 import main.dewalddylan.schedulegenie.data.Employee;
 import main.dewalddylan.schedulegenie.data.EmployeeManager;
+import main.dewalddylan.schedulegenie.data.Position;
 import main.dewalddylan.schedulegenie.data.SelectionItem;
 import main.dewalddylan.schedulegenie.data.SelectionList;
 import main.dewalddylan.schedulegenie.data.names.GUIDim;
@@ -20,8 +21,8 @@ import static main.dewalddylan.schedulegenie.data.manager.MouseManager.*;
 import static javax.swing.JOptionPane.*;
 
 public class EmployeePanel extends Panel implements MouseListener{
-	private static EmployeeManager employeeManager;
-	private SelectionList selectionList;
+	private EmployeeManager employeeManager;
+	//private SelectionList selectionList;
 	public EmployeePanel(){
 		super(GUIDim.SIDEPANELDIM, "EmployeePanel: ");
 		init();
@@ -36,10 +37,10 @@ public class EmployeePanel extends Panel implements MouseListener{
 
 	@Override
 	protected void setupPanel(){
-		employeeManager.addEmployee(new Employee("Dylan","Dewald",18,1));
-		employeeManager.addEmployee(new Employee("Gary","Anderson",18,2));
-		employeeManager.addEmployee(new Employee("Duke","Hill",18,3));
-		selectionList = SelectionList.convert(employeeManager.getEmployeeList());
+		
+		employeeManager.add(new Employee("Dylan","Dewald",18));
+		employeeManager.add(new Employee("Gary","Anderson",18));
+		employeeManager.add(new Employee("Duke","Hill",18));
 		addMouseListener(this);
 	}
 
@@ -48,22 +49,21 @@ public class EmployeePanel extends Panel implements MouseListener{
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
 		this.drawTitleLineCenteredTop(g2d);
-		//selectionList.paint(g2d);
+		this.employeeManager.paint(g2d);
 
 	}
 
-	private void showUserRemovalDialog(SelectionItem item) {
+	private void showUserRemovalDialog(Employee item) {
 		int optionSelected = showConfirmDialog(null, "Would you like to remove " +  item);
 		if(optionSelected == YES_OPTION){
 			remove(item);
 		}
 		else{
-			item.setMinusButtonClicked(false);
+		//	item.setMinusButtonClicked(false);
 		}
 		
 	}
-	private void remove(SelectionItem item){
-		selectionList.remove(item);
+	private void remove(Employee item){
 		employeeManager.remove(item);
 	}
 	@Override
@@ -82,18 +82,12 @@ public class EmployeePanel extends Panel implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent me) {
 		final Point clickPoint = new Point(me.getX(),me.getY());
-		//if(wasThePlusButtonClicked(selectionList.getPlusButtonBounds(), clickPoint)){
-			//System.out.println("PlusButton was clicked.");
-	//	}
-		SelectionItem selectedItem = wasASelectedItemClicked(selectionList, clickPoint);
-		if(selectedItem != null){
-			if(selectedItem.getMinusButtonClicked()){
-				showUserRemovalDialog(selectedItem);
+		ArrayList<Employee> employees = employeeManager.getEmployeeList();
+		for(Employee employee: employees){
+			if(employee.getBounds().contains(clickPoint.getLocation())){
+				System.out.println(employee.fullName() + " was selected.");
+				employee.setSelected(true);
 			}
-			selectionList.setSelectedItem(selectedItem);;
-		}
-		else{
-			selectionList.resetSelectedItem();
 		}
 		repaint();
 		
@@ -107,6 +101,5 @@ public class EmployeePanel extends Panel implements MouseListener{
 
 	@Override
 	public void mousePressed(MouseEvent me) {}
-	
 
 }

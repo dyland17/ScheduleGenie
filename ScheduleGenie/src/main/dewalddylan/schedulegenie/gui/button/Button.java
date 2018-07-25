@@ -4,20 +4,22 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import main.dewalddylan.schedulegenie.data.Position;
+import main.dewalddylan.schedulegenie.data.SelectionItem;
+
 public abstract class Button {
-	protected  int butXPos;
-	protected  int butYPos;
+	protected Position myPosition;
 	protected final int butLength;
 	protected boolean buttonClicked;
 	protected final int HORIZONTALBARWIDTH;
 	protected final int HORIZONTALBARHEIGHT;
 	protected final int VERTICALBARWIDTH;
 	protected final int VERTICALBARHEIGHT;
+	public static final int MINUSBUTTONXOFFSET = (int)(SelectionItem.WIDTH * .8);
 	public static final int MINUSBUTTONSIZE = 14;
 	public static final int PLUSBUTTONSIZE = 20;
-	public Button(int butXPos, int butYPos, int butLength){
-		this.butXPos = butXPos;
-		this.butYPos = butYPos;
+	public Button(Position position, int butLength){
+		myPosition = new Position(position);
 		this.butLength = butLength;
 		HORIZONTALBARWIDTH = ((int)(butLength * .75));
 		HORIZONTALBARHEIGHT = ((int)(butLength * .25));
@@ -46,6 +48,6 @@ public abstract class Button {
 	}
 	
 	public Rectangle getBounds(){
-		return new Rectangle(butXPos, butYPos, butLength, butLength);
+		return new Rectangle(myPosition.xPos(), myPosition.yPos(), butLength, butLength);
 	}
 }

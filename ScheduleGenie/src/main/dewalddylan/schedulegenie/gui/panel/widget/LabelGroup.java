@@ -2,18 +2,18 @@ package main.dewalddylan.schedulegenie.gui.panel.widget;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 
+import main.dewalddylan.schedulegenie.data.Position;
 import main.dewalddylan.schedulegenie.data.enumerations.LabelOrientation;
 
 public class LabelGroup {
 	private Label[] label;
 	private int labelEmptyIndex;
 	private int labelCount;
-	private int startXPos, startYPos;
+	private Position groupPosition;
 	private final boolean isLeftToRight;
-	private int labelXMargin;
-	private int labelYMargin;
 	private Font labelFont;
 
 	public LabelGroup(int startXPos, int startYPos, LabelOrientation orientation){
@@ -30,10 +30,9 @@ public class LabelGroup {
 		initLabels(startXPos, startYPos, 10);
 	}
 
-	private void initLabels(int startXPos, int startYPos, int labelCount) {
+	private void initLabels(int XPos, int YPos, int labelCount) {
 		label = new Label[labelCount];
-		this.startXPos = startXPos;
-		this.startYPos = startYPos;
+		this.groupPosition = new Position(XPos, YPos, Position.NO_OFFSET);
 		this.labelEmptyIndex = 0;
 		this.labelCount = 0;
 		this.labelFont = new Font(Font.SANS_SERIF,Font.BOLD, 12);
@@ -41,23 +40,25 @@ public class LabelGroup {
 
 	public void add(String name){
 		checkSize();
-		int xPos, yPos;
-		//vvvv Change 50 later vvvv
+		Position labelPosition;
+		final int  CHARTOFFSET = getChartOffset();
+		final int STRINGOFFSET = 4;
 		if(isLeftToRight){
-			xPos = startXPos+TimeChart.BLOCKSIZE*labelEmptyIndex+labelXMargin;
-			yPos = startYPos + labelYMargin;
+			labelPosition = new Position(groupPosition.xPos(), groupPosition.yPos(), 
+														(CHARTOFFSET -STRINGOFFSET), (STRINGOFFSET*2));
 		}
 		else{
-			xPos = startXPos+labelXMargin;
-			yPos = startYPos +TimeChart.BLOCKSIZE*labelEmptyIndex+ labelYMargin;
+			labelPosition = new Position(groupPosition.xPos(),groupPosition.yPos(),
+														Position.NO_OFFSET, (CHARTOFFSET - STRINGOFFSET));
 		}
-		Label newLabel = new Label(xPos, yPos, name, this); 
+		Label newLabel = new Label(labelPosition, name); 
 		label[labelEmptyIndex] = newLabel;
 		updateLabelCount();
 	}
 
 
 	public void paint(Graphics2D g2d){
+		g2d.setFont(labelFont);
 		for(int index = 0; index < labelCount; index++){
 			label[index].paint(g2d);
 		}
@@ -75,34 +76,16 @@ public class LabelGroup {
 	public void setGroupFont(Font groupFont){
 		labelFont = groupFont;
 	}
-
-	public void setXLabelMargin(int xAmount){
-		this.labelXMargin = xAmount;
-		fixLabelPositions();
+	
+	private int getChartOffset(){
+		return TimeChart.BLOCKSIZE * labelEmptyIndex;
 	}
-
-	public void setYLabelMargin(int yAmount){
-		this.labelYMargin = yAmount;
-		fixLabelPositions();
-	}
-
-	private void fixLabelPositions() {
-		if(labelCount == 0)
-			return;
-		
-		for(Label labelIndex: label){
-			if(isLeftToRight)
-				labelIndex.setLocation(startXPos+TimeChart.BLOCKSIZE*labelEmptyIndex+labelXMargin, startYPos + labelYMargin);
-			else
-				labelIndex.setLocation(startXPos+labelXMargin, startYPos +TimeChart.BLOCKSIZE*labelEmptyIndex+ labelYMargin);
-		}
-
-	}
-
+	
 	private void updateLabelCount(){
 		labelEmptyIndex++;
 		labelCount++;
 	}
+	
 	private void checkSize(){
 		int arraySize = label.length;
 		if((labelCount + 1) > arraySize){
@@ -113,36 +96,33 @@ public class LabelGroup {
 			label = newLabel;
 		}
 	}
-	//vvvv Do latervvvv
-	public void removeAllLabels() {
-		
-	}
 }
 class Label{
-	private  int xPos, yPos;
+	private  Position labelPosition;
 	private final String name;
-	private LabelGroup group;
 	
-	public Label(int xPos, int yPos, String labelName, LabelGroup group){
-		this.xPos = xPos;
-		this.yPos = yPos;
+	public Label(int xPos, int yPos, String labelName){
+		labelPosition = new Position(xPos, yPos, Position.NO_OFFSET);
 		name = labelName;
-		this.group = group;
+	}
+	
+	public Label(Position position, String labelName){
+		this.labelPosition = position;
+		name = labelName;
 	}
 	
 	public void translate(int xAmount, int yAmount){
-		this.xPos += xAmount;
-		this.yPos += yAmount;
+		final int newXPos = labelPosition.xPos() + xAmount;
+		final int newYPos = labelPosition.yPos() + yAmount;
+		labelPosition =labelPosition.newInstance(newXPos, newYPos);
 	}
 	
 	public void setLocation(int xPos, int yPos){
-		this.xPos = xPos;
-		this.yPos = yPos;
+		labelPosition = labelPosition.newInstance(xPos, yPos);
 	}
 	
 	public void paint(Graphics2D g2d){
 		g2d.setColor(Color.black);
-		g2d.setFont(group.getGroupFont());
-		g2d.drawString(name, xPos, yPos);
+		g2d.drawString(name, labelPosition.xPos(), labelPosition.yPos());
 	}
 }

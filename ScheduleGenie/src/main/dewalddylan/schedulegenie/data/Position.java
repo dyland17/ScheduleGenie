@@ -31,20 +31,34 @@ public class Position {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 	}
+	public Position(Position position) {
+		this.xPos = position.xPos();
+		this.yPos = position.yPos();
+		this.xOffset = position.xOffset();
+		this.yOffset = position.yOffset();
+	}
 	/**
 	 * 
-	 * @return xPos plus xOffset if an offset exists.
+	 * @return xPos value.
 	 */
 	public int xPos() {
+		return xPos;
+	}
+	
+	public int xPosPlusOffset(){
 		return (xPos + xOffset);
 	}
 	/**
-	 * 
-	 * @return yPos plus yOffset if an offset exists.
+	 * @return yPos value.
 	 */
 	public int yPos() {
+		return yPos;
+	}
+	
+	public int yPosPlusOffset(){
 		return (yPos + yOffset);
 	}
+	
 	public int xOffset() {
 		return xOffset;
 	}

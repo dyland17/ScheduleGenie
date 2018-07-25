@@ -85,7 +85,7 @@ public class SelectionList implements Iterable<SelectionItem>{
 	public static SelectionList convert(ArrayList<Employee> employeeList){
 		SelectionList selectionList = new SelectionList();
 		for(Employee employee: employeeList){
-			selectionList.add(employee.getFullName());
+			selectionList.add(employee.fullName());
 		}
 		return selectionList;
 	}
